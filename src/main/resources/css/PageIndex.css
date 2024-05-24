@@ -107,7 +107,7 @@ header nav ul li:hover .dropdown-content {
 
 /* Buttons in search container, hero section and help center */
 .search-container button, .text-box .learn-more, .help-center {
-    padding: 7px 10px;
+    padding: 9px 10px;
     margin-left: 3px;
     border: none;
     background-color: #333; 
@@ -172,7 +172,7 @@ header nav ul li:hover .dropdown-content {
 /* Hero section button */
 .hero button {
     margin-top: 40px; 
-    padding: 10px 20px;
+    padding: 13px 20px;
     font-size: 1em;
     background-color: #1d201e; 
     color: #fff; 
@@ -211,4 +211,24 @@ header nav ul li:hover .dropdown-content {
     font-size: 1.1em; 
     color: #a19f9f; 
     margin: 25px;
+}
+
+/* Content wrapper for overview section */
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}
+
+/* Text box in overview section */
+.text-box {
+    max-width: 400px;
+    padding: 50px 50px 50px 100px;
+    margin-left: 50px;
+    line-height: 1.8; 
+}
+
+/* ‘learn more‘ button hover effect */
+.text-box .learn-more:hover {
+    background-color: #23963a;
 }
