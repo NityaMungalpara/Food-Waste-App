@@ -90,7 +90,36 @@ header nav ul li:hover .dropdown-content {
     align-items: center;
 }
 
+/* Search bar container */
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; 
+}
+/* Search input and language selector */
+.search-container input, .language-selector select {
+    padding: 7px;
+    border: 1px solid #ddd;  
+    border-radius: 3px;  /* Rounded corners */
+    margin-right: 5px; 
+    margin-left: 20px;  /* Space to the left */
+}
 
+/* Buttons in search container, hero section and help center */
+.search-container button, .text-box .learn-more, .help-center {
+    padding: 7px 10px;
+    margin-left: 3px;
+    border: none;
+    background-color: #333; 
+    color: #fff;  
+    border-radius: 5px;  /* Rounded corners */
+    cursor: pointer;  /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;  /* transition on hover */
+}
+/* Buttons hover effect */
+.search-container button:hover, .text-box .learn-more:hover, .help-center:hover {
+    background-color: #23963a; 
+}
 
 
 
