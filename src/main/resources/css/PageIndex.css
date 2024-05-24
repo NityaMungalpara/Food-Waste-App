@@ -2,3 +2,58 @@ body {
     font-family: sans-serif;
     background-color: #ffffff;
 }
+
+/* Container styles for main layout */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;  /*Center align*/
+}
+
+/* header styles */
+header {
+    background-color: #fff;
+    padding: 20px 0;  /* top and bottom */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Set header-logo size */
+header .Weblogo img {
+    height: 60px;
+}
+
+/* Navigation menu styles */
+header nav ul {
+    list-style: none; /* Removed default list style*/
+    display: flex;
+}
+
+/* Navigation menu items */
+header nav ul li {
+    margin-right: 20px;
+    position: relative;
+}
+
+/* Navigation links */
+header nav ul li a {
+    text-decoration: none; /* Removed default underline*/
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+/* header with arrow icon  */
+header nav ul li .arrow {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+
