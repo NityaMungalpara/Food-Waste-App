@@ -126,7 +126,6 @@ header nav ul li:hover .dropdown-content {
     background-image: url('FoodWaste.jpg');  /* Add hero section background image */
     background-size: cover;  /* Cover entire hero section */
     background-position: center; 
-    color: #fff;  /* White text color */
     text-align: center;  
     padding: 150px 0;  /* Padding top and bottom 150*/
     position: relative;
@@ -140,15 +139,34 @@ header nav ul li:hover .dropdown-content {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);  /* Darken background image */
+    background: rgba(0, 0, 0, 0.4);  /* Darken background image */
 }
 
 /* Container in hero section */
 .hero .container {
     position: relative;
     z-index: 1;
-    flex-direction: column;  /* Stack children vertically */
+    flex-direction: column; /* stack vertically */
     align-items: center;
+}
+
+/* Hero section heading */
+.hero h1 {
+    margin: 0;
+    font-size: 3.5em; 
+    color: #fff;  
+    text-transform: uppercase; 
+    letter-spacing: 2px;  
+    font-weight: 700;
+    margin: 20px 0;
+}
+
+/* paragraph */
+.hero p {
+    font-style: italic;  
+    font-size: 1.1em;  
+    color: #bebebe;
+    margin: 5px;
 }
 
 
