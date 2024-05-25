@@ -54,6 +54,7 @@ public class PageIndex implements Handler {
                         <ul class='nav-links'>
                             <li><a href='#home'>Home</a></li>
                             <li><a href='#about'>About Us</a></li>
+                            <li><a href='#mission'>Our Mission</a></li>
                             <li class='dropdown'>
                                 <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>
                                 <div class='dropdown-content'>
@@ -63,7 +64,6 @@ public class PageIndex implements Handler {
                                     <a href='#'>Similarity Data Analysis by Group</a>
                                 </div>
                             </li>
-                            <li><a href='#news'>News</a></li>
                             <li><a href='#involved'>Get Involved</a></li>
                             <li><a href='#faqs'>FAQs</a></li>
                         </ul>
