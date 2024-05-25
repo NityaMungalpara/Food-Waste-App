@@ -52,16 +52,16 @@ public class PageIndex implements Handler {
                     </div>
                     <nav>
                         <ul class='nav-links'>
-                            <li><a href='#home'>Home</a></li>
+                            <li><a href='/'>Home</a></li>
                             <li><a href='#about'>About Us</a></li>
-                            <li><a href='#mission'>Our Mission</a></li>
+                            <li><a href='mission.html'>Our Mission</a></li>
                             <li class='dropdown'>
                                 <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>
                                 <div class='dropdown-content'>
-                                    <a href='#'>Food Loss and Waste Analysis by Country</a>
-                                    <a href='#'>Food Loss and Waste Analysis by Group</a>
-                                    <a href='#'>Similarity Data Analysis by Country</a>
-                                    <a href='#'>Similarity Data Analysis by Group</a>
+                                    <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>
+                                    <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>
+                                    <a href='page3A.html'>Similarity Data Analysis by Country</a>
+                                    <a href='page3B.html'>Similarity Data Analysis by Group</a>
                                 </div>
                             </li>
                             <li><a href='#involved'>Get Involved</a></li>
