@@ -64,6 +64,11 @@ public class FoodProcessCSV {
       // Comment this out after runnning it the first time
        loadCpcClass();
 
+       loadCpcGroupSectionDivision();
+
+       loadCpcSubclass();
+
+       loadFoodLoss();
 
       // Load up the Country table
       // This only needs to be done once
@@ -121,6 +126,13 @@ public class FoodProcessCSV {
          query = "DROP TABLE IF EXISTS Class";
          System.out.println("Executing: \n" + query);
          statement.execute(query);
+         // added new drop table..
+         query = "DROP TABLE IF EXISTS GroupSectionDivision";
+         System.out.println("Executing: \n" + query);
+         statement.execute(query);
+         query = "DROP TABLE IF EXISTS Subclass";
+         System.out.println("Executing: \n" + query);
+         statement.execute(query);
          query = "PRAGMA foreign_keys = ON";
          System.out.println("Executing: \n" + query);
          statement.execute(query);
@@ -148,6 +160,42 @@ public class FoodProcessCSV {
                   ")";
          System.out.println("Executing: \n" + query);
          statement.execute(query);
+
+         // create new GroupSectionDivision table
+         query = "CREATE TABLE GroupSectionDivision (" + "\n" +
+                "      gsdNo             TEXT NOT NULL," + "\n" +
+                "      gsdName           TEXT NOT NULL," + "\n" +
+                "      PRIMARY KEY (gsdNo)" + "\n" +
+                ")";
+        System.out.println("Executing: \n" + query);
+        statement.execute(query);
+
+         // create new subclass table 
+         query = "CREATE TABLE Subclass (" + "\n" +
+                "      subclassNo        TEXT NOT NULL," + "\n" +
+                "      subclassName      TEXT NOT NULL," + "\n" +
+                "      PRIMARY KEY (subclassNo)" + "\n" +
+                ")";
+        System.out.println("Executing: \n" + query);
+        statement.execute(query);
+
+        // create new FoodLoss table
+        query = "CREATE TABLE FoodLoss (" + "\n" +
+                "      m49Code           TEXT NOT NULL," + "\n" +
+                "      year              INTEGER NOT NULL," + "\n" +
+                "      cpcCode           TEXT NOT NULL," + "\n" +
+                "      commodity         TEXT," + "\n" +
+                "      lossPercentage    REAL," + "\n" +
+                "      activity          TEXT," + "\n" +
+                "      foodSupplyStage   TEXT," + "\n" +
+                "      causeOfLoss       TEXT," + "\n" +
+                "      FOREIGN KEY (m49Code) REFERENCES Country(m49Code)," + "\n" +
+                "      FOREIGN KEY (year) REFERENCES Date(year)," + "\n" +
+                "      FOREIGN KEY (cpcCode) REFERENCES Class(classNo)" + "\n" +
+                ")";
+        System.out.println("Executing: \n" + query);
+        statement.execute(query);
+        
          System.out.println("\ndropped and recreated tables\npress enter to continue");
          System.in.read();
 
@@ -253,6 +301,153 @@ public class FoodProcessCSV {
       }
    }
 
+   public static void loadCpcGroupSectionDivision() {
+      Connection connection = null;
+      PreparedStatement statement = null;
+      BufferedReader reader = null;
+      String line;
+      try {
+         reader = new BufferedReader(new FileReader(CPC_CSV_FILE));
+         String header = reader.readLine();
+         System.out.println("Heading row\n" + header + "\n");
+         connection = DriverManager.getConnection(DATABASE);
+         while ((line = reader.readLine())!=null) {
+            String[] splitline = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+            String cpcGroupSectionDivision = (splitline[ClassFields.GROUP_SECTION_DIVISION]).replaceAll("^\"|\"$", "");
+            String cpcClass = (splitline[ClassFields.CLASS]).replaceAll("^\"|\"$", "");
+            String cpcSubClass = (splitline[ClassFields.SUBCLASS]).replaceAll("^\"|\"$", "");
+            String cpcDescription = (splitline[ClassFields.DESCRIPTION]).replaceAll("^\"|\"$", "");
+
+            // only dealing with cpcGroupSectionDivision
+            if (!cpcGroupSectionDivision.isEmpty() && cpcClass.isEmpty() && cpcSubClass.isEmpty()) 
+            {
+               // insert GroupSectionDivision
+               String myStatement = "INSERT INTO GroupSectionDivision (gsdNo, gsdName) VALUES (?, ?)";
+               statement = connection.prepareStatement(myStatement);
+               statement.setString(1, cpcGroupSectionDivision);
+               statement.setString(2, cpcDescription);
+               System.out.println(statement.toString());
+               statement.executeUpdate();
+            }
+         }
+         System.out.println("\ninserted all class level cpc code\npress enter to continue");
+         System.in.read();
+
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      finally {
+         if(reader!=null) {
+            try{
+            reader.close();
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+         }
+      }
+   }
+
+   public static void loadCpcSubclass() {
+      Connection connection = null;
+      PreparedStatement statement = null;
+      BufferedReader reader = null;
+      String line;
+      try {
+         reader = new BufferedReader(new FileReader(CPC_CSV_FILE));
+         String header = reader.readLine();
+         System.out.println("Heading row\n" + header + "\n");
+         connection = DriverManager.getConnection(DATABASE);
+         while ((line = reader.readLine())!=null) {
+            String[] splitline = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+            String cpcGroupSectionDivision = (splitline[ClassFields.GROUP_SECTION_DIVISION]).replaceAll("^\"|\"$", "");
+            String cpcClass = (splitline[ClassFields.CLASS]).replaceAll("^\"|\"$", "");
+            String cpcSubClass = (splitline[ClassFields.SUBCLASS]).replaceAll("^\"|\"$", "");
+            String cpcDescription = (splitline[ClassFields.DESCRIPTION]).replaceAll("^\"|\"$", "");
+
+            // only dealing with cpcSubClass
+            if (!cpcSubClass.isEmpty()) 
+            {
+               // insert subclass
+               String myStatement = "INSERT INTO Subclass (subclassNo, subclassName) VALUES (?, ?)";
+               statement = connection.prepareStatement(myStatement);
+               statement.setString(1, cpcSubClass);
+               statement.setString(2, cpcDescription);
+               System.out.println(statement.toString());
+               statement.executeUpdate();
+           }
+         }
+         System.out.println("\ninserted all class level cpc code\npress enter to continue");
+         System.in.read();
+
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      finally {
+         if(reader!=null) {
+            try{
+            reader.close();
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+         }
+      }
+   }
+
+   public static void loadFoodLoss() {
+      Connection connection = null;
+      PreparedStatement statement = null;
+      BufferedReader reader = null;
+      String line;
+  
+      try {
+          reader = new BufferedReader(new FileReader(FOOD_CSV_FILE));
+          String header = reader.readLine();
+          System.out.println("Heading row" + header + "\n");
+          connection = DriverManager.getConnection(DATABASE);
+  
+          while ((line = reader.readLine()) != null) {
+              String[] splitline = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+  
+              String m49Code = splitline[0];
+              int year = Integer.parseInt(splitline[5]);
+              String cpcCode = splitline[3];
+              String commodity = splitline[4];
+              double lossPercentage = Double.parseDouble(splitline[6]);
+              String activity = splitline[7];
+              String foodSupplyStage = splitline[8];
+              String causeOfLoss = splitline[9];
+  
+              String myStatement = "INSERT INTO FoodLoss (m49Code, year, cpcCode, commodity, lossPercentage, activity, foodSupplyStage, causeOfLoss) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+              statement = connection.prepareStatement(myStatement);
+              statement.setString(1, m49Code);
+              statement.setInt(2, year);
+              statement.setString(3, cpcCode);
+              statement.setString(4, commodity);
+              statement.setDouble(5, lossPercentage);
+              statement.setString(6, activity);
+              statement.setString(7, foodSupplyStage);
+              statement.setString(8, causeOfLoss);
+              System.out.println(statement.toString());
+              statement.executeUpdate();
+          }
+          System.out.println("\nInserted all FoodLoss data\nPress enter to continue");
+          System.in.read();
+  
+      } catch (Exception e) {
+          e.printStackTrace();
+      } finally {
+          if (reader != null) {
+              try {
+                  reader.close();
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+          }
+      }
+  }
+  
    public static void loadCountries() {
       // JDBC Database Object
       Connection connection = null;
