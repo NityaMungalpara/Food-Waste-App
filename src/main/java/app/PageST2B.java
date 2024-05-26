@@ -85,7 +85,7 @@ public class PageST2B implements Handler {
                 </div>
             </header>
         """;
-        
+
         // Main section
         html += """
             <main>
@@ -120,10 +120,10 @@ public class PageST2B implements Handler {
                         <a href='#terms'>Terms of Use</a>
                     </div>
                     <div class='footer-social'>
-                        <a href='#'><img src='twitter-icon.png' alt='Twitter'></a>
-                        <a href='#'><img src='facebook-icon.png' alt='Facebook'></a>
-                        <a href='#'><img src='linkedin-icon.png' alt='LinkedIn'></a>
-                        <a href='#'><img src='instagram-icon.png' alt='Instagram'></a>
+                        <a href='https://x.com'><img src='twitter-icon.png' alt='Twitter'></a>
+                        <a href='https://www.facebook.com/'><img src='facebook-icon.png' alt='Facebook'></a>
+                        <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn'></a>
+                        <a href='https://www.instagram.com/'><img src='instagram-icon.png' alt='Instagram'></a>
                     </div>
                 </div>
             </footer>
