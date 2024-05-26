@@ -94,7 +94,7 @@ public class PageIndex implements Handler {
                         <div class='highlight'>
                             <p>Join us in exploring the crucial data behind food loss and waste.</p>
                             <p>Let's work together towards a more sustainable future.</p>
-                            <button>Get Started</button>
+                            <a href='page2A.html'><button>Get Started</button></a>
                         </div>
                     </div>
                 </section>
@@ -113,7 +113,7 @@ public class PageIndex implements Handler {
                                 <li>Cauliflowers and Broccoli in 2013</li>
                             </ul>
                             <p>Food loss affects us all. Understanding the data is the first step towards reducing waste.</p>
-                            <button class='learn-more'>Learn More</button>
+                            <a href='page2A.html'><button class='learn-more'>Learn More</button></a>
                         </div>
                         <div class='chart-box'>
                             <img src='chart.png' alt='Loss Percentage Chart'>
