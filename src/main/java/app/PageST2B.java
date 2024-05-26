@@ -31,36 +31,60 @@ public class PageST2B implements Handler {
     public void handle(Context context) throws Exception {
         // Create a simple HTML webpage in a String
         String html = "<html>";
+        html += "<html lang='en'>";
 
         // Add some Head information
-        html = html + "<head>" + 
-               "<title>Subtask 2.2</title>";
+        html = html + "<head>" + "<meta charset='UTF-8'>";
+        html += "<title>Subtask 2.2</title>";     
 
         // Add some CSS (external file)
-        html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
+        html = html + "<link rel='stylesheet' type='text/css' href='sub2B.css' />";
         html = html + "</head>";
 
         // Add the body
         html = html + "<body>";
 
-        // Add the topnav
-        // This uses a Java v15+ Text Block
-        html = html + """
-            <div class='topnav'>
-                <a href='/'>Homepage</a>
-                <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
-                <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
-                <a href='page3B.html'>Sub Task 3.B</a>
-            </div>
-        """;
-
         // Add header content block
-        html = html + """
-            <div class='header'>
-                <h1>Subtask 2.B</h1>
-            </div>
+        html += """
+            <header>
+                <div class='container'>
+                    <div class='Weblogo'>
+                        <img src='Weblogo.png' alt='Logo'>
+                    </div>
+                    <nav>
+                        <ul class='nav-links'>
+                            <li><a href='/'>Home</a></li>
+                            <li><a href='#about'>About Us</a></li>
+                            <li><a href='mission.html'>Our Mission</a></li>
+                            <li class='dropdown'>
+                                <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>
+                                <div class='dropdown-content'>
+                                    <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>
+                                    <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>
+                                    <a href='page3A.html'>Similarity Data Analysis by Country</a>
+                                    <a href='page3B.html'>Similarity Data Analysis by Group</a>
+                                </div>
+                            </li>
+                            <li><a href='#involved'>Get Involved</a></li>
+                            <li><a href='#faqs'>FAQs</a></li>
+                        </ul>
+                    </nav>
+                    <div class='nav-right'>
+                        <div class='search-container'>
+                            <input type='text' placeholder='Search'>
+                            <button>Search</button>
+                        </div>
+                        <button class='help-center'>Help Center</button>
+                        <div class='language-selector'>
+                            <select>
+                                <option value='en'>English</option>
+                                <option value='cn'>Chinese</option>
+                                //Add languages
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </header>
         """;
 
         // Add Div for page Content
