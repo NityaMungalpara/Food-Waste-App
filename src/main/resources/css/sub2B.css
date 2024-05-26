@@ -59,6 +59,11 @@ header nav ul li a {
     align-items: center;
 }
 
+/* Nav links hover effect */
+.nav-links li a:hover {
+    text-decoration: underline;
+}
+
 /* header with arrow icon  */
 header nav ul li .arrow {
     margin-left: 5px;

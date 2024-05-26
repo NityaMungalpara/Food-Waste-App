@@ -31,7 +31,6 @@ header {
     align-items: center;
 }
 
-
 /* Set header-logo size */
 header .Weblogo img {
     height: 60px;
@@ -56,6 +55,11 @@ header nav ul li a {
     font-weight: bold;
     display: flex;
     align-items: center;
+}
+
+/* Nav links hover effect */
+.nav-links li a:hover {
+    text-decoration: underline;
 }
 
 /* header with arrow icon  */
