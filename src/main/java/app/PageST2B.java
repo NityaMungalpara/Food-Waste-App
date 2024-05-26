@@ -79,13 +79,13 @@ public class PageST2B implements Handler {
                             <select>
                                 <option value='en'>English</option>
                                 <option value='cn'>Chinese</option>
-                                //Add languages
                             </select>
                         </div>
                     </div>
                 </div>
             </header>
         """;
+        
         // Main section
         html += """
             <main>
@@ -93,7 +93,7 @@ public class PageST2B implements Handler {
                     <ul>
                         <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>
                         <li>></li>
-                        <li><a href='page2B.html'>Food Loss and Waste Analysis by Group</a></li>
+                        <li><a href='page2B.html'><b>Food Loss and Waste Analysis by Group</b></a></li>
                         <li>></li>
                         <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>
                         <li>></li>

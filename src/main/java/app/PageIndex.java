@@ -78,13 +78,13 @@ public class PageIndex implements Handler {
                             <select>
                                 <option value='en'>English</option>
                                 <option value='cn'>Chinese</option>
-                                //Add languages
                             </select>
                         </div>
                     </div>
                 </div>
             </header>
         """;
+        
     // Main section
         html += """
             <main>
