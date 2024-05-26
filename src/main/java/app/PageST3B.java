@@ -102,7 +102,7 @@ public class PageST3B implements Handler {
                 </nav>
                 <section class='hero'>
                     <div class='subheading'>
-                        <h1>Food Loss and Waste Analysis by Group</h1>
+                        <h1>Similarity Data Analysis by Group</h1>
                     </div>
                 </section>
             </main>
