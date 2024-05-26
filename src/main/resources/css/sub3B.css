@@ -1,6 +1,14 @@
-body {
+html, body {
+    height: 100%;  /* Make sure the html and body take the full height of the viewport*/
+    display: flex;
+    flex-direction: column;
     font-family: sans-serif;
     background-color: #ffffff;
+}
+
+/* Make sure the main content area fill all available space */
+main {
+    flex: 1;
 }
 
 /* Container styles for main layout */
