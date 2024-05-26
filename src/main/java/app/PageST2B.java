@@ -86,23 +86,47 @@ public class PageST2B implements Handler {
                 </div>
             </header>
         """;
+        // Main section
+        html += """
+            <main>
+                <nav class='breadcrumb'>
+                    <ul>
+                        <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>
+                        <li>></li>
+                        <li><a href='page2B.html'>Food Loss and Waste Analysis by Group</a></li>
+                        <li>></li>
+                        <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>
+                        <li>></li>
+                        <li><a href='page3B.html'>Similarity Data Analysis by Group</a></li>
+                    </ul>
+                </nav>
+                <section class='hero'>
+                    <div class='subheading'>
+                        <h1>Food Loss and Waste Analysis by Group</h1>
+                    </div>
+                </section>
+            </main>
+        """;
 
-        // Add Div for page Content
-        html = html + "<div class='content'>";
-
-        // Add HTML for the page content
-        html = html + """
-            <p>Subtask 2.B page content</p>
-            """;
-
-        // Close Content div
-        html = html + "</div>";
-
-        // Footer
-        html = html + """
-            <div class='footer'>
-                <p>COSC2803 - Studio Project Starter Code (Apr24)</p>
-            </div>
+        // Footer section
+        html += """
+            <footer>
+                <div class='footer-container'>
+                    <div class='footer-links'>
+                        <a href='#about'>About</a>
+                        <a href='#contact'>Contact Us</a>
+                        <a href='#faqs'>FAQs</a>
+                        <a href='#privacy'>Privacy Policy</a>
+                        <a href='#terms'>Terms of Use</a>
+                    </div>
+                    <div class='footer-social'>
+                        <a href='#'><img src='twitter-icon.png' alt='Twitter'></a>
+                        <a href='#'><img src='facebook-icon.png' alt='Facebook'></a>
+                        <a href='#'><img src='linkedin-icon.png' alt='LinkedIn'></a>
+                        <a href='#'><img src='instagram-icon.png' alt='Instagram'></a>
+                    </div>
+                </div>
+            </footer>
         """;
 
         // Finish the HTML webpage
