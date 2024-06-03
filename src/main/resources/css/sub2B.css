@@ -3,7 +3,7 @@ html, body {
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
 }
 
 /* Make sure the main content area fill all available space */
@@ -24,7 +24,7 @@ main {
 /*————————————————————————————————————————————Header——————————————————————————————————————————*/
 /* header styles */
 header {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px 0;  /* top and bottom */
     border-bottom: 1px solid #ddd;
     display: flex;
@@ -148,7 +148,7 @@ header nav ul li:hover .dropdown-content {
 /* Breadcrumb styling */
 .breadcrumb {
     font-size: small;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
     padding: 10px 25px;
     margin-top: 5px;
 }
@@ -182,6 +182,105 @@ header nav ul li:hover .dropdown-content {
     text-decoration: underline;
 }
 
+/*————————————————————————————————————————————Filter section——————————————————————————————————————————*/
+/* Filter styles */
+.filter-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filter-section form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+.form-group select,
+.filter-section button {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    max-width: 200px;
+}
+
+.multiselect {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.filter-section button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+}
+
+.filter-section button:hover {
+    background-color: #23963a;
+}
+
+.filter-section button[type="reset"] {
+    background-color: #aaa;
+}
+
+.filter-section button[type="reset"]:hover {
+    background-color: #888;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+/* Dropdown Styles */
+.dropdown-group {
+    margin: 10px 0;
+    position: relative;
+    width: 200px;
+}
+
+.dropdown-group summary {
+    background-color:white;
+    border: 1px solid #dfdcdc;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 100%;
+}
+
+.dropdown-content label {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
 .footer-container {

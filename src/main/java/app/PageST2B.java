@@ -110,7 +110,7 @@ public class PageST2B implements Handler {
                 <form method="post" action="/analyse">
                     <div class="form-group">
                         <label for="group">Food Group:</label>
-                        <div class="dropdown">
+                        <div class="dropdown-group">
                             <details>
                                 <summary>Select Below</summary>
                                 <div class="dropdown-content" id="group">
