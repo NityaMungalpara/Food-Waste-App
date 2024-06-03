@@ -105,6 +105,68 @@ public class PageST2B implements Handler {
                         <h1>Food Loss and Waste Analysis by Group</h1>
                     </div>
                 </section>
+
+                <section class="filter-section">
+                <form method="post" action="/analyse">
+                    <div class="form-group">
+                        <label for="group">Food Group:</label>
+                        <div class="dropdown">
+                            <details>
+                                <summary>Select Below</summary>
+                                <div class="dropdown-content" id="group">
+                                    <label>
+                                        <input type="checkbox" name="group" value="cereals"> Cereals
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="group" value="live_animals"> Live Animals
+                                    </label>
+                                
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="start_year">Yearly Comparison:</label>
+                        <select name="start_year" id="start_year">
+                            <option value="" disabled selected>Start Year</option>
+                            <option value="1966">1966</option>
+                            <option value="1967">1967</option>
+                        </select>
+                        <select name="end_year" id="end_year">
+                            <option value="" disabled selected>End Year</option>
+                            <option value="1966">1966</option>
+                            <option value="1967">1967</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="fields">Filter:</label>
+                        <div class="multiselect">
+                            <label><input type="checkbox" name="fields" value="activity"> Activity</label>
+                            <label><input type="checkbox" name="fields" value="food_supply_stage"> Food Supply Stage</label>
+                            <label><input type="checkbox" name="fields" value="cause_of_loss"> Cause of Loss</label>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="sort_order">Sort By:</label>
+                        <select name="sort_order" id="sort_order">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-buttons">
+                        <button type="submit">Search</button>
+                        <button type="reset">Clear All</button>
+                    </div>
+                </form>
+            </section>
+    
+            <section class="result-section">
+                <h2>Results</h2>
+            </section>
             </main>
         """;
 
