@@ -264,8 +264,19 @@ header nav ul li:hover .dropdown-content {
     font-size: 16px;
     cursor: pointer;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 10px;
+}
+
+.dropdown-group summary::after {
+    content: '▼';
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+
+.dropdown-group details[open] summary::after {
+    content: '▲';
 }
 
 .dropdown-content {
