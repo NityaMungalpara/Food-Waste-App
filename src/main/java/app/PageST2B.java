@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -114,12 +115,16 @@ public class PageST2B implements Handler {
                             <details>
                                 <summary>Select Below</summary>
                                 <div class="dropdown-content" id="group">
-                                    <label>
-                                        <input type="checkbox" name="group" value="cereals"> Cereals
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" name="group" value="live_animals"> Live Animals
-                                    </label>
+        """;
+        // Get food groups from the database
+        JDBCConnection jdbc = new JDBCConnection();
+        List<String> foodGroups = jdbc.getAllFoodGroups();
+        
+        // Add checkboxes for food groups
+        for (String group : foodGroups) {
+            html += "<label><input type='checkbox' name='group' value='" + group + "'> " + group + "</label>";
+        }
+        html += """
                                 
                                 </div>
                             </details>
@@ -127,7 +132,6 @@ public class PageST2B implements Handler {
                     </div>
         """;
         // Get years from the database
-        JDBCConnection jdbc = new JDBCConnection();
         ArrayList<Integer> years = jdbc.getAllYears();
     
         // Year selection dropdowns

@@ -1,7 +1,7 @@
 package app;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -105,5 +105,23 @@ public class JDBCConnection {
             e.printStackTrace();
         }
         return years;
+    }
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get all food groups
+    public List<String> getAllFoodGroups() {
+        List<String> foodGroups = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            String query = "SELECT gsdNo, gsdName FROM GroupSectionDivision WHERE gsdNo GLOB '[0-9]*'";
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+                // String gsdNo = results.getString("gsdNo");
+                String gsdName = results.getString("gsdName");
+                foodGroups.add(" " + gsdName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foodGroups;
     }
 }
