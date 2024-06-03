@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f4f4f4;
+    padding: 10px 0;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+}
+
+.top-nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.top-nav nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.top-nav nav ul li {
+    display: inline;
+}
+
+.top-nav nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.top-nav .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.top-nav .dropbtn {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.top-nav .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.top-nav .search-bar input {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.top-nav .faqs a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: #eaeaea;
+}
+
+.main-nav button {
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.purpose {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.purpose h1 {
+    margin-top: 0;
+}
+
+.purpose p {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.purpose a {
+    display: block;
+    margin-top: 10px;
+    color: blue;
+    text-decoration: none;
+}
+
+.personas {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.personas .persona-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.personas .carousel-btn {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.personas .persona {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+}
+
+.join-us {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+}
+
+footer {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.credits p {
+    margin: 0;
+}
+
+.social-media a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
