@@ -125,21 +125,41 @@ public class PageST2B implements Handler {
                             </details>
                         </div>
                     </div>
+        """;
+        // Get years from the database
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<Integer> years = jdbc.getAllYears();
     
-                    <div class="form-group">
-                        <label for="start_year">Yearly Comparison:</label>
-                        <select name="start_year" id="start_year">
-                            <option value="" disabled selected>Start Year</option>
-                            <option value="1966">1966</option>
-                            <option value="1967">1967</option>
-                        </select>
-                        <select name="end_year" id="end_year">
-                            <option value="" disabled selected>End Year</option>
-                            <option value="1966">1966</option>
-                            <option value="1967">1967</option>
+        // Year selection dropdowns
+        html += """
+            <div class="form-group">
+                <label for="start_year">Yearly Comparison: From</label>
+                <select name="start_year" id="start_year">
+                    <option value="" disabled selected>Select Start Year</option>
+        """;
+
+        for (Integer year : years) {
+            html += "<option value='" + year + "'>" + year + "</option>";
+        }
+
+        html += """
                         </select>
                     </div>
-    
+                    <div class="form-group">
+                        <label for="end_year">To</label>
+                        <select name="end_year" id="end_year">
+                            <option value="" disabled selected>Select End Year</option>
+        """;
+
+        for (Integer year : years) {
+            html += "<option value='" + year + "'>" + year + "</option>";
+        }
+
+        html += """
+                    </select>
+                </div>
+        """;
+        html += """
                     <div class="form-group">
                         <label for="fields">Filter:</label>
                         <div class="multiselect">

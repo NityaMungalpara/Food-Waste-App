@@ -90,4 +90,20 @@ public class JDBCConnection {
     }
 
     // TODO: Add your required methods here
+
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get all years
+    public ArrayList<Integer> getAllYears() {
+        ArrayList<Integer> years = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT year FROM Date");
+            while (results.next()) {
+                years.add(results.getInt("year"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return years;
+    }
 }
