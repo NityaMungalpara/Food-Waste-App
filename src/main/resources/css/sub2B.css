@@ -279,7 +279,7 @@ header nav ul li:hover .dropdown-content {
     content: '▲';
 }
 
-.dropdown-content {
+.dropdown-groupMenu {
     position: absolute;
     background-color: white;
     border: 1px solid #ccc;
@@ -289,7 +289,7 @@ header nav ul li:hover .dropdown-content {
     overflow-y: auto;
 }
 
-.dropdown-content label {
+.dropdown-groupMenu label {
     display: block;
     padding: 5px 10px;
     cursor: pointer;

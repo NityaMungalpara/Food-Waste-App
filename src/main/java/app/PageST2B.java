@@ -114,7 +114,7 @@ public class PageST2B implements Handler {
                         <div class="dropdown-group">
                             <details>
                                 <summary>Select Below</summary>
-                                <div class="dropdown-content" id="group">
+                                <div class="dropdown-groupMenu" id="group">
         """;
         // Get food groups from the database
         JDBCConnection jdbc = new JDBCConnection();
