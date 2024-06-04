@@ -108,7 +108,7 @@ public class PageST2B implements Handler {
                 </section>
 
                 <section class="filter-section">
-                <form method="post" action="/analyse">
+                <form method="post" action="/page2B.html">
                     <div class="form-group">
                         <label for="group">Food Group:</label>
                         <div class="dropdown-group">
