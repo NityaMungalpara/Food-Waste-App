@@ -112,11 +112,11 @@ public class JDBCConnection {
         List<String> foodGroups = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DATABASE)) {
             Statement statement = connection.createStatement();
-            String query = "SELECT gsdNo, gsdName FROM GroupSectionDivision WHERE gsdNo GLOB '[0-9]*'";
+            String query = "SELECT group_name FROM groups";
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
                 // String gsdNo = results.getString("gsdNo");
-                String gsdName = results.getString("gsdName");
+                String gsdName = results.getString("group_name");
                 foodGroups.add(" " + gsdName);
             }
         } catch (SQLException e) {
