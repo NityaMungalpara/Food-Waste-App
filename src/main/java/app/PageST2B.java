@@ -30,190 +30,165 @@ public class PageST2B implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+        // database
+        JDBCConnection jdbc = new JDBCConnection();
+        List<String> foodGroups = jdbc.getAllFoodGroups();
+        ArrayList<Integer> years = jdbc.getAllYears();
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
         html += "<html lang='en'>";
-
-        // Add some Head information
-        html = html + "<head>" + "<meta charset='UTF-8'>";
-        html += "<title>Subtask 2.2</title>";     
-
-        // Add some CSS (external file)
-        html = html + "<link rel='stylesheet' type='text/css' href='sub2B.css' />";
-        html = html + "</head>";
+        html += "<head>";
+        html +=     "<meta charset='UTF-8'>";
+        html +=     "<title>Subtask 2.2</title>";     
+        html +=     "<link rel='stylesheet' type='text/css' href='sub2B.css' />";
+        html += "</head>";
 
         // Add the body
         html = html + "<body>";
 
-        // Add header content block
-        html += """
-            <header>
-                <div class='container'>
-                    <div class='Weblogo'>
-                        <img src='Weblogo.png' alt='Logo'>
-                    </div>
-                    <nav>
-                        <ul class='nav-links'>
-                            <li><a href='/'>Home</a></li>
-                            <li><a href='#about'>About Us</a></li>
-                            <li><a href='mission.html'>Our Mission</a></li>
-                            <li class='dropdown'>
-                                <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>
-                                <div class='dropdown-content'>
-                                    <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>
-                                    <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>
-                                    <a href='page3A.html'>Similarity Data Analysis by Country</a>
-                                    <a href='page3B.html'>Similarity Data Analysis by Group</a>
-                                </div>
-                            </li>
-                            <li><a href='#involved'>Get Involved</a></li>
-                            <li><a href='#faqs'>FAQs</a></li>
-                        </ul>
-                    </nav>
-                    <div class='nav-right'>
-                        <div class='search-container'>
-                            <input type='text' placeholder='Search'>
-                            <button>Search</button>
-                        </div>
-                        <button class='help-center'>Help Center</button>
-                        <div class='language-selector'>
-                            <select>
-                                <option value='en'>English</option>
-                                <option value='cn'>Chinese</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        """;
+        // Header
+        html += "<header>";
+        html += "  <div class='container'>";
+        html += "    <div class='Weblogo'><img src='Weblogo.png' alt='Logo'></div>";
+        html += "    <nav>";
+        html += "      <ul class='nav-links'>";
+        html += "        <li><a href='/'>Home</a></li>";
+        html += "        <li><a href='#about'>About Us</a></li>";
+        html += "        <li><a href='mission.html'>Our Mission</a></li>";
+        html += "        <li class='dropdown'>";
+        html += "          <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
+        html += "          <div class='dropdown-content'>";
+        html += "            <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
+        html += "            <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
+        html += "            <a href='page3A.html'>Similarity Data Analysis by Country</a>";
+        html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
+        html += "          </div>";
+        html += "        </li>";
+        html += "        <li><a href='#involved'>Get Involved</a></li>";
+        html += "        <li><a href='#faqs'>FAQs</a></li>";
+        html += "      </ul>";
+        html += "    </nav>";
+        html += "    <div class='nav-right'>";
+        html += "      <div class='search-container'><input type='text' placeholder='Search'><button>Search</button></div>";
+        html += "      <button class='help-center'>Help Center</button>";
+        html += "      <div class='language-selector'>";
+        html += "        <select>";
+        html += "          <option value='en'>English</option>";
+        html += "          <option value='cn'>Chinese</option>";
+        html += "        </select>";
+        html += "      </div>";
+        html += "    </div>";
+        html += "  </div>";
+        html += "</header>";
 
         // Main section
-        html += """
-            <main>
-                <nav class='breadcrumb'>
-                    <ul>
-                        <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>
-                        <li>></li>
-                        <li><a href='page2B.html'><b>Food Loss and Waste Analysis by Group</b></a></li>
-                        <li>></li>
-                        <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>
-                        <li>></li>
-                        <li><a href='page3B.html'>Similarity Data Analysis by Group</a></li>
-                    </ul>
-                </nav>
-                <section class='hero'>
-                    <div class='subheading'>
-                        <h1>Food Loss and Waste Analysis by Group</h1>
-                    </div>
-                </section>
+        html += "<main>";
+        html += "  <nav class='breadcrumb'>";
+        html += "    <ul>";
+        html += "      <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>";
+        html += "      <li>></li>";
+        html += "      <li><a href='page2B.html'><b>Food Loss and Waste Analysis by Group</b></a></li>";
+        html += "      <li>></li>";
+        html += "      <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>";
+        html += "      <li>></li>";
+        html += "      <li><a href='page3B.html'>Similarity Data Analysis by Group</a></li>";
+        html += "    </ul>";
+        html += "  </nav>";
+        html += "  <section class='hero'>";
+        html += "    <div class='subheading'>";
+        html += "      <h1>Food Loss and Waste Analysis by Group</h1>";
+        html += "    </div>";
+        html += "  </section>";
 
-                <section class="filter-section">
-                <form method="post" action="/page2B.html">
-                    <div class="form-group">
-                        <label for="group">Food Group:</label>
-                        <div class="dropdown-group">
-                            <details>
-                                <summary>Select Below</summary>
-                                <div class="dropdown-groupMenu" id="group">
-        """;
-        // Get food groups from the database
-        JDBCConnection jdbc = new JDBCConnection();
-        List<String> foodGroups = jdbc.getAllFoodGroups();
-        
-        // Add checkboxes for food groups
+        // Form section for selecting food groups
+        html += "  <section class='filter-section'>";
+        html += "    <form method='post' action='" + URL + "'>";
+        html += "      <div class='form-group'>";
+        html += "        <label for='group'>Food Group:</label>";
+        html += "        <div class='dropdown-group'>";
+        html += "          <details>";
+        html += "            <summary>Select Below</summary>";
+        html += "            <div class='dropdown-groupMenu' id='group'>";
         for (String group : foodGroups) {
-            html += "<label><input type='checkbox' name='group' value='" + group + "'> " + group + "</label>";
+            html += "              <label><input type='checkbox' name='group' value='" + group + "'>" + group + "</label>";
         }
-        html += """
+        html += "            </div>";
+        html += "          </details>";
+        html += "        </div>";
+        html += "      </div>";
                                 
-                                </div>
-                            </details>
-                        </div>
-                    </div>
-        """;
-        // Get years from the database
-        ArrayList<Integer> years = jdbc.getAllYears();
-    
-        // Year selection dropdowns
-        html += """
-            <div class="form-group">
-                <label for="start_year">Yearly Comparison: From</label>
-                <select name="start_year" id="start_year">
-                    <option value="" disabled selected>Select Start Year</option>
-        """;
-
+        // Year dropdowns
+        html += "      <div class='form-group'>";
+        html += "        <label for='start_year'>Yearly Comparison: From</label>";
+        html += "        <select name='start_year' id='start_year'>";
+        html += "          <option value='' disabled selected>Select Start Year</option>";
         for (Integer year : years) {
-            html += "<option value='" + year + "'>" + year + "</option>";
+            html += "          <option value='" + year + "'>" + year + "</option>";
         }
-
-        html += """
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="end_year">To</label>
-                        <select name="end_year" id="end_year">
-                            <option value="" disabled selected>Select End Year</option>
-        """;
-
+        html += "        </select>";
+        html += "      </div>";
+        html += "      <div class='form-group'>";
+        html += "        <label for='end_year'>To</label>";
+        html += "        <select name='end_year' id='end_year'>";
+        html += "          <option value='' disabled selected>Select End Year</option>";
         for (Integer year : years) {
-            html += "<option value='" + year + "'>" + year + "</option>";
+            html += "          <option value='" + year + "'>" + year + "</option>";
         }
+        html += "        </select>";
+        html += "      </div>";
 
-        html += """
-                    </select>
-                </div>
-        """;
-        html += """
-                    <div class="form-group">
-                        <label for="fields">Filter:</label>
-                        <div class="multiselect">
-                            <label><input type="checkbox" name="fields" value="activity"> Activity</label>
-                            <label><input type="checkbox" name="fields" value="food_supply_stage"> Food Supply Stage</label>
-                            <label><input type="checkbox" name="fields" value="cause_of_loss"> Cause of Loss</label>
-                        </div>
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="sort_order">Sort By:</label>
-                        <select name="sort_order" id="sort_order">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </div>
-    
-                    <div class="form-buttons">
-                        <button type="submit">Search</button>
-                        <button type="reset">Clear All</button>
-                    </div>
-                </form>
-            </section>
-    
-            <section class="result-section">
-                <h2>Results</h2>
-            </section>
-            </main>
-        """;
+        // Additional filters
+        html += "      <div class='form-group'>";
+        html += "        <label for='fields'>Filter:</label>";
+        html += "        <div class='multiselect'>";
+        html += "          <label><input type='checkbox' name='fields' value='activity'> Activity</label>";
+        html += "          <label><input type='checkbox' name='fields' value='food_supply_stage'> Food Supply Stage</label>";
+        html += "          <label><input type='checkbox' name='fields' value='cause_of_loss'> Cause of Loss</label>";
+        html += "        </div>";
+        html += "      </div>";
 
-        // Footer section
-        html += """
-            <footer>
-                <div class='footer-container'>
-                    <div class='footer-links'>
-                        <a href='#about'>About</a>
-                        <a href='#contact'>Contact Us</a>
-                        <a href='#faqs'>FAQs</a>
-                        <a href='#privacy'>Privacy Policy</a>
-                        <a href='#terms'>Terms of Use</a>
-                    </div>
-                    <div class='footer-social'>
-                        <a href='https://x.com'><img src='twitter-icon.png' alt='Twitter'></a>
-                        <a href='https://www.facebook.com/'><img src='facebook-icon.png' alt='Facebook'></a>
-                        <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn'></a>
-                        <a href='https://www.instagram.com/'><img src='instagram-icon.png' alt='Instagram'></a>
-                    </div>
-                </div>
-            </footer>
-        """;
+        // Sort order
+        html += "      <div class='form-group'>";
+        html += "        <label for='sort_order'>Sort By:</label>";
+        html += "        <select name='sort_order' id='sort_order'>";
+        html += "          <option value='asc'>Ascending</option>";
+        html += "          <option value='desc'>Descending</option>";
+        html += "        </select>";
+        html += "      </div>";
+
+        // Submit and Reset buttons
+        html += "      <div class='form-buttons'>";
+        html += "        <button type='submit'>Search</button>";
+        html += "        <button type='reset'>Clear All</button>";
+        html += "      </div>";
+        html += "    </form>";
+        html += "  </section>";
+
+        // Results section
+        html += "  <section class='result-section'>";
+        html += "    <h2>Results</h2>";
+        // Results
+        html += "  </section>";
+
+        // Footer
+        html += "<footer>";
+        html += "  <div class='footer-container'>";
+        html += "    <div class='footer-links'>";
+        html += "      <a href='#about'>About</a>";
+        html += "      <a href='#contact'>Contact Us</a>";
+        html += "      <a href='#faqs'>FAQs</a>";
+        html += "      <a href='#privacy'>Privacy Policy</a>";
+        html += "      <a href='#terms'>Terms of Use</a>";
+        html += "    </div>";
+        html += "    <div class='footer-social'>";
+        html += "      <a href='https://x.com'><img src='twitter-icon.png' alt='Twitter'></a>";
+        html += "      <a href='https://www.facebook.com/'><img src='facebook-icon.png' alt='Facebook'></a>";
+        html += "      <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn'></a>";
+        html += "      <a href='https://www.instagram.com/'><img src='instagram-icon.png' alt='Instagram'></a>";
+        html += "    </div>";
+        html += "  </div>";
+        html += "</footer>";
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";
