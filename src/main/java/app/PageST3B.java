@@ -81,11 +81,11 @@ public class PageST3B implements Handler {
         html += "    <ul>";
         html += "      <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>";
         html += "      <li>></li>";
-        html += "      <li><a href='page2B.html'><b>Food Loss and Waste Analysis by Group</b></a></li>";
+        html += "      <li><a href='page2B.html'>Food Loss and Waste Analysis by Group</a></li>";
         html += "      <li>></li>";
         html += "      <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>";
         html += "      <li>></li>";
-        html += "      <li><a href='page3B.html'>Similarity Data Analysis by Group</a></li>";
+        html += "      <li><a href='page3B.html'><b>Similarity Data Analysis by Group</b></a></li>";
         html += "    </ul>";
         html += "  </nav>";
         html += "  <section class='hero'>";
