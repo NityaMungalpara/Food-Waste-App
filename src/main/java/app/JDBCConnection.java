@@ -115,9 +115,8 @@ public class JDBCConnection {
             String query = "SELECT group_name FROM groups";
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
-                // String gsdNo = results.getString("gsdNo");
-                String gsdName = results.getString("group_name");
-                foodGroups.add(" " + gsdName);
+                String groupName = results.getString("group_name");
+                foodGroups.add(" " + groupName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
