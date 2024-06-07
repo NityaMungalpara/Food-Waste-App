@@ -34,60 +34,60 @@ public class JDBCConnection {
      * @return
      *    Returns an ArrayList of Country objects
      */
-    public ArrayList<Country> getAllCountries() {
-        // Create the ArrayList of Country objects to return
-        ArrayList<Country> countries = new ArrayList<Country>();
+    // public ArrayList<Country> getAllCountries() {
+    //     // Create the ArrayList of Country objects to return
+    //     ArrayList<Country> countries = new ArrayList<Country>();
 
-        // Setup the variable for the JDBC connection
-        Connection connection = null;
+    //     // Setup the variable for the JDBC connection
+    //     Connection connection = null;
 
-        try {
-            // Connect to JDBC data base
-            connection = DriverManager.getConnection(DATABASE);
+    //     try {
+    //         // Connect to JDBC data base
+    //         connection = DriverManager.getConnection(DATABASE);
 
-            // Prepare a new SQL Query & Set a timeout
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
+    //         // Prepare a new SQL Query & Set a timeout
+    //         Statement statement = connection.createStatement();
+    //         statement.setQueryTimeout(30);
 
-            // The Query
-            String query = "SELECT * FROM Country";
+    //         // The Query
+    //         String query = "SELECT * FROM Country WHERE name = '\" + country_drop + \"'\"";
             
-            // Get Result
-            ResultSet results = statement.executeQuery(query);
+    //         // Get Result
+    //         ResultSet results = statement.executeQuery(query);
 
-            // Process all of the results
-            while (results.next()) {
-                // Lookup the columns we need
-                String m49Code     = results.getString("m49code");
-                String name  = results.getString("countryName");
+    //         // Process all of the results
+    //         while (results.next()) {
+    //             // Lookup the columns we need
+    //             String m49Code     = results.getString("m49code");
+    //             //String name  = results.getString("countryName");
 
-                // Create a Country Object
-                Country country = new Country(m49Code, name);
+    //             // Create a Country Object
+    //             Country country = new Country(m49Code);
 
-                // Add the Country object to the array
-                countries.add(country);
-            }
+    //             // Add the Country object to the array
+    //             countries.add(country);
+    //         }
 
-            // Close the statement because we are done with it
-            statement.close();
-        } catch (SQLException e) {
-            // If there is an error, lets just pring the error
-            System.err.println(e.getMessage());
-        } finally {
-            // Safety code to cleanup
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e.getMessage());
-            }
-        }
+    //         // Close the statement because we are done with it
+    //         statement.close();
+    //     } catch (SQLException e) {
+    //         // If there is an error, lets just pring the error
+    //         System.err.println(e.getMessage());
+    //     } finally {
+    //         // Safety code to cleanup
+    //         try {
+    //             if (connection != null) {
+    //                 connection.close();
+    //             }
+    //         } catch (SQLException e) {
+    //             // connection close failed.
+    //             System.err.println(e.getMessage());
+    //         }
+    //     }
 
-        // Finally we return all of the countries
-        return countries;
-    }
+    //     // Finally we return all of the countries
+    //     return countries;
+    // }
 
-    // TODO: Add your required methods here
-}
+//     // TODO: Add your required methods here
+ }
