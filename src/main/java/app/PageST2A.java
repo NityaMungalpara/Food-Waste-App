@@ -118,13 +118,15 @@ public class PageST2A implements Handler {
     html = html + "   <button type='submit' class='btn btn-primary'>Get Results!</button>";
 
     String country_drop = context.formParam("country_drop");
+    String start_year_drop = context.formParam("start_year_drop");
+    String end_year_drop = context.formParam("end_year_drop");
     // String movietype_drop = context.queryParam("movietype_drop");
     if (country_drop == null) {
         // If NULL, nothing to show, therefore we make some "no results" HTML
         html = html + "<h2><i>No Results to show for dropbox</i></h2>";
     } else {
         // If NOT NULL, then lookup the movie by type!
-        html = html + outputCountries(country_drop);
+        html = html + outputCountries(country_drop,start_year_drop,end_year_drop);
     }
     // Close Content div
     html = html + "</div>";
@@ -163,26 +165,26 @@ public class PageST2A implements Handler {
 }
     
     
-    public String outputCountries(String name) {
+    public String outputCountries(String name,String startYear,String endYear) {
         String html = "";
-        html = html + "<h2>" + name + " Code</h2>";
+        html = html + "<h2>" + name + " Data</h2>";
 
         // Look up movies from JDBC
-        ArrayList<String> countries = getAllCountries(name);
+        ArrayList<Country> countries = getAllCountries(name,startYear,endYear);
         
         // Add HTML for the movies list
         html = html + "<ul>";
-        for (String title : countries) {
-            html = html + "<li>" + title + "</li>";
+        for (Country country : countries) {
+            html = html + "<li>" + country.countryName + "," + country.year + "," + country.loss_percentage + "</li>";
         }
         html = html + "</ul>";
         
         return html;
     }
     
-    public ArrayList<String> getAllCountries(String m49code) {
+    public ArrayList<Country> getAllCountries(String name,String startYear,String endYear) {
         // Create the ArrayList of Country objects to return
-        ArrayList<String> m49CodeList = new ArrayList<String>();
+        ArrayList<Country> countryData = new ArrayList<Country>();
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -196,22 +198,26 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT DISTINCT m49code FROM Country WHERE countryName = '" + m49code + "'";
+            String query = "SELECT country.countryName, country.year, country.loss_percentage FROM FoodLoss";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
 
             // Process all of the results
             while (results.next()) {
-                // Lookup the columns we need
-                String title = results.getString("m49code");
-                //String name  = results.getString("countryName");
 
                 // Create a Country Object
-                //Country country = new Country(m49Code);
+                Country country = new Country();
+                // Lookup the columns we need
+
+                //String title = results.getString("m49code");
+                //String name  = results.getString("countryName");
+                country.countryName = results.getString("countryName");
+                country.year = results.getString("year");
+                country.loss_percentage = results.getString("loss_percentage");
 
                 // Add the Country object to the array
-                m49CodeList.add(title);
+                countryData.add(country);
             }
 
             // Close the statement because we are done with it
@@ -232,7 +238,7 @@ public class PageST2A implements Handler {
         }
 
         // Finally we return all of the countries
-        return m49CodeList;
+        return countryData;
     }
 }
 
