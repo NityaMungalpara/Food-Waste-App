@@ -58,36 +58,182 @@ public class PageST2A implements Handler {
 
         // Add header content block
         html = html + """
-            <div class='header'>
-                <h1>Subtask 2.A</h1>
-            </div>
-        """;
+        <header>
+        <img src = "Weblogo.png" width = 100px>
+            <div>
+                <nav class = 'box1'>
+                        <button>Food Loss vs Food Waste</button>
+                        <button>News</button>
+                        <button>About us</button>
+                        <button>Help Centre</button>
+                        <button>FAQ's</button> 
+                        <br>
+                        <br>
+                        <button>Research and Development</button>
+                        <input type = "text" placeholder = "Search..."> 
+                        <button>Search</button>   
+                </nav>   
+                <br>
+                <div>
+                    <button>Food Supply Chain</button>
+                    <button>Impact on Environment</button>
+                    <button>How can we improve?</button>
+                    <button>Testimonials</button>
+                    <button>Crowd Funding</button>
+                </div>
+        </header>
+    """;
 
         // Add Div for page Content
-        html = html + "<div class='content'>";
+    html = html + "<div class='content'>";
+    html = html + "<form action='#' method='post'>";
+
+    html = html + "   <div class='form-group'>";
+    html = html + "      <label for='country_drop'>Select the Country (Dropdown):</label>";
+    html = html + "      <select id='country_drop' name='country_drop'>";
+    html = html + "<option> Myanmar </option>";
+    html = html + "<option> Burundi </option>";
+    html = html + "<option> Western Africa </option>";
+    html = html + "      </select>";
+    html = html + "   </div>";
+
+    html = html + "   <div class='form-group'>";
+    html = html + "      <label for='start_year_drop'>Select the Start Year (Dropdown))</label>";
+    html = html + "      <select id='start_year_drop' name='start_year_drop'>";
+    html = html + "<option> 1966 </option>";
+    html = html + "<option> 1967 </option>";
+    html = html + "<option> 1968 </option>";
+    html = html + "      </select>";
+    html = html + "   </div>";
+
+    html = html + "   <div class='form-group'>";
+    html = html + "      <label for='end_year_drop'>Select the End Year (Dropdown))</label>";
+    html = html + "      <select id='end_year_drop' name='end_year_drop'>";
+    html = html + "<option> 1966 </option>";
+    html = html + "<option> 1967 </option>";
+    html = html + "<option> 1968 </option>";
+    html = html + "      </select>";
+    html = html + "   </div>";
+
+    html = html + "   <button type='submit' class='btn btn-primary'>Get Results!</button>";
+
+    String country_drop = context.formParam("country_drop");
+    // String movietype_drop = context.queryParam("movietype_drop");
+    if (country_drop == null) {
+        // If NULL, nothing to show, therefore we make some "no results" HTML
+        html = html + "<h2><i>No Results to show for dropbox</i></h2>";
+    } else {
+        // If NOT NULL, then lookup the movie by type!
+        html = html + outputCountries(country_drop);
+    }
+    // Close Content div
+    html = html + "</div>";
+
 
         // Add HTML for the page content
-        html = html + """
-            <p>Subtask 2.A page content</p>
-            """;
-
         // Close Content div
-        html = html + "</div>";
-
+        //html = html + "</div>";
         // Footer
-        html = html + """
+    html = html + """
+        <footer>
             <div class='footer'>
-                <p>COSC2803 - Studio Project Starter Code (Apr24)</p>
+                <div class="footer-content">
+                <div class="footer-logo"><img src = "Weblogo.png" width = 100></div>
+            <div class="credits">
+                <p>Created by :</p>
+                <p>Student 1: Name1 and Student Number1</p>
+                <p>Student 2: Name2 and Student Number2</p>
             </div>
-        """;
+            <div class="social-media">
+                <a href="https://www.facebook.com"><img src = "facebook-icon.png"></a>
+                <a href="https://www.twitter.com"><img src = "twitter-icon.png"></a>
+                <a href="https://www.instagram.com"><img src = "instagram-icon.png"></a>
+            </div>
+            </div>
+        </footer>
+    """;
 
-        // Finish the HTML webpage
-        html = html + "</body>" + "</html>";
+    // Finish the HTML webpage
+    html = html + "</body>" + "</html>";
         
 
-        // DO NOT MODIFY THIS
-        // Makes Javalin render the webpage
-        context.html(html);
-    }
-
+    // DO NOT MODIFY THIS
+    // Makes Javalin render the webpage
+    context.html(html);
 }
+    
+    
+    public String outputCountries(String name) {
+        String html = "";
+        html = html + "<h2>" + name + " Code</h2>";
+
+        // Look up movies from JDBC
+        ArrayList<String> countries = getAllCountries(name);
+        
+        // Add HTML for the movies list
+        html = html + "<ul>";
+        for (String title : countries) {
+            html = html + "<li>" + title + "</li>";
+        }
+        html = html + "</ul>";
+        
+        return html;
+    }
+    
+    public ArrayList<String> getAllCountries(String m49code) {
+        // Create the ArrayList of Country objects to return
+        ArrayList<String> m49CodeList = new ArrayList<String>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(JDBCConnection.DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT DISTINCT m49code FROM Country WHERE countryName = '" + m49code + "'";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String title = results.getString("m49code");
+                //String name  = results.getString("countryName");
+
+                // Create a Country Object
+                //Country country = new Country(m49Code);
+
+                // Add the Country object to the array
+                m49CodeList.add(title);
+            }
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        // Finally we return all of the countries
+        return m49CodeList;
+    }
+}
+
+    
