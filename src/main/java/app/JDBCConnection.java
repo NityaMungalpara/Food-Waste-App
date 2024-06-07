@@ -89,11 +89,7 @@ public class JDBCConnection {
     //     return countries;
     // }
 
-<<<<<<< HEAD
 //     // TODO: Add your required methods here
- }
-=======
-    // TODO: Add your required methods here
 
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //get all years
@@ -128,4 +124,3 @@ public class JDBCConnection {
         return foodGroups;
     }
 }
->>>>>>> ed66873039f2309bf14af6d468334a40011397a6
