@@ -30,11 +30,45 @@ img.top-image {
 
 /* CSS Layout from W3Schools: https://www.w3schools.com/css/css_templates.asp */
 /* Style the top navigation bar */
-.topnav {
-   overflow: hidden;
-   background-color: #333;
+nav{
+   text-align: right;
  }
- 
+
+ .purpose{
+  text-align: center;
+ }
+ .box1{
+  position: absolute;
+  left: 1000px;
+  top: 80px;
+ }
+
+ .content{
+  text-align: center;
+ }
+ .credits{
+  position: relative;
+  left: 500px;
+  bottom: 110px;
+ }
+
+ .social-media{
+  position: relative;
+  left: 1200px;
+  bottom: 200px;
+ }
+ .topnav{
+   overflow: hidden;
+   background-color: #3c3a3a;
+ }
+
+ .join-us{
+  text-align: center;
+ } 
+
+ /* .personas{
+  text-align: center;
+ } */
  /* Style the topnav links */
  .topnav a {
    float: left;
