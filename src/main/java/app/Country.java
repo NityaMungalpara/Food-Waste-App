@@ -12,13 +12,17 @@ public class Country {
 
    // country Name
    private String name;
+   private String startYear;
+   private String endYear;
 
    /**
     * Create a Country and set the fields
     */
-   public Country(String m49Code, String name) {
+   public Country(String m49Code, String name, String startYear, String endYear) {
       this.m49Code = m49Code;
       this.name = name;
+      this.startYear = startYear;
+      this.endYear = endYear;
    }
 
    public String getM49Code() {
@@ -27,5 +31,13 @@ public class Country {
 
    public String getName() {
       return name;
+   }
+
+   public String getStartYear() {
+      return startYear;
+   }
+
+   public String getEndYear() {
+      return endYear;
    }
 }
