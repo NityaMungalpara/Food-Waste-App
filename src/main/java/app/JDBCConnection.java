@@ -1,7 +1,7 @@
 package app;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -89,5 +89,43 @@ public class JDBCConnection {
     //     return countries;
     // }
 
+<<<<<<< HEAD
 //     // TODO: Add your required methods here
  }
+=======
+    // TODO: Add your required methods here
+
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get all years
+    public ArrayList<Integer> getAllYears() {
+        ArrayList<Integer> years = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT year FROM Date");
+            while (results.next()) {
+                years.add(results.getInt("year"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return years;
+    }
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get all food groups
+    public List<String> getAllFoodGroups() {
+        List<String> foodGroups = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            String query = "SELECT group_name FROM groups";
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+                String groupName = results.getString("group_name");
+                foodGroups.add(" " + groupName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foodGroups;
+    }
+}
+>>>>>>> ed66873039f2309bf14af6d468334a40011397a6
