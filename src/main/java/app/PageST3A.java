@@ -58,9 +58,30 @@ public class PageST3A implements Handler {
 
         // Add header content block
         html = html + """
-            <div class='header'>
-                <h1>Subtask 3.A</h1>
-            </div>
+            <header>
+            <img src = "Weblogo.png" width = 100px>
+                <div>
+                    <nav class = 'box1'>
+                            <button>Food Loss vs Food Waste</button>
+                            <button>News</button>
+                            <button>About us</button>
+                            <button>Help Centre</button>
+                            <button>FAQ's</button> 
+                            <br>
+                            <br>
+                            <button>Research and Development</button>
+                            <input type = "text" placeholder = "Search..."> 
+                            <button>Search</button>   
+                    </nav>   
+                    <br>
+                    <div>
+                        <button>Food Supply Chain</button>
+                        <button>Impact on Environment</button>
+                        <button>How can we improve?</button>
+                        <button>Testimonials</button>
+                        <button>Crowd Funding</button>
+                    </div>
+            </header>
         """;
 
         // Add Div for page Content
@@ -68,7 +89,7 @@ public class PageST3A implements Handler {
 
         // Add HTML for the page content
         html = html + """
-            <p>Subtask 3.A page content</p>
+            <h1>Similarity Data Analysis by Country</h1>
             """;
 
         // Close Content div
@@ -76,9 +97,22 @@ public class PageST3A implements Handler {
 
         // Footer
         html = html + """
-            <div class='footer'>
-                <p>COSC2803 - Studio Project Starter Code (Apr24)</p>
-            </div>
+            <footer>
+                <div class='footer'>
+                    <div class="footer-content">
+                    <div class="footer-logo"><img src = "Weblogo.png" width = 100></div>
+                <div class="credits">
+                    <p>Created by :</p>
+                    <p>Student 1: Name1 and Student Number1</p>
+                    <p>Student 2: Name2 and Student Number2</p>
+                </div>
+                <div class="social-media">
+                    <a href="https://www.facebook.com"><img src = "facebook-icon.png"></a>
+                    <a href="https://www.twitter.com"><img src = "twitter-icon.png"></a>
+                    <a href="https://www.instagram.com"><img src = "instagram-icon.png"></a>
+                </div>
+                </div>
+            </footer>
         """;
 
         // Finish the HTML webpage
