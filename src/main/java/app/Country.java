@@ -15,6 +15,12 @@ public class Country {
    private String startYear;
    private String endYear;
 
+   public String countryName;
+
+public String year;
+
+public String loss_percentage;
+
    /**
     * Create a Country and set the fields
     */
@@ -25,7 +31,11 @@ public class Country {
       this.endYear = endYear;
    }
 
-   public String getM49Code() {
+   public Country() {
+    //TODO Auto-generated constructor stub
+}
+
+public String getM49Code() {
       return m49Code;
    }
 
