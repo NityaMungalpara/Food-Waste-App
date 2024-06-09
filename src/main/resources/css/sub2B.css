@@ -61,7 +61,8 @@ header nav ul li a {
 
 /* Nav links hover effect */
 .nav-links li a:hover {
-    text-decoration: underline;
+/* text-decoration: underline; */
+background-color: #edecec;
 }
 
 /* header with arrow icon  */
@@ -294,6 +295,38 @@ header nav ul li:hover .dropdown-content {
     padding: 5px 10px;
     cursor: pointer;
 }
+/*————————————————————————————————————————————Result section——————————————————————————————————————————*/
+/* Result section styles */
+.result-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.result-section h2 {
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+.result-section p {
+    font-size: medium;
+    display: flex;
+    justify-content: left;
+}
+/*Result table*/
+.table-header {
+    background-color: #edeaeaf5;
+}
+/* table.custom-border {
+    border: 1px solid #767676; 
+    border-collapse: collapse;
+} */
+table.custom-border td, table.custom-border th {
+    border: 0.5px solid #d9d6d6ee;
+  }
+
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
 .footer-container {
