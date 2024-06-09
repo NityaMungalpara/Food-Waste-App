@@ -22,11 +22,10 @@ import java.sql.Statement;
  * @author Halil Ali, 2024. email: halil.ali@rmit.edu.au
  */
 
-public class PageST3B implements Handler {
+public class PageReference implements Handler {
 
     // URL of this page relative to http://localhost:7001/
-    public static final String URL = "/page3B.html";
-
+    public static final String URL = "/Reference.html";
     @Override
     public void handle(Context context) throws Exception {
         String html = "<html>";
@@ -73,27 +72,14 @@ public class PageST3B implements Handler {
         html += "    </div>";
         html += "  </div>";
         html += "</header>";
-
-        // // Main section
-        html += "<main>";
-        html += "  <nav class='breadcrumb'>";
-        html += "    <ul>";
-        html += "      <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>";
-        html += "      <li>></li>";
-        html += "      <li><a href='page2B.html'>Food Loss and Waste Analysis by Group</a></li>";
-        html += "      <li>></li>";
-        html += "      <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>";
-        html += "      <li>></li>";
-        html += "      <li><a href='page3B.html'><b>Similarity Data Analysis by Group</b></a></li>";
-        html += "    </ul>";
-        html += "  </nav>";
+        
+        // Main section
         html += "  <section class='hero'>";
         html += "    <div class='subheading'>";
-        html += "      <h1>Similarity Data Analysis by Group</h1>";
+        html += "      <h1>References</h1>";
         html += "    </div>";
         html += "  </section>";
-        html += "</main>";
-
+        
         // Footer
         html += "<footer>";
         html += "  <div class='footer-container'>";
@@ -116,11 +102,9 @@ public class PageST3B implements Handler {
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";
-        
 
         // DO NOT MODIFY THIS
         // Makes Javalin render the webpage
         context.html(html);
     }
-
 }

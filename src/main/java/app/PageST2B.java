@@ -65,8 +65,7 @@ public class PageST2B implements Handler {
         html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
         html += "          </div>";
         html += "        </li>";
-        html += "        <li><a href='#involved'>Get Involved</a></li>";
-        html += "        <li><a href='#faqs'>FAQs</a></li>";
+        html += "        <li><a href='/Reference.html'>Reference</a></li>";
         html += "      </ul>";
         html += "    </nav>";
         html += "    <div class='nav-right'>";
@@ -175,6 +174,7 @@ public class PageST2B implements Handler {
         html += "<footer>";
         html += "  <div class='footer-container'>";
         html += "    <div class='footer-links'>";
+        html += "      COSC2803 - Studio Project Starter Code (Apr24)";
         html += "      <a href='#about'>About</a>";
         html += "      <a href='#contact'>Contact Us</a>";
         html += "      <a href='#faqs'>FAQs</a>";
