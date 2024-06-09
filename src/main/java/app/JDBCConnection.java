@@ -89,7 +89,11 @@ public class JDBCConnection {
     //     return countries;
     // }
 
+<<<<<<< HEAD
     // TODO: Add your required methods here
+=======
+//     // TODO: Add your required methods here
+>>>>>>> 5a0aa3f3d38cfe7f47bde2bc05b718fb62c63f8b
 
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //get all years
