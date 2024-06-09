@@ -14,13 +14,6 @@ public class Country {
    private String name;
    private String startYear;
    private String endYear;
-
-   public String countryName;
-
-public String year;
-
-public String loss_percentage;
-
    /**
     * Create a Country and set the fields
     */
