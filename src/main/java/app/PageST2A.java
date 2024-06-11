@@ -165,24 +165,25 @@ public class PageST2A implements Handler {
 }
     
     
-    public String outputCountries(String name,String startYear,String endYear) {
+    public String outputCountries(String name,String year,String loss_percentage) {
         String html = "";
         html = html + "<h2>" + name + " Data</h2>";
 
         // Look up movies from JDBC
-        ArrayList<Country> countries = getAllCountries(name,startYear,endYear);
+        ArrayList<Country> countries = getAllCountries(name,year,loss_percentage);
         
         // Add HTML for the movies list
         html = html + "<ul>";
         for (Country country : countries) {
-            html = html + "<li>" + country.countryName + "," + country.year + "," + country.loss_percentage + "</li>";
+            html = html + "<li>" + country.loss_percentage +  "," + country.year + "," + "</li>";
         }
         html = html + "</ul>";
+        //country.countryName + "," + country.year + "," + 
         
         return html;
     }
     
-    public ArrayList<Country> getAllCountries(String name,String startYear,String endYear) {
+    public ArrayList<Country> getAllCountries(String name,String year,String loss_percentage) {
         // Create the ArrayList of Country objects to return
         ArrayList<Country> countryData = new ArrayList<Country>();
 
@@ -198,7 +199,7 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT country.countryName, country.year, country.loss_percentage FROM FoodLoss";
+            String query = "SELECT year,loss_percentage FROM FoodLoss where country = country_drop";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -212,7 +213,7 @@ public class PageST2A implements Handler {
 
                 //String title = results.getString("m49code");
                 //String name  = results.getString("countryName");
-                country.countryName = results.getString("countryName");
+                //country.countryName = results.getString("country");
                 country.year = results.getString("year");
                 country.loss_percentage = results.getString("loss_percentage");
 
