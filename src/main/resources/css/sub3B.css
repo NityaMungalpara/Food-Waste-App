@@ -59,7 +59,8 @@ header nav ul li a {
 
 /* Nav links hover effect */
 .nav-links li a:hover {
-    text-decoration: underline;
+/* text-decoration: underline; */
+background-color: #edecec;
 }
 
 /* header with arrow icon  */
