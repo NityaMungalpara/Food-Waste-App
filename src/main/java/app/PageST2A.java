@@ -199,7 +199,7 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT year,loss_percentage FROM FoodLoss where country = country_drop";
+            String query = "SELECT year,loss_percentage FROM FoodLoss where country ='" + name + "'";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
