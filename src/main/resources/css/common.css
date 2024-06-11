@@ -22,6 +22,23 @@ body {
    font-size: 50px;
 }
 
+.content-table{
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  background-color: rgb(234, 205, 166);
+}
+
+.heading{
+  background: white;
+  background-color: aqua;
+  text-align: left;
+  font-weight: bold;
+}
+
+.contents{
+  padding: 12px 15px;
+}
 
 /* Make the logo have a rounded edge */
 img.top-image {
@@ -34,8 +51,22 @@ nav{
    text-align: right;
  }
 
+ .btn{
+  color: black;
+  background-color: white;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+ }
+
+ .btn:hover{
+  background-color: lightgreen;
+ }
  .purpose{
+  background-image: url("foodloss.png");
+  background-size: cover;
+  position: relative;
   text-align: center;
+  background-position: right;   
+  padding: 200px 0;
  }
  .box1{
   position: absolute;
