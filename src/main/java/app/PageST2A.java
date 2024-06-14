@@ -49,9 +49,9 @@ public class PageST2A implements Handler {
             <div class='topnav'>
                 <a href='/'>Homepage</a>
                 <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
+                <a href='page2A.html'>Food Loss Percent by Country</a>
                 <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
+                <a href='page3A.html'>Similarity Data Analysis by Country</a>
                 <a href='page3B.html'>Sub Task 3.B</a>
             </div>
         """;
@@ -60,29 +60,30 @@ public class PageST2A implements Handler {
         html = html + """
         <header>
         <img src = "Weblogo.png" width = 100px>
-            <div>
-                <nav class = 'box1'>
-                        <button>Food Loss vs Food Waste</button>
-                        <button>News</button>
-                        <button>About us</button>
-                        <button>Help Centre</button>
-                        <button>FAQ's</button> 
-                        <br>
-                        <br>
-                        <button>Research and Development</button>
-                        <input type = "text" placeholder = "Search..."> 
-                        <button>Search</button>   
-                </nav>   
-                <br>
-                <div>
-                    <button>Food Supply Chain</button>
-                    <button>Impact on Environment</button>
-                    <button>How can we improve?</button>
-                    <button>Testimonials</button>
-                    <button>Crowd Funding</button>
-                </div>
         </header>
     """;
+    html = html + "<h1> Food Loss Percent by Country</h1>";
+    // <div>
+    //             <nav class = 'box1'>
+    //                     <button>Food Loss vs Food Waste</button>
+    //                     <button>News</button>
+    //                     <button>About us</button>
+    //                     <button>Help Centre</button>
+    //                     <button>FAQ's</button> 
+    //                     <br>
+    //                     <br>
+    //                     <button>Research and Development</button>
+    //                     <input type = "text" placeholder = "Search..."> 
+    //                     <button>Search</button>   
+    //             </nav>   
+    //             <br>
+    //             <div>
+    //                 <button>Food Supply Chain</button>
+    //                 <button>Impact on Environment</button>
+    //                 <button>How can we improve?</button>
+    //                 <button>Testimonials</button>
+    //                 <button>Crowd Funding</button>
+    //             </div>
 
         // Add Div for page Content
     html = html + "<div class='content'>";
@@ -100,18 +101,18 @@ public class PageST2A implements Handler {
     html = html + "   <div class='form-group'>";
     html = html + "      <label for='start_year_drop'>Select the Start Year (Dropdown))</label>";
     html = html + "      <select id='start_year_drop' name='start_year_drop'>";
-    html = html + "<option> 1966 </option>";
-    html = html + "<option> 1967 </option>";
-    html = html + "<option> 1968 </option>";
+    html = html + "<option> 2001 </option>";
+    html = html + "<option> 2002 </option>";
+    html = html + "<option> 2003 </option>";
     html = html + "      </select>";
     html = html + "   </div>";
 
     html = html + "   <div class='form-group'>";
     html = html + "      <label for='end_year_drop'>Select the End Year (Dropdown))</label>";
     html = html + "      <select id='end_year_drop' name='end_year_drop'>";
-    html = html + "<option> 1966 </option>";
-    html = html + "<option> 1967 </option>";
-    html = html + "<option> 1968 </option>";
+    html = html + "<option> 2001 </option>";
+    html = html + "<option> 2002 </option>";
+    html = html + "<option> 2003 </option>";
     html = html + "      </select>";
     html = html + "   </div>";
 
@@ -126,7 +127,15 @@ public class PageST2A implements Handler {
         html = html + "<h2><i>No Results to show for dropbox</i></h2>";
     } else {
         // If NOT NULL, then lookup the movie by type!
-        html = html + outputCountries(country_drop,start_year_drop,end_year_drop);
+        html = html + outputCountries1(country_drop,start_year_drop);
+    }
+
+    if (country_drop == null) {
+        // If NULL, nothing to show, therefore we make some "no results" HTML
+        html = html + "<h2><i>No Results to show for dropbox</i></h2>";
+    } else {
+        // If NOT NULL, then lookup the movie by type!
+        html = html + outputCountries2(country_drop,end_year_drop);
     }
     // Close Content div
     html = html + "</div>";
@@ -165,25 +174,56 @@ public class PageST2A implements Handler {
 }
     
     
-    public String outputCountries(String name,String year,String loss_percentage) {
+    public String outputCountries1(String name,String startYear) {
         String html = "";
         html = html + "<h2>" + name + " Data</h2>";
 
         // Look up movies from JDBC
-        ArrayList<Country> countries = getAllCountries(name,year,loss_percentage);
+        ArrayList<Country> countries = getAllCountries1(name,startYear);
         
         // Add HTML for the movies list
-        html = html + "<ul>";
+        html = html + "<table class = 'content-table' border = '10'>";
+        html = html + "<tr class = 'heading'><th>Country</th><th>Year</th><th>Loss Percentage</th></tr>";
+
         for (Country country : countries) {
-            html = html + "<li>" + country.loss_percentage +  "," + country.year + "," + "</li>";
+            html = html + "<tr>";
+            html = html + "<td>" + country.name + "</td>";
+            html = html + "<td>" + country.year + "</td>";
+            html = html + "<td>" + country.loss_percentage + "</td>";
+            html = html + "</tr>";
         }
-        html = html + "</ul>";
+
+        html = html + "</table>"; 
         //country.countryName + "," + country.year + "," + 
         
         return html;
     }
+
+    public String outputCountries2(String name,String endYear) {
+        String html = "";
+        html = html + "<h2>" + name + " Data</h2>";
+
+        // Look up movies from JDBC
+        ArrayList<Country> countries = getAllCountries2(name,endYear);
+        
+        // Add HTML for the movies list
+        html = html + "<table class = 'content-table' border = '10'>";
+        html = html + "<tr class = 'heading'><th>Country</th><th>Year</th><th>Loss Percentage</th></tr>";
+
+        for (Country country : countries) {
+            html = html + "<tr>";
+            html = html + "<td>" + country.name + "</td>";
+            html = html + "<td>" + country.year + "</td>";
+            html = html + "<td>" + country.loss_percentage + "</td>";
+            html = html + "</tr>";
+        }
+
+        html = html + "</table>"; 
+        
+        return html;
+    }
     
-    public ArrayList<Country> getAllCountries(String name,String year,String loss_percentage) {
+    public ArrayList<Country> getAllCountries1(String name,String startYear) {
         // Create the ArrayList of Country objects to return
         ArrayList<Country> countryData = new ArrayList<Country>();
 
@@ -199,7 +239,7 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT year,loss_percentage FROM FoodLoss where country ='" + name + "'";
+            String query = "SELECT country,year,loss_percentage FROM FoodLoss WHERE country ='" + name + "' AND year ='" + startYear + "'";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -213,7 +253,66 @@ public class PageST2A implements Handler {
 
                 //String title = results.getString("m49code");
                 //String name  = results.getString("countryName");
-                //country.countryName = results.getString("country");
+                country.name = results.getString("country");
+                country.year = results.getString("year");
+                country.loss_percentage = results.getString("loss_percentage");
+
+                // Add the Country object to the array
+                countryData.add(country);
+            }
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        // Finally we return all of the countries
+        return countryData;
+    }
+
+    public ArrayList<Country> getAllCountries2(String name,String endYear) {
+        // Create the ArrayList of Country objects to return
+        ArrayList<Country> countryData = new ArrayList<Country>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(JDBCConnection.DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT country,year,loss_percentage FROM FoodLoss WHERE country ='" + name + "' AND year ='" + endYear + "'";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+
+                // Create a Country Object
+                Country country = new Country();
+                // Lookup the columns we need
+
+                //String title = results.getString("m49code");
+                //String name  = results.getString("countryName");
+                country.name = results.getString("country");
                 country.year = results.getString("year");
                 country.loss_percentage = results.getString("loss_percentage");
 

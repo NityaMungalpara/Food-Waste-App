@@ -10,7 +10,7 @@ public class Country {
    // country Code
 
    // country Name
-   public String countryName;
+   public String name;
    // public String startYear;
    // public String endYear;
    public String year;
@@ -32,9 +32,7 @@ public class Country {
 //       return m49Code;
 //    }
 
-   public String getName() {
-      return countryName;
-   }
+   
 
    // public String getStartYear() {
    //    return startYear;

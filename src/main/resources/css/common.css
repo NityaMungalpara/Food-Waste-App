@@ -26,13 +26,14 @@ body {
   margin: 25px 0;
   font-size: 0.9em;
   min-width: 400px;
-  background-color: rgb(234, 205, 166);
+  background-color: rgb(244, 249, 246);
+  text-align: center;
 }
 
 .heading{
   background: white;
   background-color: aqua;
-  text-align: left;
+  text-align: center;
   font-weight: bold;
 }
 
@@ -77,6 +78,7 @@ nav{
  .content{
   text-align: center;
  }
+
  .credits{
   position: relative;
   left: 500px;

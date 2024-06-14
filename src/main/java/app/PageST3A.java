@@ -49,9 +49,9 @@ public class PageST3A implements Handler {
             <div class='topnav'>
                 <a href='/'>Homepage</a>
                 <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
+                <a href='page2A.html'>Food Loss Percent by Country</a>
                 <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
+                <a href='page3A.html'>Similarity Data Analysis by Country</a>
                 <a href='page3B.html'>Sub Task 3.B</a>
             </div>
         """;
@@ -60,29 +60,30 @@ public class PageST3A implements Handler {
         html = html + """
             <header>
             <img src = "Weblogo.png" width = 100px>
-                <div>
-                    <nav class = 'box1'>
-                            <button>Food Loss vs Food Waste</button>
-                            <button>News</button>
-                            <button>About us</button>
-                            <button>Help Centre</button>
-                            <button>FAQ's</button> 
-                            <br>
-                            <br>
-                            <button>Research and Development</button>
-                            <input type = "text" placeholder = "Search..."> 
-                            <button>Search</button>   
-                    </nav>   
-                    <br>
-                    <div>
-                        <button>Food Supply Chain</button>
-                        <button>Impact on Environment</button>
-                        <button>How can we improve?</button>
-                        <button>Testimonials</button>
-                        <button>Crowd Funding</button>
-                    </div>
+                
             </header>
         """;
+        // <div>
+        //             <nav class = 'box1'>
+        //                     <button>Food Loss vs Food Waste</button>
+        //                     <button>News</button>
+        //                     <button>About us</button>
+        //                     <button>Help Centre</button>
+        //                     <button>FAQ's</button> 
+        //                     <br>
+        //                     <br>
+        //                     <button>Research and Development</button>
+        //                     <input type = "text" placeholder = "Search..."> 
+        //                     <button>Search</button>   
+        //             </nav>   
+        //             <br>
+        //             <div>
+        //                 <button>Food Supply Chain</button>
+        //                 <button>Impact on Environment</button>
+        //                 <button>How can we improve?</button>
+        //                 <button>Testimonials</button>
+        //                 <button>Crowd Funding</button>
+        //             </div>
 
         // Add Div for page Content
         html = html + "<div class='content'>";
