@@ -48,7 +48,7 @@ public class App {
         app.get(PageReference.URL, new PageReference());
 
         // Add / uncomment POST commands for any pages that need web form POSTS
-        //app.post(PageIndex.URL, new PageIndex());
+        app.post(PageIndex.URL, new PageIndex());
         //app.post(PageMission.URL, new PageMission());
         app.post(PageST2A.URL, new PageST2A());
         app.post(PageST2B.URL, new PageST2B());

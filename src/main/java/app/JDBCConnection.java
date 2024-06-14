@@ -34,70 +34,52 @@ public class JDBCConnection {
      * @return
      *    Returns an ArrayList of Country objects
      */
-    // public ArrayList<Country> getAllCountries() {
-    //     // Create the ArrayList of Country objects to return
-    //     ArrayList<Country> countries = new ArrayList<Country>();
 
-    //     // Setup the variable for the JDBC connection
-    //     Connection connection = null;
-
-    //     try {
-    //         // Connect to JDBC data base
-    //         connection = DriverManager.getConnection(DATABASE);
-
-    //         // Prepare a new SQL Query & Set a timeout
-    //         Statement statement = connection.createStatement();
-    //         statement.setQueryTimeout(30);
-
-    //         // The Query
-    //         String query = "SELECT * FROM Country WHERE name = '\" + country_drop + \"'\"";
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //indexpage result
+    public List<PageIndexResult> getMaxYearLoss(String startYear, String endYear) {
+        List<PageIndexResult> PageIndexResultList = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
             
-    //         // Get Result
-    //         ResultSet results = statement.executeQuery(query);
-
-    //         // Process all of the results
-    //         while (results.next()) {
-    //             // Lookup the columns we need
-    //             String m49Code     = results.getString("m49code");
-    //             //String name  = results.getString("countryName");
-
-    //             // Create a Country Object
-    //             Country country = new Country(m49Code);
-
-    //             // Add the Country object to the array
-    //             countries.add(country);
-    //         }
-
-    //         // Close the statement because we are done with it
-    //         statement.close();
-    //     } catch (SQLException e) {
-    //         // If there is an error, lets just pring the error
-    //         System.err.println(e.getMessage());
-    //     } finally {
-    //         // Safety code to cleanup
-    //         try {
-    //             if (connection != null) {
-    //                 connection.close();
-    //             }
-    //         } catch (SQLException e) {
-    //             // connection close failed.
-    //             System.err.println(e.getMessage());
-    //         }
-    //     }
-
-    //     // Finally we return all of the countries
-    //     return countries;
-    // }
-
-    // TODO: Add your required methods here
-
+            String query = "WITH user_input AS (" +
+               "SELECT " + startYear + " AS start_year, " + endYear + " AS end_year)," +
+               "ranked_losses AS (" +
+               "SELECT year, commodity, loss_percentage, " +
+               "ROW_NUMBER() OVER (PARTITION BY year ORDER BY loss_percentage DESC) AS row_num " +
+               "FROM food_loss " +
+               "WHERE year BETWEEN (SELECT start_year FROM user_input) AND (SELECT end_year FROM user_input))," +
+               "max_losses AS (" +
+               "SELECT year, commodity, loss_percentage " +
+               "FROM ranked_losses " +
+               "WHERE row_num = 1) " +
+               "SELECT year, commodity, AVG(loss_percentage) AS avg_max_loss_percentage " +
+               "FROM max_losses " +
+               "GROUP BY year, commodity " +
+               "ORDER BY year;";
+    
+            System.out.println(query);
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+                PageIndexResult pageIndexResult = new PageIndexResult();
+                pageIndexResult.setYear(results.getString("year"));
+                pageIndexResult.setName(results.getString("commodity"));
+                pageIndexResult.setAvgMaxLossPercentage(results.getString("avg_max_loss_percentage"));
+                PageIndexResultList.add(pageIndexResult);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return PageIndexResultList;
+    }
+    
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //get all years
     public ArrayList<Integer> getAllYears() {
         ArrayList<Integer> years = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DATABASE)) {
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT year FROM Date");
+            ResultSet results = statement.executeQuery("SELECT DISTINCT year FROM Date");
             while (results.next()) {
                 years.add(results.getInt("year"));
             }
@@ -112,7 +94,7 @@ public class JDBCConnection {
         List<String> foodGroups = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DATABASE)) {
             Statement statement = connection.createStatement();
-            String query = "SELECT group_name FROM groups";
+            String query = "SELECT DISTINCT group_name FROM groups";
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
                 String groupName = results.getString("group_name");
