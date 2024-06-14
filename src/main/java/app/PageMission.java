@@ -49,9 +49,9 @@ public class PageMission implements Handler {
             <div class='topnav'>
                 <a href='/'>Homepage</a>
                 <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
+                <a href='page2A.html'>Food Loss Percent by Country</a>
                 <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
+                <a href='page3A.html'>Similarity Data Analysis by Country</a>
                 <a href='page3B.html'>Sub Task 3.B</a>
             </div>
         """;
@@ -60,29 +60,30 @@ public class PageMission implements Handler {
         html = html + """
             <header>
             <img src = "Weblogo.png" width = 100px>
-                <div>
-                    <nav class = 'box1'>
-                            <button>Food Loss vs Food Waste</button>
-                            <button>News</button>
-                            <button>About us</button>
-                            <button>Help Centre</button>
-                            <button>FAQ's</button> 
-                            <br>
-                            <br>
-                            <button>Research and Development</button>
-                            <input type = "text" placeholder = "Search..."> 
-                            <button>Search</button>   
-                    </nav>   
-                    <br>
-                    <div>
-                        <button>Food Supply Chain</button>
-                        <button>Impact on Environment</button>
-                        <button>How can we improve?</button>
-                        <button>Testimonials</button>
-                        <button>Crowd Funding</button>
-                    </div>
+                
             </header>
         """;
+        // <div>
+        //             <nav class = 'box1'>
+        //                     <button>Food Loss vs Food Waste</button>
+        //                     <button>News</button>
+        //                     <button>About us</button>
+        //                     <button>Help Centre</button>
+        //                     <button>FAQ's</button> 
+        //                     <br>
+        //                     <br>
+        //                     <button>Research and Development</button>
+        //                     <input type = "text" placeholder = "Search..."> 
+        //                     <button>Search</button>   
+        //             </nav>   
+        //             <br>
+        //             <div>
+        //                 <button>Food Supply Chain</button>
+        //                 <button>Impact on Environment</button>
+        //                 <button>How can we improve?</button>
+        //                 <button>Testimonials</button>
+        //                 <button>Crowd Funding</button>
+        //             </div>
 
         // Add Div for page Content
         html = html + "<div class='content'>";
@@ -148,139 +149,6 @@ public class PageMission implements Handler {
 
         // Finish the List HTML
         // html = html + "</ul>";
-
-        /*html = html + """
-            <section class='personas'>
-            <table>
-
-                <th>
-                <td>Image:</td>
-                <td><img src = "Persona1.png" alt = "Persona1"></td>
-                </th>
-                <br>
-                <th>
-                    <td>Name:</td>
-                    <td>Ethan Campbell</td>
-                </th>
-                <br>
-                <th>
-                    <td>Description:</td>
-                    <td>
-                    Ethan is a first-year undergraduate student majoring in Environmental Science. As a new student,<br>
-                        he is excited about learning new knowledge from college. He is very interested in the environmental<br>
-                        pollution caused by food loss and waste, so he wants to have some basic information to gain useful<br>
-                        knowledge on the matter.
-                    </td>
-                </th>
-                <br>
-                <th>
-                    <td>Needs And Goals:</td>
-                    <td>
-                    Ethan is looking for a platform that has useful information and resources related to food loss and waste.<br>
-                    He hoped that the headline would give him a quick idea of what the page was about so that he could decide<br> 
-                    whether to explore further. He wants to get the information from some graphs or charts rather than searching<br>
-                    for specific information. After exploring the website, he would like to have some basic knowledge about food<br>
-                    loss and waste and share these resources with his peers to gain knowledge.
-                    </td>
-                </th>
-                <br>
-                <th>
-                    <td>Skills And Experiences:</td>
-                    <td>
-                    He has basic computer skills and owns a laptop and mobile phone. He is quite active on social media and<br>
-                    has experience on various social platforms. He enjoys learning new things and sharing them with others.
-                    </td>
-                </th>
-            </table>
-
-            <table>
-
-                <th>
-                <td>Image:</td>
-                <td><img src = "Persona2.png" alt = "Persona2"></td>
-                </th>
-                <br>
-                <th>
-                    <td>Name:</td>
-                    <td>Harry Kesotie</td>
-                </th>
-                <br>
-                <th>
-                    <td>Description:</td>
-                    <td>
-                    Harry, 29 years old, is a local individual from Australia. He is a food organisation manager and knows<br>
-                    that the problem of food waste cannot be ignored. He is also part of a charity group. He plans to distribute<br> 
-                    surplus food at household level to those in need.
-                    </td>
-                </th>
-                <br>
-                <th>
-                    <td>Needs And Goals:</td>
-                    <td>
-                    He wants an analysis of food waste occurring at the household level in the supply chain. He aims to<br> 
-                    reduce food waste at the household level. If the food is not edible, he wants to track the shopping patterns<br> 
-                    of consumers that lead to food waste.
-                    </td>
-                </th>
-                <br>
-                <th>
-                    <td>Skills And Experiences:</td>
-                    <td>
-                    He has been part of the food organization for 5 years and a charity group for 3 years. He has successfully<br> 
-                    made a positive impact on consumers through his speeches. Harry is also well-known for the food donations made by<br> 
-                    the charity group.
-                    </td>
-                </th>
-            </table>
-
-            <table>
-
-                <th>
-                <td>Image:</td>
-                <td><img src = "Persona3.png" alt = "Persona3"></td>
-                </th>
-                <br>
-                <th>
-                    <td>Name:</td>
-                    <td>Georgia Kane</td>
-                </th>
-                <br>
-                <th>
-                    <td>Description:</td>
-                    <td>
-                    Georgia is originally from Brazil and she is one of many policy makers. She becomes very conscious<br> 
-                    when the environment degradation occurs due to food loss and is currently researching how significantly food<br> 
-                    dumping leads to environmental degradation, focusing on which greenhouse gases are released and their specific<br>
-                    impacts on nature.
-                    </td>
-                </th>
-                <br>
-                <th>
-                    <td>Needs And Goals:</td>
-                    <td>
-                    Georgia requires proper statistical data regarding food loss and waste and needs knowledge of the gases<br>
-                    released from spoiled and stale food. She also wants to identify other regions that are having similar food<br> 
-                    waste changes. She needs accurate information listed up in tables to come up with effective solutions depending<br> 
-                    on the intensity of the situation. She also wants to make laws that can handle this situation.
-                    </td>
-                </th>
-                <br>
-                <th>
-                    <td>Skills And Experiences:</td>
-                    <td>
-                    Georgia has previously introduced many policies related to food waste that has an impact on environment.<br> 
-                    Besides being a successful policy maker, she also considers herself as being responsible for the change in<br> 
-                    environment that is taking place. She is famous for her renowned speeches across Brazil, that leave a deep impact<br> 
-                    on the audience and encourage them to change in a positive way.
-                    </td>
-                </th>
-            </table>
-
-            
-            <section>
-                """;*/
-
-
         // Close Content div
         html = html + "</div>";
 
@@ -326,8 +194,9 @@ public class PageMission implements Handler {
             html = html + "<table class = 'content-table'>";
             html = html + "<tr class = 'heading'>" + "<th>ID</th>" + "<th>Image</th>" + "<th>Name</th>" + "<th>Description</th>" + "<th>Needs</th>" + "<th>Goals</th>" + "</tr>";
             html = html + "<div class = 'contents'>";
+            
             html = html + "<td>" + persona.id + "</td>";
-            html = html + "<td>" + persona.image + "</td>";
+            html = html + "<td>" + "<img src = '" + persona.image + ".png" + "'>" + "</td>";
             html = html + "<td>" + persona.name + "</td>";
             html = html + "<td>" + persona.description + "</td>";
             html = html + "<td>" + persona.needs + "</td>";
@@ -358,7 +227,7 @@ public class PageMission implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT id,imageFilePath,name,description,needs,skills FROM Persona WHERE name ='" + name + "'";
+            String query = "SELECT id,imageFile,name,description,needs,skills FROM Persona WHERE name ='" + name + "'";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -374,7 +243,7 @@ public class PageMission implements Handler {
                 //String name  = results.getString("countryName");
                 //country.countryName = results.getString("country");
                 persona.id = results.getString("id");
-                persona.image = results.getString("imageFilePath");
+                persona.image = results.getString("imageFile");
                 persona.name = results.getString("name");
                 persona.description = results.getString("description");
                 persona.needs = results.getString("needs");
