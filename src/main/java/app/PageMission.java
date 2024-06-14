@@ -141,6 +141,7 @@ public class PageMission implements Handler {
             //html = html + "</div>";
             
         }
+
         html = html + "</table>";
 
         html = html + """
@@ -149,11 +150,30 @@ public class PageMission implements Handler {
                     <div class="footer-content">
                     <div class="footer-logo"><img src = "Weblogo.png" width = 100></div>
                 <div class="credits">
-                    <p>Created by :</p>
-                    <p>Student 1: Nitya Mungalpara, Student ID: s4057052</p>
-                    <p>Student 2: Name2 and Student Number2</p>
-                </div>
-                <div class="social-media">
+            </footer> """;
+                        
+    ArrayList<Student> credits = getAllStudents();
+        
+        html = html + "<footer>"
+                        + "<table class = 'credits'>";
+                
+        html = html + "<tr>" + 
+                    "<th>ID</th>" + 
+                    "<th>Name</th>" +
+                    "</tr>";
+
+        for (Student s : credits) {
+            html = html + "<tr>";
+            html = html + "<td>" + s.studentID + "</td>";
+            html = html + "<td>" + s.studentName + "</td>";
+            html = html + "</tr>";    
+        }
+        html = html + "</table>"
+                            + "</footer>";
+
+        html = html + """
+            <footer>
+                    <div class="social-media">
                     <a href="https://www.facebook.com"><img src = "facebook-icon.png"></a>
                     <a href="https://www.twitter.com"><img src = "twitter-icon.png"></a>
                     <a href="https://www.instagram.com"><img src = "instagram-icon.png"></a>
@@ -236,6 +256,63 @@ public class PageMission implements Handler {
         // Finally we return all of the countries
         return personaInfo;
     }
+
+    public ArrayList<Student> getAllStudents() {
+        // Create the ArrayList of Country objects to return
+        ArrayList<Student> students = new ArrayList<>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(JDBCConnection.DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT * FROM Student";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+
+                // Create a Country Object
+                Student student = new Student();
+                // Lookup the columns we need
+
+                student.studentID = results.getString("StudentID");
+                student.studentName = results.getString("Name");
+                
+
+                // Add the Country object to the array
+                students.add(student);
+            }
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        // Finally we return all of the countries
+        return students;
+    }    
 //Persona class
     public class Persona{
         public String id;
@@ -247,6 +324,16 @@ public class PageMission implements Handler {
     
         public Persona(){
     
+        }
+    }
+
+//Student Class
+    public class Student{
+        public String studentID;
+        public String studentName;
+
+        public Student(){
+
         }
     }
 
