@@ -227,7 +227,7 @@ public class PageMission implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT id,imageFile,name,description,needs,skills FROM Persona WHERE name ='" + name + "'";
+            String query = "SELECT * FROM Persona WHERE name ='" + name + "'";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
