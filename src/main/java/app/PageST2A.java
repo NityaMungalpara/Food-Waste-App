@@ -239,7 +239,7 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT country,year,loss_percentage FROM FoodLoss WHERE country ='" + name + "' AND year ='" + startYear + "'";
+            String query = "SELECT country,year,loss_percentage FROM food_loss WHERE country ='" + name + "' AND year ='" + startYear + "'";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -298,7 +298,7 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT country,year,loss_percentage FROM FoodLoss WHERE country ='" + name + "' AND year ='" + endYear + "'";
+            String query = "SELECT country,year,loss_percentage FROM food_loss WHERE country ='" + name + "' AND year ='" + endYear + "'";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
