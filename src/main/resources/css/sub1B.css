@@ -64,14 +64,20 @@ header {
    .credits{
     position: relative;
     left: 500px;
-    bottom: 110px;
+    top: 10px;
    }
   
    .social-media{
     position: relative;
     left: 1200px;
-    bottom: 200px;
+    bottom: 50px;
    }
+
+   .footer-content{
+    top: 100px;
+    position: relative;
+   }  
+
    .topnav{
      overflow: hidden;
      background-color: #3c3a3a;

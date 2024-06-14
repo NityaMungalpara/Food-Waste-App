@@ -409,6 +409,55 @@ footer a {
     justify-content: center;
     margin-top: 15px;
 }
+
+/*Added some CSS from common.css*/
+.btn:hover{
+    background-color: lightgreen;
+   }
+   .purpose{
+    background-image: url("foodloss.png");
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    background-position: center;   
+    padding: 200px 0;
+    background-attachment: fixed;
+   }
+   .box1{
+    position: absolute;
+    left: 1000px;
+    top: 80px;
+   }
+  
+   .content{
+    text-align: center;
+   }
+  
+   .credits{
+    position: relative;
+    left: 500px;
+    top: 50px;
+   }
+  
+   .social-media{
+    position: relative;
+    left: 1200px;
+    bottom: 2px;
+   }
+
+    .footer-content{
+    top: 140px;
+    position: relative;
+   } 
+   
+   .topnav{
+     overflow: hidden;
+     background-color: #3c3a3a;
+   }
+  
+   .join-us{
+    text-align: center;
+   }  
 /*————————————————————————————————————————————Result section——————————————————————————————————————————*/
 /* Result section styles */
 .result-section {
