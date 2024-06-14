@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 
+import app.PageMission.Student;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -87,9 +88,9 @@ public class PageST2A implements Handler {
         html += "<main>";
         html += "  <nav class='breadcrumb'>";
         html += "    <ul>";
-        html += "      <li><a href='page2A.html'>Food Loss and Waste Analysis by Country</a></li>";
+        html += "      <li><a href='page2A.html'><b>Food Loss and Waste Analysis by Country</b></a></li>";
         html += "      <li>></li>";
-        html += "      <li><a href='page2B.html'><b>Food Loss and Waste Analysis by Group</b></a></li>";
+        html += "      <li><a href='page2B.html'>Food Loss and Waste Analysis by Group</a></li>";
         html += "      <li>></li>";
         html += "      <li><a href='page3A.html'>Similarity Data Analysis by Country</a></li>";
         html += "      <li>></li>";
@@ -161,24 +162,43 @@ public class PageST2A implements Handler {
         // Close Content div
         //html = html + "</div>";
         // Footer
-    html = html + """
-        <footer>
-            <div class='footer'>
-                <div class="footer-content">
-                <div class="footer-logo"><img src = "Weblogo.png" width = 100></div>
-            <div class="credits">
-                <p>Created by :</p>
-                <p>Student 1: Name1 and Student Number1</p>
-                <p>Student 2: Name2 and Student Number2</p>
-            </div>
-            <div class="social-media">
-                <a href="https://www.facebook.com"><img src = "facebook-icon.png"></a>
-                <a href="https://www.twitter.com"><img src = "twitter-icon.png"></a>
-                <a href="https://www.instagram.com"><img src = "instagram-icon.png"></a>
-            </div>
-            </div>
-        </footer>
-    """;
+        html = html + """
+            <footer>
+                <div class='footer-content'>
+                    <div class="footer-logo"><a href='/'><img src = "Weblogo.png" width = 60></a></div>
+                </div>
+            </footer> """;
+                        
+    ArrayList<Student> credits = getAllStudents();
+        
+        html = html + "<footer>"
+                        + "<table class = 'credits'>";
+                
+        html = html + "<tr>" + 
+                    "<th>ID</th>" + 
+                    "<th>Name</th>" +
+                    "</tr>";
+
+        for (Student s : credits) {
+            html = html + "<tr>";
+            html = html + "<td>" + s.studentID + "</td>";
+            html = html + "<td>" + s.studentName + "</td>";
+            html = html + "</tr>";    
+        }
+        html = html + "</table>"
+                            + "</footer>";
+
+        html = html + """
+            <footer>
+                    <div class="social-media">
+                    <a href="https://www.twitter.com"><img src = "twitter-icon.png" alt='Twitter' width = 30></a>
+                    <a href="https://www.facebook.com"><img src = "facebook-icon.png" alt='Facebook' width = 30></a>
+                    <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn' width = 30></a>
+                    <a href="https://www.instagram.com"><img src = "instagram-icon.png" alt='Instagram' width = 30></a>
+                </div>
+                </div>
+            </footer>
+        """;
 
     // Finish the HTML webpage
     html = html + "</body>" + "</html>";
@@ -210,7 +230,6 @@ public class PageST2A implements Handler {
         }
 
         html = html + "</table>"; 
-        //country.countryName + "," + country.year + "," + 
         
         return html;
     }
@@ -355,6 +374,74 @@ public class PageST2A implements Handler {
 
         // Finally we return all of the countries
         return countryData;
+    }
+
+    public ArrayList<Student> getAllStudents() {
+        // Create the ArrayList of Country objects to return
+        ArrayList<Student> students = new ArrayList<>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(JDBCConnection.DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT * FROM Student";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+
+                // Create a Country Object
+                Student student = new Student();
+                // Lookup the columns we need
+
+                student.studentID = results.getString("StudentID");
+                student.studentName = results.getString("Name");
+                
+
+                // Add the Country object to the array
+                students.add(student);
+            }
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        // Finally we return all of the countries
+        return students;
+    } 
+    
+    //Student Class
+    public class Student{
+        public String studentID;
+        public String studentName;
+
+        public Student(){
+
+        }
+    
     }
 }
 

@@ -148,7 +148,7 @@ public class PageMission implements Handler {
             <footer>
                 <div class='footer'>
                     <div class="footer-content">
-                    <div class="footer-logo"><img src = "Weblogo.png" width = 100></div>
+                    <div class="footer-logo"><a href='/'><img src = "Weblogo.png" width = 60></a></div>
                 <div class="credits">
             </footer> """;
                         
@@ -174,9 +174,10 @@ public class PageMission implements Handler {
         html = html + """
             <footer>
                     <div class="social-media">
-                    <a href="https://www.facebook.com"><img src = "facebook-icon.png"></a>
-                    <a href="https://www.twitter.com"><img src = "twitter-icon.png"></a>
-                    <a href="https://www.instagram.com"><img src = "instagram-icon.png"></a>
+                    <a href="https://www.twitter.com"><img src = "twitter-icon.png" alt='Twitter' width = 30></a>
+                    <a href="https://www.facebook.com"><img src = "facebook-icon.png" alt='Facebook' width = 30></a>
+                    <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn' width = 30></a>
+                    <a href="https://www.instagram.com"><img src = "instagram-icon.png" alt='Instagram' width = 30></a>
                 </div>
                 </div>
             </footer>
