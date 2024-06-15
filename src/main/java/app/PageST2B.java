@@ -187,7 +187,7 @@ public class PageST2B implements Handler {
         } else {
             html += "<h2>Results</h2>";
             if (pageST2BBeanList.size() == 0) {
-                html += "<div style='display: flex; justify-content: center; align-items: center; height: 100vh;'><p style='text-align: center; font-size: 20px; font-weight: bold;'>No results found.</p></div>";
+                html += "<div style='display: flex; justify-content: center; align-items: center; height: 100px;'><p style='text-align: center; font-size: 20px; font-weight: bold;'>No results found.</p></div>";
             } else {
                 // Create a table for the selected filters
                 html += "<div style='margin-bottom: 20px;'>";
