@@ -44,7 +44,7 @@ public class PageIndex implements Handler {
             if ("zh".equals(language)) {
                 errorMessage = "请选择起始和结束年份。";
             } else {
-                errorMessage = "Please select both start and end years.";
+                errorMessage = "Please select both start and end years!";
             }
         }
 

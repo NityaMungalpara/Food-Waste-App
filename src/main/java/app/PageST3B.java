@@ -118,16 +118,12 @@ public class PageST3B implements Handler {
         // similarity criterion filter
         html += "      <div class='form-group'>";
         html += "        <label for='fields'>Similarity Criterion:</label>";
-        html += "        <div class='dropdown-group'>";
-        html += "          <details>";
-        html += "            <summary>Select Below</summary>";
-        html += "            <div class='dropdown-groupMenu' id='group'>";
-        html += "               <label><input type='radio' name='fields' value='ratio'> Ratio of Food Loss to Waste</label>";
-        html += "               <label><input type='radio' name='fields' value='highest_loss'> Highest% of Food Loss/Waste</label>";
-        html += "               <label><input type='radio' name='fields' value='lowest_loss'> Lowest% of Food Loss/Waste</label>";
-        html += "            </div>";
-        html += "          </details>";
-        html += "        </div>";
+        html += "              <select name='fields'>";
+        html += "              <option value='' disabled selected>Select Below</option>";
+        html += "                <option value='ratio'>Ratio of Food Loss to Waste</option>";
+        html += "                <option value='highest_loss'>Highest Percentage of Food Loss/Waste</option>";
+        html += "                <option value='lowest_loss'>Lowest Percentage of Food Loss/Waste</option>";
+        html += "              </select>";
         html += "      </div>";
 
         //similar groups number
