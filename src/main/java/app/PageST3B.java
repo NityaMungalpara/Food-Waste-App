@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -29,6 +30,11 @@ public class PageST3B implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
+        // database
+        JDBCConnection jdbc = new JDBCConnection();
+        List<String> foodNames = jdbc.getAllFoodName();
+        ArrayList<Integer> similarNums = jdbc.getGroupCount();
+        
         String html = "<html>";
         html += "<html lang='en'>";
         html += "<head>";
@@ -91,8 +97,72 @@ public class PageST3B implements Handler {
         html += "      <h1>Similarity Data Analysis by Group</h1>";
         html += "    </div>";
         html += "  </section>";
-        html += "</main>";
 
+        // Form section for selecting commodity
+        html += "  <section class='filter-section'>";
+        html += "    <form method='post' action='" + URL + "'>";
+        html += "      <div class='form-group'>";
+        html += "        <label for='group'> Food Commodity:</label>";
+        html += "        <div class='dropdown-group'>";
+        html += "          <details>";
+        html += "            <summary>Select Below</summary>";
+        html += "            <div class='dropdown-groupMenu' id='group'>";
+        for (String name : foodNames) {
+            html += "              <label><input type='radio' name='commodity' value='" + name + "'>" + name + "</label>";
+        }
+        html += "            </div>";
+        html += "          </details>";
+        html += "        </div>";
+        html += "      </div>";
+
+        // similarity criterion filter
+        html += "      <div class='form-group'>";
+        html += "        <label for='fields'>Similarity Criterion:</label>";
+        html += "        <div class='dropdown-group'>";
+        html += "          <details>";
+        html += "            <summary>Select Below</summary>";
+        html += "            <div class='dropdown-groupMenu' id='group'>";
+        html += "               <label><input type='radio' name='fields' value='ratio'> Ratio of Food Loss to Waste</label>";
+        html += "               <label><input type='radio' name='fields' value='highest_loss'> Highest% of Food Loss/Waste</label>";
+        html += "               <label><input type='radio' name='fields' value='lowest_loss'> Lowest% of Food Loss/Waste</label>";
+        html += "            </div>";
+        html += "          </details>";
+        html += "        </div>";
+        html += "      </div>";
+
+        //similar groups number
+        html += "      <div class='form-group'>";
+        html += "        <label for='group'>Number of Similar Groups</label>";
+        html += "              <select name='commodity'>";
+        for (Integer number : similarNums) {
+            html += "                <option value='" + number + "'>" + number + "</option>";
+        }
+        html += "              </select>";
+        html += "      </div>";
+
+        // Sort order
+        html += "      <div class='form-group'>";
+        html += "        <label for='sort_order'>Sort by Result:</label>";
+        html += "        <select name='sort_order' id='sort_order'>";
+        html += "          <option value='asc'>Ascending</option>";
+        html += "          <option value='desc'>Descending</option>";
+        html += "        </select>";
+        html += "      </div>";
+
+        // Submit and Reset buttons
+        html += "      <div class='form-buttons'>";
+        html += "        <button type='submit'>Find Similar Groups</button>";
+        html += "        <button type='reset'>Clear All</button>";
+        html += "      </div>";
+        html += "    </form>";
+        html += "  </section>";
+        
+        // Results section
+        html += "  <section class='result-section'>";
+        html += "<h2>Results</h2>";
+
+
+        html += "</main>";
         // Footer
         html += "<footer>";
         html += "  <div class='footer-container'>";
