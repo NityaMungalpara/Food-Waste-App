@@ -1,14 +1,9 @@
-html, body {
+body {
     height: 100%;  /* Make sure the html and body take the full height of the viewport*/
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
     background-color: #f8f8f8;
-}
-
-/* Make sure the main content area fill all available space */
-main {
-    flex: 1;
 }
 
 /* Container styles for main layout */
@@ -142,6 +137,7 @@ header nav ul li:hover .dropdown-content {
 .hero h1 {
     font-size: 25px;
     display: flex;
+    margin-top: 35px;
     justify-content: center;
 }
 
@@ -187,9 +183,9 @@ header nav ul li:hover .dropdown-content {
 /* Filter styles */
 .filter-section {
     background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    margin-top: 40px;
+    padding: 40px;
+    margin-bottom: 40px;
+    margin-top: 50px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
@@ -324,8 +320,18 @@ header nav ul li:hover .dropdown-content {
     border-collapse: collapse;
 } */
 table.custom-border td, table.custom-border th {
-    border: 0.5px solid #d9d6d6ee;
-  }
+    border: 0.8px solid #d9d6d6ee;
+}
+
+/* invisible */
+.result-section {
+    display: none;
+}
+
+.result-section:target {
+    display: block;
+}
+
 
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
@@ -334,13 +340,12 @@ table.custom-border td, table.custom-border th {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 1200px;
-    margin: auto;
-    border-top: 1px solid #d5c9c9
+    max-width: 1400px;
+    border-top: 1px solid #d5c9c9;
 }
 /* Footer styles */
 .footer {
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: 20px 0;
     border-bottom: 1px solid #ddd;
     display: flex;

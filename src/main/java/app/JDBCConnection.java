@@ -35,6 +35,23 @@ public class JDBCConnection {
      *    Returns an ArrayList of Country objects
      */
 
+    
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get all years
+    public ArrayList<Integer> getAllYears() {
+        ArrayList<Integer> years = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT DISTINCT year FROM Date");
+            while (results.next()) {
+                years.add(results.getInt("year"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return years;
+    }
+
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //indexpage result
     public List<PageIndexResult> getMaxYearLoss(String startYear, String endYear) {
@@ -72,22 +89,7 @@ public class JDBCConnection {
         }
         return PageIndexResultList;
     }
-    
-    /*—————————————————————————————————————————————————————————————————————————————————————— */
-    //get all years
-    public ArrayList<Integer> getAllYears() {
-        ArrayList<Integer> years = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DATABASE)) {
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT DISTINCT year FROM Date");
-            while (results.next()) {
-                years.add(results.getInt("year"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return years;
-    }
+
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //get all food groups
     public List<String> getAllFoodGroups() {
@@ -105,4 +107,117 @@ public class JDBCConnection {
         }
         return foodGroups;
     }
+
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get result for sub2B
+
+    public List<PageST2BBean> getAvgByGroupAndYear(List<String> groupList, List<String> activityList, String startYear, String endYear, String orderType) {
+        StringBuffer groupWhereBuffer = new StringBuffer();
+        // StringBuffer activityWhereBuffer = new StringBuffer();
+        String groupWhereStr = "";
+        // String activityWhereStr = "";
+        String yearWhere = "";
+
+        if (groupList.size() > 0) {
+            for (String foodGroup : groupList) {
+                groupWhereBuffer.append("'").append(foodGroup.trim()).append("',");
+            }
+            String tempWhere = groupWhereBuffer.toString();
+            groupWhereStr = tempWhere.substring(0, tempWhere.lastIndexOf(","));
+            groupWhereStr = " and g.group_name in (" + groupWhereStr + ")";
+        }
+
+        // if (activityList.size() > 0) {
+        //     for (String activity : activityList) {
+        //         activityWhereBuffer.append("'").append(activity.trim()).append("',");
+        //     }
+        //     String tempWhere = activityWhereBuffer.toString();
+        //     activityWhereStr = tempWhere.substring(0, tempWhere.lastIndexOf(","));
+        //     activityWhereStr = " and activity in (" + activityWhereStr + ")";
+        // }
+
+        if (!("".equals(startYear) || startYear == null) && !("".equals(endYear) || endYear == null)) {
+            yearWhere = " and (year between " + startYear + " and " + endYear + ")";
+        }
+
+        if (orderType == null) {
+            orderType = "asc";
+        }
+
+        List<PageST2BBean> pageST2BBeanList = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            String query = "SELECT g.group_name, gf.activity, gf.food_supply_stage, gf.cause_of_loss, " +
+                    "ROUND(AVG(CASE WHEN year = " + startYear + " THEN loss_percentage ELSE NULL END), 2) AS start_year_avg, " +
+                    "ROUND(AVG(CASE WHEN year = " + endYear + " THEN loss_percentage ELSE NULL END), 2) AS end_year_avg, " +
+                    "ROUND((CASE WHEN AVG(CASE WHEN year = " + endYear + " THEN loss_percentage ELSE NULL END) IS NULL THEN 0 " +
+                    "ELSE AVG(CASE WHEN year = " + endYear + " THEN loss_percentage ELSE NULL END) END) - " +
+                    "(CASE WHEN AVG(CASE WHEN year = " + startYear + " THEN loss_percentage ELSE NULL END) IS NULL THEN 0 " +
+                    "ELSE AVG(CASE WHEN year = " + startYear + " THEN loss_percentage ELSE NULL END) END), 2) AS avg_loss_diff " +
+                    "FROM food_loss f " +
+                    "INNER JOIN groups g ON SUBSTR(f.cpc_code, 1, 3) = g.group_code " +
+                    "INNER JOIN group_filter gf ON g.group_name = gf.groupName " +
+                    "WHERE 1 = 1 " + yearWhere + groupWhereStr + " " +
+                    "GROUP BY g.group_name " +
+                    "ORDER BY avg_loss_diff " + orderType;
+
+            System.out.println(query);
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+                PageST2BBean pageST2BBean = new PageST2BBean();
+                pageST2BBean.setGroupName(results.getString("group_name"));
+                pageST2BBean.setStartYearAvg(results.getString("start_year_avg"));
+                pageST2BBean.setEndYearAvg(results.getString("end_year_avg"));
+                pageST2BBean.setLossDifference(results.getString("avg_loss_diff"));
+
+                pageST2BBean.setActivity(results.getString("activity"));
+                pageST2BBean.setFoodSupplyStage(results.getString("food_supply_stage"));
+                pageST2BBean.setCauseOfLoss(results.getString("cause_of_loss"));
+                pageST2BBeanList.add(pageST2BBean);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            PageST2BBean errorBean = new PageST2BBean();
+            errorBean.setErrorMessage("An error occurred while querying the database.");
+            pageST2BBeanList.add(errorBean);
+        }
+        return pageST2BBeanList;
+    }
+
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get all food commodity
+    public List<String> getAllFoodName() {
+        List<String> foodNames = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            String query = "SELECT DISTINCT commodity FROM food_loss";
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+                String foodName = results.getString("commodity");
+                foodNames.add(" " + foodName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foodNames;
+    }
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get total groups count
+    public ArrayList<Integer> getGroupCount() {
+        ArrayList<Integer> similarNums = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE)) {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT COUNT(group_code) AS total_count FROM groups");
+            while (results.next()) {
+                int totalCount = results.getInt("total_count");
+                for (int i = 1; i <= totalCount; i++) {
+                    similarNums.add(i);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return similarNums;
+    }
+    
 }
