@@ -6,11 +6,6 @@ import java.util.List;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Example Index HTML class using Javalin
@@ -219,7 +214,7 @@ public class PageIndex implements Handler {
         html += "          <li>" + ("en".equals(language) ? "Cauliflowers and Broccoli in 2013" : "2013年菜花和西兰花") + "</li>";
         html += "        </ul>";
         html += "        <p>" + ("en".equals(language) ? "Food loss affects us all. Understanding the data is the first step towards reducing waste." : "食物损失影响着我们所有人。了解数据是减少浪费的第一步。") + "</p>";
-        html += "        <a href='page2A.html'><button class='learn-more'>" + ("en".equals(language) ? "Learn More" : "了解更多") + "</button></a>";
+        html += "        <a href='page2B.html'><button class='learn-more'>" + ("en".equals(language) ? "Learn More" : "了解更多") + "</button></a>";
         html += "      </div>";
         html += "      <div class='chart-box'>";
         html += "        <img src='chart.png' alt='Loss Percentage Chart'>";
