@@ -136,15 +136,6 @@ public class PageST3B implements Handler {
         html += "              </select>";
         html += "      </div>";
 
-        // Sort order
-        html += "      <div class='form-group'>";
-        html += "        <label for='sort_order'>Sort by Result:</label>";
-        html += "        <select name='sort_order' id='sort_order'>";
-        html += "          <option value='asc'>Ascending</option>";
-        html += "          <option value='desc'>Descending</option>";
-        html += "        </select>";
-        html += "      </div>";
-
         // Submit and Reset buttons
         html += "      <div class='form-buttons'>";
         html += "        <button type='submit'>Find Similar Groups</button>";
