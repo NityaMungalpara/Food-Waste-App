@@ -6,12 +6,6 @@ import java.util.List;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
  * Example Index HTML class using Javalin
  * <p>
@@ -35,12 +29,32 @@ public class PageST2B implements Handler {
         List<String> foodGroups = jdbc.getAllFoodGroups();
         ArrayList<Integer> years = jdbc.getAllYears();
 
+        List<String> groupList = context.formParams("group");
+        List<String> activityList = context.formParams("fields");
+        // String activityList = context.formParam("fields");
+
+        String startYear = context.formParam("start_year");
+        String endYear = context.formParam("end_year");
+        String sortType = context.formParam("sort_order");
+
+        List<PageST2BBean> pageST2BBeanList = new ArrayList<>();
+        String errorMessage = null;
+        if (endYear != null && startYear != null && Integer.parseInt(endYear) <= Integer.parseInt(startYear)) {
+            errorMessage = "End year must be greater than start year!";
+        }
+
+        if (errorMessage == null) {
+            pageST2BBeanList = jdbc.getAvgByGroupAndYear(groupList, activityList, startYear, endYear, sortType);
+        }
+        // List<PageST2BBean> pageST2BBeanList = jdbc.getAvgByGroupAndYear(groupList,activityList,startYear,endYear,sortType);
+
+
         // Create a simple HTML webpage in a String
         String html = "<html>";
         html += "<html lang='en'>";
         html += "<head>";
         html +=     "<meta charset='UTF-8'>";
-        html +=     "<title>Subtask 2.2</title>";     
+        html +=     "<title>Subtask 2.2</title>";
         html +=     "<link rel='stylesheet' type='text/css' href='sub2B.css' />";
         html += "</head>";
 
@@ -54,7 +68,6 @@ public class PageST2B implements Handler {
         html += "    <nav>";
         html += "      <ul class='nav-links'>";
         html += "        <li><a href='/'>Home</a></li>";
-        html += "        <li><a href='#about'>About Us</a></li>";
         html += "        <li><a href='mission.html'>Our Mission</a></li>";
         html += "        <li class='dropdown'>";
         html += "          <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
@@ -65,7 +78,7 @@ public class PageST2B implements Handler {
         html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
         html += "          </div>";
         html += "        </li>";
-        html += "        <li><a href='/Reference.html'>Reference</a></li>";
+        html += "         <li><a href='/Reference.html'>Reference</a></li>";
         html += "      </ul>";
         html += "    </nav>";
         html += "    <div class='nav-right'>";
@@ -102,7 +115,8 @@ public class PageST2B implements Handler {
 
         // Form section for selecting food groups
         html += "  <section class='filter-section'>";
-        html += "    <form method='post' action='" + URL + "'>";
+        // html += "    <form method='post' action='" + URL + "'>";
+        html += "    <form method='post' action='" + URL + "#results'>";
         html += "      <div class='form-group'>";
         html += "        <label for='group'>Food Group:</label>";
         html += "        <div class='dropdown-group'>";
@@ -116,7 +130,7 @@ public class PageST2B implements Handler {
         html += "          </details>";
         html += "        </div>";
         html += "      </div>";
-                                
+
         // Year dropdowns
         html += "      <div class='form-group'>";
         html += "        <label for='start_year'>Yearly Comparison: From</label>";
@@ -165,10 +179,123 @@ public class PageST2B implements Handler {
         html += "  </section>";
 
         // Results section
-        html += "  <section class='result-section'>";
-        html += "    <h2>Results</h2>";
-        // Results
-        html += "  </section>";
+        html += "  <section id= 'results' class='result-section'>";
+        
+        if (errorMessage != null) {
+            // html += "<p class='error-message'>" + errorMessage + "</p>";
+            html += "<div class='error-container' style='display: flex; justify-content: center; align-items: center; height: 100px;'><p class='error-message' style='text-align: center; font-size: 20px; font-weight: bold;'>" + errorMessage + "</p></div>";
+        } else {
+            html += "<h2>Results</h2>";
+            if (pageST2BBeanList.size() == 0) {
+                html += "<div style='display: flex; justify-content: center; align-items: center; height: 100px;'><p style='text-align: center; font-size: 20px; font-weight: bold;'>No results found.</p></div>";
+            } else {
+                // Create a table for the selected filters
+                html += "<div style='margin-bottom: 20px;'>";
+                html += "<table style='width: 100%; table-layout: fixed;'><tr>";
+
+                // Selected Groups
+                html += "<td style='vertical-align: top;'><p><b>Selected Groups:</b></p>";
+                if (!groupList.isEmpty()) {
+                    html += "<ul style='list-style-type: disc; margin: 0; padding-left:20px;'>";
+                    for (int i = 0; i < groupList.size(); i++) {
+                        html += "<li>" + groupList.get(i) + "</li>";
+                    }
+                    html += "</ul>";
+                } else {
+                    html += " None";
+                }
+                html += "</td>";
+
+                // Selected Filters
+                html += "<td style='vertical-align: top;'><p><b>Selected Filters:</b></p>";
+                if (!activityList.isEmpty()) {
+                    html += "<ul style='list-style-type: disc; margin: 0; padding-left:20px'>";
+                    for (int i = 0; i < activityList.size(); i++) {
+                        if (activityList.get(i).equals("activity")) {
+                            html += "<li>Activity</li>";
+                        } else if(activityList.get(i).equals("food_supply_stage")) {
+                            html += "<li>Food Supply Stage</li>";
+                        } else if(activityList.get(i).equals("cause_of_loss")) {
+                            html += "<li>Cause of Loss</li>";
+                        }
+                    }
+                    html += "</ul>";
+                } else {
+                    html += "Default";
+                }
+                html += "</td>";
+
+
+                // Selected Years
+                html += "<td style='vertical-align: top;'><p><b>Selected Years:&nbsp;</b>" + startYear + " - " + endYear + "</p></td>";
+
+                // Sorted by
+                html += "<td style='vertical-align: top;'><p><b>Sorted by:&nbsp;</b>" + sortType + "</p></td>";
+
+                html += "</tr></table>";
+                html += "</div>";
+            }
+
+            // Result table
+            html += "<table class='custom-border' cellspacing='0' cellpadding='10'>";
+            html += "<tr class='table-header'>";
+            html += "<td><b>Group Name</b></td>";
+            html += "<td><b>Start Year Average Loss %</b></td>";
+            html += "<td><b>End Year Average Loss %</b></td>";
+            html += "<td><b>Average Loss Difference %</b></td>";
+
+            if(activityList.contains("activity") && activityList.contains("food_supply_stage") && activityList.contains("cause_of_loss")) {
+                html += "<td><b>Activity</b></td>";
+                html += "<td><b>Food Supply Stage</b></td>";
+                html += "<td><b>Cause of Loss</b></td>";
+            } else if(activityList.contains("activity") && activityList.contains("food_supply_stage")) {
+                html += "<td><b>Activity</b></td>";
+                html += "<td><b>Food Supply Stage</b></td>";
+            } else if(activityList.contains("activity") && activityList.contains("cause_of_loss")) {
+                html += "<td><b>Activity</b></td>";
+                html += "<td><b>Cause of Loss</b></td>";
+            } else if (activityList.contains("food_supply_stage") && activityList.contains("cause_of_loss")) {
+                html += "<td><b>Food Supply Stage</b></td>";
+                html += "<td><b>Cause of Loss</b></td>";
+            } else {
+                html += "<td><b>Activity</b></td>";
+                html += "<td><b>Food Supply Stage</b></td>";
+                html += "<td><b>Cause of Loss</b></td>";
+            }
+            html += "</tr>";
+
+            for (PageST2BBean pageST2BBean : pageST2BBeanList) {
+                html += "<tr>";
+                html += "<td>" + pageST2BBean.getGroupName() + "</td>";
+                html += "<td>" + pageST2BBean.getStartYearAvg() + "</td>";
+                html += "<td>" + pageST2BBean.getEndYearAvg() + "</td>";
+                html += "<td>" + pageST2BBean.getLossDifference() + "</td>";
+                if(activityList.contains("activity") && activityList.contains("food_supply_stage") && activityList.contains("cause_of_loss")) {
+                    html += "<td>" + pageST2BBean.getActivity() + "</td>";
+                    html += "<td>" + pageST2BBean.getFoodSupplyStage() + "</td>";
+                    html += "<td>" + pageST2BBean.getCauseOfLoss() + "</td>";
+                } else if (activityList.contains("activity") && activityList.contains("food_supply_stage")) {
+                    html += "<td>" + pageST2BBean.getActivity() + "</td>";
+                    html += "<td>" + pageST2BBean.getFoodSupplyStage() + "</td>";
+                } else if(activityList.contains("activity") && activityList.contains("cause_of_loss")) {
+                    html += "<td>" + pageST2BBean.getActivity() + "</td>";
+                    html += "<td>" + pageST2BBean.getCauseOfLoss() + "</td>";
+                } else if(activityList.contains("food_supply_stage") && activityList.contains("cause_of_loss")) {
+                    html += "<td>" + pageST2BBean.getFoodSupplyStage() + "</td>";
+                    html += "<td>" + pageST2BBean.getCauseOfLoss() + "</td>";
+                } else {
+                    html += "<td>" + pageST2BBean.getActivity() + "</td>";
+                    html += "<td>" + pageST2BBean.getFoodSupplyStage() + "</td>";
+                    html += "<td>" + pageST2BBean.getCauseOfLoss() + "</td>";
+                }
+
+                html += "</tr>";
+            }
+            html += " </table>";
+
+            html += "  </section>";
+        }
+        html += "<main>";
 
         // Footer
         html += "<footer>";
@@ -192,7 +319,7 @@ public class PageST2B implements Handler {
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";
-        
+
 
         // DO NOT MODIFY THIS
         // Makes Javalin render the webpage

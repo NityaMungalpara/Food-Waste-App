@@ -1,15 +1,7 @@
 package app;
 
-import java.util.ArrayList;
-
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Example Index HTML class using Javalin
@@ -33,7 +25,7 @@ public class PageReference implements Handler {
         html += "<head>";
         html +=     "<meta charset='UTF-8'>";
         html +=     "<title>Reference Page</title>";     
-        html +=     "<link rel='stylesheet' type='text/css' href='sub3B.css' />";
+        html +=     "<link rel='stylesheet' type='text/css' href='reference.css' />";
         html += "</head>";
 
         // Add the body
@@ -79,6 +71,20 @@ public class PageReference implements Handler {
         html += "      <h1>References</h1>";
         html += "    </div>";
         html += "  </section>";
+
+        // Add the images and descriptions
+        html += "<div class='image_container'>";
+        html += "    <img src='FoodWaste.jpg' alt='Background for the landing page' width='150'>";
+        html += "    <p>This image was used as the background for the landing page.<br>";
+        html += "    <br>\n";
+        html += "    National Resource Consortium. (2024). <i>How Does Recycling Food Waste Benefit My Business?</i> [Image]. Available at: <a href='https://uk-nrc.com/blog/how-recycling-food-waste-benefits-business/' target='_blank'>https://uk-nrc.com/blog/how-recycling-food-waste-benefits-business/</a> (Accessed: 25 May. 2024).</p>";
+        html += "</div>";
+        html += "<div class='image_container'>";
+        html += "    <img src='Weblogo.png' alt='Website logo' width='150'>";
+        html += "    <p>This image was used as the website logo.<br>";
+        html += "    <br>\n";
+        html += "    Depositphotos. (n.d.). <i>ZN logo</i> [Image]. Available at: <a href='https://depositphotos.com/vectors/zn-logo.html' target='_blank'>https://depositphotos.com/vectors/zn-logo.html</a> (Accessed: 25 May. 2024).</p>";
+        html += "</div>";
         
         // Footer
         html += "<footer>";
