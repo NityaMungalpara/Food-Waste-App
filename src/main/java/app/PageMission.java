@@ -72,22 +72,21 @@ public class PageMission implements Handler {
                         </ul>
                     </nav>
                     <div class='nav-right'>
-                        <div class='search-container'>
-                            <input type='text' placeholder='Search'>
-                            <button>Search</button>
-                        </div>
-                        <button class='help-center'>Help Center</button>
-                        <div class='language-selector'>
-                            <select>
-                                <option value='en'>English</option>
-                                <option value='cn'>Chinese</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
             </header>
         """;
-
+    //     <div class='search-container'>
+    //     <input type='text' placeholder='Search'>
+    //     <button>Search</button>
+    // </div>
+    // <button class='help-center'>Help Center</button>
+    // <div class='language-selector'>
+    //     <select>
+    //         <option value='en'>English</option>
+    //         <option value='cn'>Chinese</option>
+    //     </select>
+    // </div>
         // Add header content block
 
         // Add Div for page Content
@@ -98,14 +97,20 @@ public class PageMission implements Handler {
                 <h1>Our Purpose</h1>
                 <p>
                     The website mainly focuses to acknowledge people regarding the global issue of food loss and wastage,
-                    which occurs<br> at households as well as giant manufacturing industries. The website would provide the 
-                    information of the food loss <br> occurring at each level in the food supply chain, contributing to a massive
-                    food waste for the entire system. Besides that,<br> it would also give news of current studies and technological 
-                    innovations on food loss and waste. The website would also be<br>helpful to people, by informing them about 
+                    which occurs<br> throughout the world. The website would provide the 
+                    information of the food loss percents<br> occurring in different countries based on a given start year and end year,
+                    .Besides that,<br> based on a given country, it would find other countries that have common food types being wasted 
+                    and similar overall food loss percent. The website would also be<br>helpful to people, by informing them about 
                     the devastating impact of food disposal on environment as well as<br> available resources. It would encourage
-                    people by publishing success stories of stakeholders on this mission and provide<br> effective strategies,
-                    highlighting responsible food management, to combat this social challenge.
+                    people by providing the required information using tables, so that they can easily access the data.<br> The website
+                    would provide information in an engaging manner so that people do not feel bored.
                 </p>
+
+                <h1>Features of the Wesbsite</h1>
+                <ul>
+                <li>Explore the Food Loss Analysis by Country webpage. You can get the amount of loss percent for a country corresponding to a year. You can also filter out data based on activity, food supply stage and cause of food loss.</li>
+                <li>You can also get other countries having similar food loss percent and in which the wasted products are common through the Similarity Analysis by Country Page.</li>
+                </ul>
             </main>
                 """;      
 

@@ -79,22 +79,21 @@ public class PageST3A implements Handler {
                         </ul>
                     </nav>
                     <div class='nav-right'>
-                        <div class='search-container'>
-                            <input type='text' placeholder='Search'>
-                            <button>Search</button>
-                        </div>
-                        <button class='help-center'>Help Center</button>
-                        <div class='language-selector'>
-                            <select>
-                                <option value='en'>English</option>
-                                <option value='cn'>Chinese</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
             </header>
         """;
-
+    //     <div class='search-container'>
+    //     <input type='text' placeholder='Search'>
+    //     <button>Search</button>
+    // </div>
+    // <button class='help-center'>Help Center</button>
+    // <div class='language-selector'>
+    //     <select>
+    //         <option value='en'>English</option>
+    //         <option value='cn'>Chinese</option>
+    //     </select>
+    // </div>
         html += "<main>";
         html += "  <nav class='breadcrumb'>";
         html += "    <ul>";
