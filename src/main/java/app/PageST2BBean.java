@@ -1,15 +1,15 @@
 package app;
 
 public class PageST2BBean {
-    private String groupName;
-    private String startYearAvg;
-    private String endYearAvg;
-    private String lossDifference;
-    private String activity;
-    private String foodSupplyStage;
-    private String causeOfLoss;
-    // private String mostFrequentFilter;
-    private String errorMessage;
+    public String groupName;
+    public String startYearAvg;
+    public String endYearAvg;
+    public String lossDifference;
+    public String activity;
+    public String foodSupplyStage;
+    public String causeOfLoss;
+    // public String mostFrequentFilter;
+    public String errorMessage;
 
 
     // Default constructor
