@@ -205,6 +205,8 @@ header nav ul li:hover .dropdown-content {
     flex-direction: column;
     flex: 1;
     min-width: 150px;
+    margin-left: 80px;
+    margin-bottom: 20px;
 }
 
 .form-group select,
@@ -214,13 +216,6 @@ header nav ul li:hover .dropdown-content {
     border: 1px solid #ddd;
     border-radius: 3px;
     max-width: 200px;
-}
-
-.multiselect {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 10px;
 }
 
 .filter-section button {
@@ -245,7 +240,7 @@ header nav ul li:hover .dropdown-content {
 
 .form-buttons {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     width: 100%;
     justify-content: center;
     margin-top: 10px;
@@ -305,6 +300,12 @@ header nav ul li:hover .dropdown-content {
     border-radius: 5px;
 }
 
+.result-section table {
+    width: 100%; 
+    margin: auto; 
+    border-collapse: collapse; 
+}
+
 .result-section h2 {
     font-size: 25px;
     display: flex;
@@ -314,18 +315,25 @@ header nav ul li:hover .dropdown-content {
     font-size: medium;
     display: flex;
     justify-content: left;
+    margin-top: 20px;
 }
 /*Result table*/
 .table-header {
     background-color: #edeaeaf5;
 }
-/* table.custom-border {
-    border: 1px solid #767676; 
-    border-collapse: collapse;
-} */
+
 table.custom-border td, table.custom-border th {
     border: 0.5px solid #d9d6d6ee;
   }
+
+  /* invisible */
+.result-section {
+    display: none;
+}
+
+.result-section:target {
+    display: block;
+}
 
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
