@@ -197,7 +197,7 @@ public class PageIndex implements Handler {
         html += "          <li>Cauliflowers and Broccoli in 2013</li>";
         html += "        </ul>";
         html += "        <p>Food loss affects us all. Understanding the data is the first step towards reducing waste.</p>";
-        html += "        <a href='page2A.html'><button class='learn-more'>Learn More</button></a>";
+        html += "        <a href='page2B.html'><button class='learn-more'>Learn More</button></a>";
         html += "      </div>";
         html += "      <div class='chart-box'>";
         html += "        <img src='chart.png' alt='Loss Percentage Chart'>";
