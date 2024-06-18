@@ -93,24 +93,24 @@ public class PageMission implements Handler {
         html = html + "<div class='content'>";
         html = html + """
             <main>
-            <section class="purpose">
+            <section class = 'purpose'>
                 <h1>Our Purpose</h1>
-                <p>
-                    The website mainly focuses to acknowledge people regarding the global issue of food loss and wastage,
+                    The website mainly focuses to acknowledge people regarding<br> the global issue of food loss and wastage,
                     which occurs<br> throughout the world. The website would provide the 
-                    information of the food loss percents<br> occurring in different countries based on a given start year and end year,
-                    .Besides that,<br> based on a given country, it would find other countries that have common food types being wasted 
-                    and similar overall food loss percent. The website would also be<br>helpful to people, by informing them about 
+                    information of the food<br> loss percents occurring in different countries based on a given start year<br> and end year
+                    .Besides that, based on a given country,<br> it would find other countries that have common food types being wasted<br> 
+                    and similar overall food loss percent. The website <br>would also be helpful to people, by informing them about<br>
                     the devastating impact of food disposal on environment as well as<br> available resources. It would encourage
-                    people by providing the required information using tables, so that they can easily access the data.<br> The website
-                    would provide information in an engaging manner so that people do not feel bored.
-                </p>
-
-                <h1>Features of the Wesbsite</h1>
-                <ul>
-                <li>Explore the Food Loss Analysis by Country webpage. You can get the amount of loss percent for a country corresponding to a year. You can also filter out data based on activity, food supply stage and cause of food loss.</li>
-                <li>You can also get other countries having similar food loss percent and in which the wasted products are common through the Similarity Analysis by Country Page.</li>
-                </ul>
+                    people by providing the required information<br> using tables, so that they can easily access the data. The website
+                    would<br> provide information in an engaging manner so that people do not feel bored.
+                <h1>Features of the Website</h1>
+                
+                 <li>Explore the Food Loss Analysis by Country webpage.<br></li><br>
+                 <li>You can get the amount of loss percent for a country corresponding to a year.<br></li><br> 
+                 <li>You can also filter out data based on activity, food supply stage and cause of food loss.<br></li><br>
+                 <li>You can also get other countries having similar food loss percent<br> and in which the wasted products are common through the <br>Similarity Analysis by Country Page.</li>
+                
+        </section>
             </main>
                 """;      
 
@@ -119,8 +119,8 @@ public class PageMission implements Handler {
         // Footer
 
         ArrayList<Persona> personas = getAllPersonas();
-        
-        html = html + "<table border = '1'>";
+        html = html + "<h2 class = 'users'>OUR USERS</h2>";
+        html = html + "<table border = '1' class = 'table'>";
                 
         html = html + "<tr>" + 
                     "<th>ID</th>" + 
@@ -149,18 +149,11 @@ public class PageMission implements Handler {
 
         html = html + "</table>";
 
-        html = html + """
-            <footer>
-                <div class='footer'>
-                    <div class="footer-content">
-                    <div class="footer-logo"><a href='/'><img src = "Weblogo.png" width = 60></a></div>
-                <div class="credits">
-            </footer> """;
-                        
-    ArrayList<Student> credits = getAllStudents();
+        ArrayList<Student> credits = getAllStudents();
         
         html = html + "<footer>"
-                        + "<table class = 'credits'>";
+                        + "<table border = 3 class = 'credits'>";
+        html = html + "<h2 class = 'efforts'>Efforts By:</h2>";
                 
         html = html + "<tr>" + 
                     "<th>ID</th>" + 
@@ -175,6 +168,14 @@ public class PageMission implements Handler {
         }
         html = html + "</table>"
                             + "</footer>";
+
+        html = html + """
+            <footer>
+                <div class='footer'>
+                    <div class="footer-content">
+                    <div class="footer-logo"><a href='/'><img src = "Weblogo.png" width = 60></a></div>
+                <div class="credits">
+            </footer> """;
 
         html = html + """
             <footer>

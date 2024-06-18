@@ -11,10 +11,13 @@ public class Country {
 
    // country Name
    public String name;
-   // public String startYear;
-   // public String endYear;
-   public String year;
+   public String startYear;
+   public String endYear;
    public String loss_percentage;
+   public String year;
+   public String lossStartYear;
+   public String loss_end_year;
+   public String loss_difference;
    /**
     * Create a Country and set the fields
     */

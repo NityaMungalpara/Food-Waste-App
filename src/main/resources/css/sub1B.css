@@ -42,14 +42,27 @@ header {
  .btn:hover{
     background-color: lightgreen;
    }
+   /* {
+    color: #454a47;
+    padding: 20px;
+    text-align: left;
+   } */
    .purpose{
-    background-image: url("foodloss.png");
+    background-image: url("foodloss.avif");
     background-size: cover;
-    position: relative;
     text-align: center;
     background-position: center;   
-    padding: 200px 0;
-    background-attachment: fixed;
+    padding: 20px 0;
+    display: block;
+    height: 600px;
+    width: 1500px;
+   }
+
+   .table{
+    padding: 40px;
+    margin: 20px;
+    table-layout: fixed;
+    -o-table-baseline: initial;
    }
    .box1{
     position: absolute;
@@ -57,24 +70,31 @@ header {
     top: 80px;
    }
   
-   .content{
+   .efforts{
     text-align: center;
    }
   
    .credits{
+    font-size: x-large;
+    text-align: center;
     position: relative;
-    left: 500px;
+    left: 550px;
     top: 10px;
+   }
+
+   .users{
+    text-align: center;
+    font-size:xx-large;
    }
   
    .social-media{
     position: relative;
     left: 1200px;
-    bottom: 50px;
+    top: 10px;
    }
 
    .footer-content{
-    top: 100px;
+    top: 90px;
     position: relative;
    }  
 
