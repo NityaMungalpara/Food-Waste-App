@@ -182,7 +182,7 @@ public class PageST2B implements Handler {
                 html += "<table style='width: 100%; table-layout: fixed;'><tr>";
 
                 // Selected Groups
-                html += "<td style='vertical-align: top;'><p><b>Selected Groups:</b></p>";
+                html += "<td style='vertical-align: top;padding-left:40px;'><p><b>Selected Groups:</b></p>";
                 if (!groupList.isEmpty()) {
                     html += "<ul style='list-style-type: disc; margin: 0; padding-left:20px;'>";
                     for (int i = 0; i < groupList.size(); i++) {
@@ -195,7 +195,7 @@ public class PageST2B implements Handler {
                 html += "</td>";
 
                 // Selected Filters
-                html += "<td style='vertical-align: top;'><p><b>Selected Filters:</b></p>";
+                html += "<td style='vertical-align: top;padding-left:60px;'><p><b>Selected Filters:</b></p>";
                 if (!activityList.isEmpty()) {
                     html += "<ul style='list-style-type: disc; margin: 0; padding-left:20px'>";
                     for (int i = 0; i < activityList.size(); i++) {
@@ -215,10 +215,15 @@ public class PageST2B implements Handler {
 
 
                 // Selected Years
-                html += "<td style='vertical-align: top;'><p><b>Selected Years:&nbsp;</b>" + startYear + " - " + endYear + "</p></td>";
+                html += "<td style='vertical-align: top;padding-left:70px;'><p><b>Selected Years:</b></p>";
+                html += "<li>"+ startYear + " - " + endYear + "</li>";
+                html += "</td>";
 
                 // Sorted by
-                html += "<td style='vertical-align: top;'><p><b>Sorted by:&nbsp;</b>" + sortType + "</p></td>";
+                html += "<td style='vertical-align: top;padding-left:70px;'><p><b>Sorted by:</b></p>";
+                html += "<ul style='list-style-type: disc; margin: 0; padding-left:20px;'>";
+                html += "<li>" + sortType + "</li>";
+                html += "</td>";
 
                 html += "</tr></table>";
                 html += "</div>";
