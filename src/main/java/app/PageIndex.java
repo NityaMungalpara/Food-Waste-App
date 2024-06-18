@@ -62,9 +62,6 @@ public class PageIndex implements Handler {
         // Add header content block
         html += "<header>";
         html += "    <div class='container'>";
-        html += "        <div class='Weblogo'>";
-        html += "            <img src='Weblogo.png' alt='Logo'>";
-        html += "        </div>";
         html += "        <nav>";
         html += "            <ul class='nav-links'>";
         html += "                <li><a href='/'>Home</a></li>";
@@ -81,20 +78,6 @@ public class PageIndex implements Handler {
         html += "                <li><a href='Reference.html'>Reference</a></li>";
         html += "            </ul>";
         html += "        </nav>";
-        html += "        <div class='nav-right'>";
-        html += "            <div class='search-container'>";
-        html += "                <input type='text' placeholder='Search'>";
-        html += "                <button>Search</button>";
-        html += "            </div>";
-        html += "            <button class='help-center'>Help Center</button>";
-        html += "            <div class='language-selector'>";
-        html += "                <select>";
-        html += "                    <option value='PageIndex.html'>English</option>";
-        html += "                    <option value='cn'>Chinese</option>";
-        html += "                </select>";
-        html += "            </div>";
-        html += "        </div>";
-        html += "    </div>";
         html += "</header>";
 
         // Main section

@@ -21,7 +21,7 @@ main {
 /* header styles */
 header {
     background-color: #ffffff;
-    padding: 20px 0;  /* top and bottom */
+    padding: 15px 0;  /* top and bottom */
     border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
@@ -38,20 +38,20 @@ header nav ul {
 }
 /* Navigation menu items */
 header nav ul li {
-    margin-right: 20px;
+    margin-right: 35px;
     position: relative;
 }
 /* Navigation links */
 header nav ul li a {
     text-decoration: none; /* Removed default underline*/
     color: #333;
+    font-size: 17px;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
 /* Nav links hover effect */
 .nav-links li a:hover {
-/* text-decoration: underline; */
 background-color: #edecec;
 }
 /* header with arrow icon  */

@@ -32,16 +32,9 @@ header nav ul li .dropdown-content {
 /* header styles */
 header {
     background-color: #fff;
-    padding: 20px 0;  /* top and bottom */
+    padding: 15px 0;  /* top and bottom */
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Set header-logo size */
-header .Weblogo img {
-    height: 60px;
 }
 
 /* Navigation menu styles */
@@ -52,7 +45,7 @@ header nav ul {
 
 /* Navigation menu items */
 header nav ul li {
-    margin-right: 20px;
+    margin-right: 35px;
     position: relative;
 }
 
@@ -60,10 +53,15 @@ header nav ul li {
 header nav ul li a {
     text-decoration: none; /* Removed default underline*/
     color: #333;
+    font-size: 17px;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
+
+/* .nav-right {
+    margin-left: auto;
+} */
 
 /* Nav links hover effect */
 .nav-links li a:hover {
@@ -89,30 +87,8 @@ header nav ul li:hover .dropdown-content {
     display: block;
 }
 
-/* Navigation right section */
-.nav-right{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-
-/* Search bar container */
-.search-container {
-    display: flex;
-    align-items: center;
-    margin-right: 20px; 
-}
-/* Search input and language selector */
-.search-container input, .language-selector select {
-    padding: 10px;
-    border: 1px solid #ddd;  
-    border-radius: 3px;  /* Rounded corners */
-    margin-right: 5px; 
-    margin-left: 5px;  /* Space to the left */
-}
-
-/* Buttons in search container, hero section and help center */
-.search-container button, .text-box .learn-more, .help-center {
+/* Buttons */
+ .text-box .learn-more {
     padding: 10px 13px;
     margin-left: 3px;
     border: none;

@@ -33,35 +33,23 @@ public class PageReference implements Handler {
 
         // Header
         html += "<header>";
-        html += "  <div class='container'>";
-        html += "    <div class='Weblogo'><img src='Weblogo.png' alt='Logo'></div>";
-        html += "    <nav>";
-        html += "      <ul class='nav-links'>";
-        html += "        <li><a href='/'>Home</a></li>";
-        html += "        <li><a href='mission.html'>Our Mission</a></li>";
-        html += "        <li class='dropdown'>";
-        html += "          <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
-        html += "          <div class='dropdown-content'>";
-        html += "            <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
-        html += "            <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
-        html += "            <a href='page3A.html'>Similarity Data Analysis by Country</a>";
-        html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
-        html += "          </div>";
-        html += "        </li>";
-        html += "        <li><a href='/Reference.html'>Reference</a></li>";
-        html += "      </ul>";
-        html += "    </nav>";
-        html += "    <div class='nav-right'>";
-        html += "      <div class='search-container'><input type='text' placeholder='Search'><button>Search</button></div>";
-        html += "      <button class='help-center'>Help Center</button>";
-        html += "      <div class='language-selector'>";
-        html += "        <select>";
-        html += "          <option value='en'>English</option>";
-        html += "          <option value='cn'>Chinese</option>";
-        html += "        </select>";
-        html += "      </div>";
-        html += "    </div>";
-        html += "  </div>";
+        html += "    <div class='container'>";
+        html += "        <nav>";
+        html += "            <ul class='nav-links'>";
+        html += "                <li><a href='/'>Home</a></li>";
+        html += "                <li><a href='mission.html'>Our Mission</a></li>";
+        html += "                <li class='dropdown'>";
+        html += "                    <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
+        html += "                    <div class='dropdown-content'>";
+        html += "                        <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
+        html += "                        <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
+        html += "                        <a href='page3A.html'>Similarity Data Analysis by Country</a>";
+        html += "                        <a href='page3B.html'>Similarity Data Analysis by Group</a>";
+        html += "                    </div>";
+        html += "                </li>";
+        html += "                <li><a href='Reference.html'>Reference</a></li>";
+        html += "            </ul>";
+        html += "        </nav>";
         html += "</header>";
         
         // Main section
@@ -77,12 +65,6 @@ public class PageReference implements Handler {
         html += "    <p>This image was used as the background for the landing page.<br>";
         html += "    <br>\n";
         html += "    National Resource Consortium. (2024). <i>How Does Recycling Food Waste Benefit My Business?</i> [Image]. Available at: <a href='https://uk-nrc.com/blog/how-recycling-food-waste-benefits-business/' target='_blank'>https://uk-nrc.com/blog/how-recycling-food-waste-benefits-business/</a> (Accessed: 25 May. 2024).</p>";
-        html += "</div>";
-        html += "<div class='image_container'>";
-        html += "    <img src='Weblogo.png' alt='Website logo' width='150'>";
-        html += "    <p>This image was used as the website logo.<br>";
-        html += "    <br>\n";
-        html += "    Depositphotos. (n.d.). <i>ZN logo</i> [Image]. Available at: <a href='https://depositphotos.com/vectors/zn-logo.html' target='_blank'>https://depositphotos.com/vectors/zn-logo.html</a> (Accessed: 25 May. 2024).</p>";
         html += "</div>";
         
         // Footer
