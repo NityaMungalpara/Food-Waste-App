@@ -24,13 +24,8 @@ header {
     padding: 15px 0;  /* top and bottom */
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
-/* Set header-logo size */
-header .Weblogo img {
-    height: 60px;
-}
+
 /* Navigation menu styles */
 header nav ul {
     list-style: none; /* Removed default list style*/
@@ -83,41 +78,7 @@ header nav ul li .dropdown-content a:hover {
 header nav ul li:hover .dropdown-content {
     display: block;
 }
-/* Navigation right section */
-.nav-right{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-/* Search bar container */
-.search-container {
-    display: flex;
-    align-items: center;
-    margin-right: 20px; 
-}
-/* Search input and language selector */
-.search-container input, .language-selector select {
-    padding: 10px;
-    border: 1px solid #ddd;  
-    border-radius: 3px;  /* Rounded corners */
-    margin-right: 5px; 
-    margin-left: 5px;  /* Space to the left */
-}
-/* Buttons in search container and help center */
-.search-container button, .help-center {
-    padding: 10px 13px;
-    margin-left: 3px;
-    border: none;
-    background-color: #333; 
-    color: #fff;  
-    border-radius: 5px;  /* Rounded corners */
-    cursor: pointer;  /* Pointer cursor on hover */
-    transition: background-color 0.3s ease;  /* transition on hover */
-}
-/* Buttons hover effect */
-.search-container button:hover, .help-center:hover {
-    background-color: #23963a; 
-}
+
 /* Hero section title styling */
 .hero h1 {
     font-size: 25px;
@@ -163,7 +124,7 @@ header nav ul li:hover .dropdown-content {
 .filter-section {
     background-color: #fff;
     padding: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 54px;
     margin-top: 50px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -303,7 +264,7 @@ table.custom-border td, table.custom-border th {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    padding: 11px;
+    margin: 10px;
+    padding: 10px;
     border-top: 1px solid #d5c9c9;
-    margin-top: auto;
 }
