@@ -38,7 +38,6 @@ public class PageReference implements Handler {
         html += "    <nav>";
         html += "      <ul class='nav-links'>";
         html += "        <li><a href='/'>Home</a></li>";
-        html += "        <li><a href='#about'>About Us</a></li>";
         html += "        <li><a href='mission.html'>Our Mission</a></li>";
         html += "        <li class='dropdown'>";
         html += "          <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
