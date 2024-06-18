@@ -116,7 +116,7 @@ public class PageST2A implements Handler {
     html = html + "   </div>";
 
     html = html + "   <div class='form-group'>";
-    html = html + "      <label for='start_year_drop'>Select the Start Year (Dropdown))</label>";
+    html = html + "      <label for='start_year_drop'>Select the Start Year (Dropdown)</label>";
     html = html + "      <select id='start_year_drop' name='start_year_drop'>";
     html = html + "<option> 2001 </option>";
     html = html + "<option> 2002 </option>";
@@ -125,7 +125,7 @@ public class PageST2A implements Handler {
     html = html + "   </div>";
 
     html = html + "   <div class='form-group'>";
-    html = html + "      <label for='end_year_drop'>Select the End Year (Dropdown))</label>";
+    html = html + "      <label for='end_year_drop'>Select the End Year (Dropdown)</label>";
     html = html + "      <select id='end_year_drop' name='end_year_drop'>";
     html = html + "<option> 2001 </option>";
     html = html + "<option> 2002 </option>";
@@ -274,7 +274,7 @@ public class PageST2A implements Handler {
             statement.setQueryTimeout(30);
 
             // The Query
-            String query = "SELECT country,year,loss_percentage FROM food_loss WHERE country ='" + name + "' AND year ='" + startYear + "'";
+            String query = "SELECT country,year,SUM(loss_percentage) AS loss_percentage FROM food_loss WHERE country ='" + name + "' AND year ='" + startYear + "' GROUP BY year";
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
