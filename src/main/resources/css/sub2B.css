@@ -5,11 +5,9 @@ body {
     font-family: sans-serif;
     background-color: #f8f8f8;
 }
-
 main {
     flex: 1;
 }
-
 /* Container styles for main layout */
 .container {
     display: flex;
@@ -19,7 +17,6 @@ main {
     max-width: 1200px;
     margin: auto;  /*Center align*/
 }
-
 /*————————————————————————————————————————————Header——————————————————————————————————————————*/
 /* header styles */
 header {
@@ -30,25 +27,20 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
-
 /* Set header-logo size */
 header .Weblogo img {
     height: 60px;
 }
-
 /* Navigation menu styles */
 header nav ul {
     list-style: none; /* Removed default list style*/
     display: flex;
 }
-
 /* Navigation menu items */
 header nav ul li {
     margin-right: 20px;
     position: relative;
 }
-
 /* Navigation links */
 header nav ul li a {
     text-decoration: none; /* Removed default underline*/
@@ -57,19 +49,16 @@ header nav ul li a {
     display: flex;
     align-items: center;
 }
-
 /* Nav links hover effect */
 .nav-links li a:hover {
 /* text-decoration: underline; */
 background-color: #edecec;
 }
-
 /* header with arrow icon  */
 header nav ul li .arrow {
     margin-left: 5px;
     font-size: 0.8em;
 }
-
 /* dropdown menu styles  */
 header nav ul li .dropdown-content {
     display: none;
@@ -79,7 +68,6 @@ header nav ul li .dropdown-content {
     z-index: 5; 
     /* make sure dropdown menu is above others*/
 }
-
 /* dropdown links */
 header nav ul li .dropdown-content a {
     color: black;
@@ -87,24 +75,20 @@ header nav ul li .dropdown-content a {
     text-decoration: none; /* removed underline*/
     display: block;
 }
-
 /* dropdown link hover effect*/
 header nav ul li .dropdown-content a:hover {
     background-color: #ddd;
 }
-
 /* Show dropdown on hover */
 header nav ul li:hover .dropdown-content {
     display: block;
 }
-
 /* Navigation right section */
 .nav-right{
     display: flex;
     align-items: center;
     margin-left: auto;
 }
-
 /* Search bar container */
 .search-container {
     display: flex;
@@ -119,7 +103,6 @@ header nav ul li:hover .dropdown-content {
     margin-right: 5px; 
     margin-left: 5px;  /* Space to the left */
 }
-
 /* Buttons in search container and help center */
 .search-container button, .help-center {
     padding: 10px 13px;
@@ -135,8 +118,6 @@ header nav ul li:hover .dropdown-content {
 .search-container button:hover, .help-center:hover {
     background-color: #23963a; 
 }
-
-
 /* Hero section title styling */
 .hero h1 {
     font-size: 25px;
@@ -144,7 +125,6 @@ header nav ul li:hover .dropdown-content {
     margin-top: 35px;
     justify-content: center;
 }
-
 /*————————————————————————————————————————————Breadcrumb——————————————————————————————————————————*/
 /* Breadcrumb styling */
 .breadcrumb {
@@ -153,13 +133,11 @@ header nav ul li:hover .dropdown-content {
     padding: 10px 25px;
     margin-top: 5px;
 }
-
 /* Breadcrumb container alignment */
 .breadcrumb .container {
     display: flex;
     justify-content: center;
 }
-
 /* list styling */
 .breadcrumb ul {
     list-style: none;
@@ -171,18 +149,15 @@ header nav ul li:hover .dropdown-content {
 .breadcrumb ul li {
     margin-right: 10px;
 }
-
 /* link styling */
 .breadcrumb ul li a {
     text-decoration: none;
     color: #333;
 }
-
 /* link hover effect */
 .breadcrumb ul li a:hover {
     text-decoration: underline;
 }
-
 /*————————————————————————————————————————————Filter section——————————————————————————————————————————*/
 /* Filter styles */
 .filter-section {
@@ -193,14 +168,12 @@ header nav ul li:hover .dropdown-content {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
 .filter-section form {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     align-items: flex-start;
 }
-
 .form-group {
     display: flex;
     flex-direction: column;
@@ -208,7 +181,6 @@ header nav ul li:hover .dropdown-content {
     min-width: 150px;
     margin-bottom: 80px;
 }
-
 .form-group select,
 .filter-section button {
     margin: 10px 0;
@@ -217,14 +189,12 @@ header nav ul li:hover .dropdown-content {
     border-radius: 3px;
     max-width: 200px;
 }
-
 .multiselect {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-top: 10px;
 }
-
 .filter-section button {
     background-color: #333;
     color: #fff;
@@ -232,19 +202,15 @@ header nav ul li:hover .dropdown-content {
     transition: background-color 0.3s ease;
     padding: 10px 20px;
 }
-
 .filter-section button:hover {
     background-color: #23963a;
 }
-
 .filter-section button[type="reset"] {
     background-color: #aaa;
 }
-
 .filter-section button[type="reset"]:hover {
     background-color: #888;
 }
-
 .form-buttons {
     display: flex;
     gap: 10px;
@@ -258,7 +224,6 @@ header nav ul li:hover .dropdown-content {
     position: relative;
     width: 200px;
 }
-
 .dropdown-group summary {
     background-color:white;
     border: 1px solid #dfdcdc;
@@ -269,18 +234,14 @@ header nav ul li:hover .dropdown-content {
     justify-content: space-between;
     align-items: center;
 }
-
 .dropdown-group summary::after {
     content: '▼';
     font-size: 12px;
     margin-left: 10px;
 }
-
-
 .dropdown-group details[open] summary::after {
     content: '▲';
 }
-
 .dropdown-groupMenu {
     position: absolute;
     background-color: white;
@@ -290,7 +251,6 @@ header nav ul li:hover .dropdown-content {
     max-height: 150px; 
     overflow-y: auto;
 }
-
 .dropdown-groupMenu label {
     display: block;
     padding: 5px 10px;
@@ -305,7 +265,6 @@ header nav ul li:hover .dropdown-content {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
 .result-section h2 {
     font-size: 25px;
     display: flex;
@@ -325,45 +284,26 @@ header nav ul li:hover .dropdown-content {
     border-collapse: collapse;
 } */
 table.custom-border td, table.custom-border th {
-    border: 0.5px solid #d9d6d6ee;
-  }
+    border: 0.8px solid #d9d6d6ee;
+}
+
+/* invisible */
+.result-section {
+    display: none;
+}
+
+.result-section:target {
+    display: block;
+}
+
 
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: auto;
-    border-top: 1px solid #d5c9c9
-}
-/* Footer styles */
-.footer {
-    background-color: #fff;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Footer links, social media, and legal sections */
-.footer-links, .footer-social, .footer-legal {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 10px;
-    padding: 10px;
-}
-
-/* Footer links */
-footer a {
-    text-decoration: none;
-    color: #333;
-}
-/* Footer social icons size */
-.footer-social img {
-    height: 20px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 11px;
+    border-top: 1px solid #d5c9c9;
+    margin-top: auto;
 }
