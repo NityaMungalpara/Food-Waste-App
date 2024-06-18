@@ -88,22 +88,9 @@ public class PageReference implements Handler {
         
         // Footer
         html += "<footer>";
-        html += "  <div class='footer-container'>";
-        html += "    <div class='footer-links'>";
-        html += "      COSC2803 - Studio Project Starter Code (Apr24)";
-        html += "      <a href='#about'>About</a>";
-        html += "      <a href='#contact'>Contact Us</a>";
-        html += "      <a href='#faqs'>FAQs</a>";
-        html += "      <a href='#privacy'>Privacy Policy</a>";
-        html += "      <a href='#terms'>Terms of Use</a>";
+        html += "    <div class='footer-container'>";
+        html += "            COSC2803 - Studio Project Starter Code (Apr24)";
         html += "    </div>";
-        html += "    <div class='footer-social'>";
-        html += "      <a href='https://x.com'><img src='twitter-icon.png' alt='Twitter'></a>";
-        html += "      <a href='https://www.facebook.com/'><img src='facebook-icon.png' alt='Facebook'></a>";
-        html += "      <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn'></a>";
-        html += "      <a href='https://www.instagram.com/'><img src='instagram-icon.png' alt='Instagram'></a>";
-        html += "    </div>";
-        html += "  </div>";
         html += "</footer>";
 
         // Finish the HTML webpage
