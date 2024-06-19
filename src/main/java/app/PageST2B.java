@@ -63,24 +63,26 @@ public class PageST2B implements Handler {
 
         // Header
         html += "<header>";
-        html += "    <div class='container'>";
-        html += "        <nav>";
-        html += "            <ul class='nav-links'>";
-        html += "                <li><a href='/'>Home</a></li>";
-        html += "                <li><a href='mission.html'>Our Mission</a></li>";
-        html += "                <li class='dropdown'>";
-        html += "                    <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
-        html += "                    <div class='dropdown-content'>";
-        html += "                        <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
-        html += "                        <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
-        html += "                        <a href='page3A.html'>Similarity Data Analysis by Country</a>";
-        html += "                        <a href='page3B.html'>Similarity Data Analysis by Group</a>";
-        html += "                    </div>";
-        html += "                </li>";
-        html += "                <li><a href='Reference.html'>Reference</a></li>";
-        html += "            </ul>";
-        html += "        </nav>";
+        html += "  <div class='container'>";
+        html += "    <nav>";
+        html += "      <ul class='nav-links'>";
+        html += "        <li><a href='/'>Home</a></li>";
+        html += "        <li><a href='mission.html'>Our Mission</a></li>";
+        html += "        <li class='dropdown'>";
+        html += "          <a href='#data'>Data & Resources <span class='arrow'>▼</span></a>";
+        html += "          <div class='dropdown-content'>";
+        html += "            <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
+        html += "            <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
+        html += "            <a href='page3A.html'>Similarity Data Analysis by Country</a>";
+        html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
+        html += "          </div>";
+        html += "        </li>";
+        html += "        <li><a href='Reference.html'>Reference</a></li>";
+        html += "      </ul>";
+        html += "    </nav>";
+        html += "  </div>";
         html += "</header>";
+
 
         // Main section
         html += "<main>";
@@ -111,11 +113,7 @@ public class PageST2B implements Handler {
         html += "            <summary>Select Below</summary>";
         html += "            <div class='dropdown-groupMenu' id='group'>";
         for (String group : foodGroups) {
-            html += "              <label><input type='checkbox' name='group' value='" + group + "'";
-            if (groupList != null && groupList.contains(group)) {
-                html += " checked";
-            }
-            html += ">" + group + "</label>";
+            html += "    <label><input type='checkbox' name='group' value='" + group + "'>" + group + "</label>";
         }
         html += "            </div>";
         html += "          </details>";
@@ -292,8 +290,16 @@ public class PageST2B implements Handler {
             for (PageST2BBean pageST2BBean : pageST2BBeanList) {
                 html += "<tr>";
                 html += "<td>" + pageST2BBean.getGroupName() + "</td>";
-                html += "<td>" + pageST2BBean.getStartYearAvg() + "</td>";
-                html += "<td>" + pageST2BBean.getEndYearAvg() + "</td>";
+                if(pageST2BBean.getStartYearAvg() == null) {
+                    html += "<td>N/A</td>";
+                } else {
+                    html += "<td>" + pageST2BBean.getStartYearAvg() + "</td>";
+                }
+                if(pageST2BBean.getEndYearAvg() == null) {
+                    html += "<td>N/A</td>";
+                } else {
+                    html += "<td>" + pageST2BBean.getEndYearAvg() + "</td>";
+                }
                 html += "<td>" + pageST2BBean.getLossDifference() + "</td>";
                 if(activityList.contains("activity") && activityList.contains("food_supply_stage") && activityList.contains("cause_of_loss")) {
                     html += "<td>" + pageST2BBean.getActivity() + "</td>";
