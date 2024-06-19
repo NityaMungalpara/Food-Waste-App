@@ -103,7 +103,6 @@ public class PageST2B implements Handler {
 
         // Form section for selecting food groups
         html += "  <section class='filter-section'>";
-        // html += "    <form method='post' action='" + URL + "'>";
         html += "    <form method='post' action='" + URL + "#results'>";
         html += "      <div class='form-group'>";
         html += "        <label for='group'>Food Group:</label>";
@@ -112,7 +111,11 @@ public class PageST2B implements Handler {
         html += "            <summary>Select Below</summary>";
         html += "            <div class='dropdown-groupMenu' id='group'>";
         for (String group : foodGroups) {
-            html += "              <label><input type='checkbox' name='group' value='" + group + "'>" + group + "</label>";
+            html += "              <label><input type='checkbox' name='group' value='" + group + "'";
+            if (groupList != null && groupList.contains(group)) {
+                html += " checked";
+            }
+            html += ">" + group + "</label>";
         }
         html += "            </div>";
         html += "          </details>";
@@ -125,7 +128,11 @@ public class PageST2B implements Handler {
         html += "        <select name='start_year' id='start_year'>";
         html += "          <option value='' disabled selected>Select Start Year</option>";
         for (Integer year : years) {
-            html += "          <option value='" + year + "'>" + year + "</option>";
+            html += "          <option value='" + year + "'";
+            if (startYear != null && startYear.equals(year.toString())) {
+                html += " selected";
+            }
+            html += ">" + year + "</option>";
         }
         html += "        </select>";
         html += "      </div>";
@@ -134,18 +141,35 @@ public class PageST2B implements Handler {
         html += "        <select name='end_year' id='end_year'>";
         html += "          <option value='' disabled selected>Select End Year</option>";
         for (Integer year : years) {
-            html += "          <option value='" + year + "'>" + year + "</option>";
+            html += "          <option value='" + year + "'";
+            if (endYear != null && endYear.equals(year.toString())) {
+                html += " selected";
+            }
+            html += ">" + year + "</option>";
         }
         html += "        </select>";
         html += "      </div>";
+
 
         // Additional filters
         html += "      <div class='form-group'>";
         html += "        <label for='fields'>Filter:</label>";
         html += "        <div class='multiselect'>";
-        html += "          <label><input type='checkbox' name='fields' value='activity'> Activity</label>";
-        html += "          <label><input type='checkbox' name='fields' value='food_supply_stage'> Food Supply Stage</label>";
-        html += "          <label><input type='checkbox' name='fields' value='cause_of_loss'> Cause of Loss</label>";
+        html += "          <label><input type='checkbox' name='fields' value='activity'";
+        if (activityList != null && activityList.contains("activity")) {
+            html += " checked";
+        }
+        html += "> Activity</label>";
+        html += "          <label><input type='checkbox' name='fields' value='food_supply_stage'";
+        if (activityList != null && activityList.contains("food_supply_stage")) {
+            html += " checked";
+        }
+        html += "> Food Supply Stage</label>";
+        html += "          <label><input type='checkbox' name='fields' value='cause_of_loss'";
+        if (activityList != null && activityList.contains("cause_of_loss")) {
+            html += " checked";
+        }
+        html += "> Cause of Loss</label>";
         html += "        </div>";
         html += "      </div>";
 
@@ -153,8 +177,16 @@ public class PageST2B implements Handler {
         html += "      <div class='form-group'>";
         html += "        <label for='sort_order'>Sort By:</label>";
         html += "        <select name='sort_order' id='sort_order'>";
-        html += "          <option value='asc'>Ascending</option>";
-        html += "          <option value='desc'>Descending</option>";
+        html += "          <option value='asc'";
+        if (sortType != null && sortType.equals("asc")) {
+            html += " selected";
+        }
+        html += ">Ascending</option>";
+        html += "          <option value='desc'";
+        if (sortType != null && sortType.equals("desc")) {
+            html += " selected";
+        }
+        html += ">Descending</option>";
         html += "        </select>";
         html += "      </div>";
 
