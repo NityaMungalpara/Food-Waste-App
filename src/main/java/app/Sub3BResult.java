@@ -1,11 +1,12 @@
 package app;
 
 public class Sub3BResult {
-    private String name;
-    private String foodName;  
-    private String maxPer;
-    private String score;
-    private String errorMessage;
+    public String name;
+    public String foodName;  
+    public String maxPer;
+    public String minPer;
+    public String score;
+    public String errorMessage;
 
 
     // Getters and setters
@@ -31,6 +32,13 @@ public class Sub3BResult {
 
     public void setMaxPer(String maxPer) {
         this.maxPer = maxPer;
+    }
+    public String getMinPer() {
+        return minPer;
+    }
+
+    public void setMinPer(String minPer) {
+        this.minPer = minPer;
     }
 
     public String getScore() {
