@@ -104,40 +104,8 @@ public class PageST2A implements Handler {
     html = html + "<h1> Food Loss Percent by Country</h1>";
 
         // Add Div for page Content
-    // html = html + "<div class='content'>";
-    // html = html + """<form action='#' method='post'> 
-
-    // html = html + "   <div class='form-group'>";
-    // html = html + "      <label for='country_drop'>Select the Country(s):</label>";
-    // html = html + "      <select id='country_drop' name='country_drop'>";
-    // html = html + "<option> Myanmar </option>";
-    // html = html + "<option> Burundi </option>";
-    // html = html + "<option> Western Africa </option>";
-    // html = html + "      </select>";
-    // html = html + "   </div>";
-
-    // html = html + "   <div class='form-group'>";
-    // html = html + "      <label for='start_year_drop'>Select the Start Year (Dropdown)</label>";
-    // html = html + "      <select id='start_year_drop' name='start_year_drop'>";
-    // html = html + "<option> 2001 </option>";
-    // html = html + "<option> 2002 </option>";
-    // html = html + "<option> 2003 </option>";
-    // html = html + "      </select>";
-    // html = html + "   </div>";
-
-    // html = html + "   <div class='form-group'>";
-    // html = html + "      <label for='end_year_drop'>Select the End Year (Dropdown)</label>";
-    // html = html + "      <select id='end_year_drop' name='end_year_drop'>";
-    // html = html + "<option> 2001 </option>";
-    // html = html + "<option> 2002 </option>";
-    // html = html + "<option> 2003 </option>";
-    // html = html + "      </select>";
-    // html = html + "   </div>";
-
-    // html = html + "   <button type='submit' class='btn btn-primary'>Get Results!</button>""";
-
     html = html + """
-            <form action='/page2B.html' method='post'>
+            <form action='/page2A.html' method='post'>
                 <div class='form-group'>
                     <label for='country_drop'>Select the Country(s):</label>
                     <div>
@@ -162,6 +130,21 @@ public class PageST2A implements Handler {
                         <option>2003</option>
                     </select>
                 </div>
+                <div class='form-group'>
+                    <label for='filter_drop'>Select the Filter(s):</label>
+                    <div>
+                        <input type='checkbox' name='filter_drop' value='Activity'>Activity<br>
+                        <input type='checkbox' name='filter_drop' value='Food Supply Stage'>Food Supply Stage<br>
+                        <input type='checkbox' name='filter_drop' value='Cause of Loss'>Cause of Loss<br>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <label for='order_drop'>Select the Start Year:</label>
+                    <select id='order_drop' name='order_drop'>
+                        <option>Ascending</option>
+                        <option>Descending</option>
+                    </select>
+                </div>
                 <button type='submit' class='btn btn-primary'>Get Data</button>
             </form>
         """;
@@ -180,13 +163,6 @@ public class PageST2A implements Handler {
         html = html + outputCountries(country_drop_array,start_year_drop,end_year_drop);
     }
 
-    // if (country_drop == null) {
-    //     // If NULL, nothing to show, therefore we make some "no results" HTML
-    //     html = html + "<h2><i>No Results to show for dropbox</i></h2>";
-    // } else {
-    //     // If NOT NULL, then lookup the movie by type!
-    //     html = html + outputCountries2(country_drop,end_year_drop);
-    // }
     // Close Content div
     html = html + "</div>";
 
@@ -254,7 +230,7 @@ public class PageST2A implements Handler {
         // Add HTML for the sum of loss percentages by year and group
         
         // Add HTML for the movies list
-        html = html + "<table class = 'content-table' border = '10'>";
+        html = html + "<table class = 'content-table' border = '1'>";
         html = html + "<tr class = 'heading'><th>Country</th><th>Start Year</th><th>Start Year Loss Percentage</th><th>End Year</th><th>End Year Loss Percentage</th><th>Loss Percent Difference</th></tr>";
 
         for (int i = 0; i < lossPercentages.size(); i += 3) {
@@ -278,173 +254,67 @@ public class PageST2A implements Handler {
         
         return html;
     }
-
-    // public String outputCountries2(String name,String endYear) {
-    //     String html = "";
-    //     html = html + "<h2>" + name + " Data</h2>";
-
-    //     // Look up movies from JDBC
-    //     ArrayList<Country> countries = getAllCountries2(name,endYear);
-        
-    //     // Add HTML for the movies list
-    //     html = html + "<table class = 'content-table' border = '10'>";
-    //     html = html + "<tr class = 'heading'><th>Country</th><th>Year</th><th>Loss Percentage</th></tr>";
-
-    //     for (Country country : countries) {
-    //         html = html + "<tr>";
-    //         html = html + "<td>" + country.name + "</td>";
-    //         html = html + "<td>" + country.year + "</td>";
-    //         html = html + "<td>" + country.loss_percentage + "</td>";
-    //         html = html + "</tr>";
-    //     }
-
-    //     html = html + "</table>"; 
-        
-    //     return html;
-    // }
     
-    public List<String> getLossPercentages(String[] countries,String startYear,String endYear) {
-        // Create the ArrayList of Country objects to return
-        List<String> countryData = new ArrayList<String>();
-
-        // Setup the variable for the JDBC connection
+    public List<String> getLossPercentages(String[] countries, String startYear, String endYear) {
+        List<String> countryData = new ArrayList<>();
+    
         Connection connection = null;
-
+    
         try {
-            // Connect to JDBC data base
             connection = DriverManager.getConnection(JDBCConnection.DATABASE);
-            String countriesTogether = "'" + String.join("','",countries) + "'";
-
+    
             // Prepare a new SQL Query & Set a timeout
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
-            String query = "SELECT country, year, SUM(loss_percentage) AS loss_percentage FROM food_loss" +
-                           "WHERE country IN (" + countriesTogether + ") " +
-                           "AND year IN ('" + startYear + "', '" + endYear + "') " +
-                           "GROUP BY country, year";
-
-            // The Query
-            // String query = "SELECT country,year,SUM(loss_percentage) AS loss_percentage FROM food_loss WHERE country ='" + countries + "' AND year ='" + startYear + "' GROUP BY year";
-            
-            // Get Result
+    
+            // Construct the SQL query with proper spacing and aliases
+            String countriesTogether = "'" + String.join("','", countries) + "'";
+            String query = "SELECT t1.country, t1.loss1 AS loss_start_year, t2.loss2 AS loss_end_year " +
+                           "FROM " +
+                           "(SELECT SUM(loss_percentage) AS loss1, country " +
+                           " FROM food_loss " +
+                           " WHERE country IN (" + countriesTogether + ") " +
+                           " AND year = '" + startYear + "' " +
+                           " GROUP BY country) t1 " +
+                           "JOIN " +
+                           "(SELECT SUM(loss_percentage) AS loss2, country " +
+                           " FROM food_loss " +
+                           " WHERE country IN (" + countriesTogether + ") " +
+                           " AND year = '" + endYear + "' " +
+                           " GROUP BY country) t2 ON t1.country = t2.country";
+    
+            // Execute the query
             ResultSet results = statement.executeQuery(query);
-
-            // Process all of the results
+    
+            // Process the results
             while (results.next()) {
-
-                // Create a Country Object
-                //Country country = new Country();
-                // Lookup the columns we need
-
-               String countryName = results.getString("country");
-               String year = results.getString("year");
-               String lossPercentage = results.getString("loss_percentage");
-
-               //Check if country exists in list
-               boolean found = false;
-               for (int i = 0; i < countryData.size(); i += 3) {
-                   if (countryData.get(i).equals(countryName)) {
-                       found = true;
-                       // Update existing year sum
-                       if (year.equals(startYear)) {
-                           countryData.set(i + 1, lossPercentage);
-                       } else if (year.equals(endYear)) {
-                           countryData.set(i + 2, lossPercentage);
-                       }
-                       break;
-                   }
-               }
-
-               if (!found) {
-                   // Add new food group
-                   countryData.add(countryName);
-                   countryData.add(year.equals(startYear) ? lossPercentage : "0");
-                   countryData.add(year.equals(endYear) ? lossPercentage : "0");
-               }
-
-                // Add the Country object to the array
+                String country = results.getString("country");
+                String loss_start_year = results.getString("loss_start_year");
+                String loss_end_year = results.getString("loss_end_year");
+    
+                // Add country and loss percentages to the list
+                countryData.add(country);
+                countryData.add(loss_start_year);
+                countryData.add(loss_end_year);
             }
-
-            // Close the statement because we are done with it
+    
+            // Close the statement and connection
             statement.close();
         } catch (SQLException e) {
-            // If there is an error, lets just pring the error
             System.err.println(e.getMessage());
         } finally {
-            // Safety code to cleanup
             try {
                 if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException e) {
-                // connection close failed.
                 System.err.println(e.getMessage());
             }
         }
-
-        // Finally we return all of the countries
+    
         return countryData;
     }
-
-    // public ArrayList<Country> getAllCountries2(String name,String endYear) {
-    //     // Create the ArrayList of Country objects to return
-    //     ArrayList<Country> countryData = new ArrayList<Country>();
-
-    //     // Setup the variable for the JDBC connection
-    //     Connection connection = null;
-
-    //     try {
-    //         // Connect to JDBC data base
-    //         connection = DriverManager.getConnection(JDBCConnection.DATABASE);
-
-    //         // Prepare a new SQL Query & Set a timeout
-    //         Statement statement = connection.createStatement();
-    //         statement.setQueryTimeout(30);
-
-    //         // The Query
-    //         String query = "SELECT country,year,loss_percentage FROM food_loss WHERE country ='" + name + "' AND year ='" + endYear + "'";
-            
-    //         // Get Result
-    //         ResultSet results = statement.executeQuery(query);
-
-    //         // Process all of the results
-    //         while (results.next()) {
-
-    //             // Create a Country Object
-    //             Country country = new Country();
-    //             // Lookup the columns we need
-
-    //             //String title = results.getString("m49code");
-    //             //String name  = results.getString("countryName");
-    //             country.name = results.getString("country");
-    //             country.year = results.getString("year");
-    //             country.loss_percentage = results.getString("loss_percentage");
-
-    //             // Add the Country object to the array
-    //             countryData.add(country);
-    //         }
-
-    //         // Close the statement because we are done with it
-    //         statement.close();
-    //     } catch (SQLException e) {
-    //         // If there is an error, lets just pring the error
-    //         System.err.println(e.getMessage());
-    //     } finally {
-    //         // Safety code to cleanup
-    //         try {
-    //             if (connection != null) {
-    //                 connection.close();
-    //             }
-    //         } catch (SQLException e) {
-    //             // connection close failed.
-    //             System.err.println(e.getMessage());
-    //         }
-    //     }
-
-    //     // Finally we return all of the countries
-    //     return countryData;
-    // }
-
+    
     public ArrayList<Student> getAllStudents() {
         // Create the ArrayList of Country objects to return
         ArrayList<Student> students = new ArrayList<>();

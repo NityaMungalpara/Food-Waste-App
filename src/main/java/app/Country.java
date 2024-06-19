@@ -14,18 +14,19 @@ public class Country {
    public String startYear;
    public String endYear;
    public String loss_percentage;
-   public String year;
+   // public String year;
    public String lossStartYear;
    public String loss_end_year;
    public String loss_difference;
    /**
     * Create a Country and set the fields
     */
-   // public Country(String countryName, String startYear, String endYear) {
-   //    this.countryName = countryName;
-   //    this.startYear = startYear;
-   //    this.endYear = endYear;
-   // }
+   public Country(String name, String startYear, String endYear) {
+      this.name = name;
+      this.startYear = startYear;
+      this.endYear = endYear;
+
+   }
 
    public Country() {
     //TODO Auto-generated constructor stub
