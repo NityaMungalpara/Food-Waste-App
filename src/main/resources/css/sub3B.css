@@ -244,6 +244,11 @@ header nav ul li:hover .dropdown-content {
 .table-header {
     background-color: #edeaeaf5;
 }
+
+.first-row {
+    background-color: #f2f1f1f9;
+}
+
 table.custom-border td, table.custom-border th {
     border: 0.5px solid #d9d6d6ee;
   }
