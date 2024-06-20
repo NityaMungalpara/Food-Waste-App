@@ -260,8 +260,7 @@ table.custom-border td, table.custom-border th {
     display: block;
 }
 td.similarity-score { width: 180px; }
-/*————————————————————————————————————————————Note——————————————————————————————————————————*/
-/* Similarity score */
+/*————————————————————————————————————————————explanation——————————————————————————————————————————*/
 .explanation {
     display: none;
     margin: 30px;
