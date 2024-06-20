@@ -71,6 +71,12 @@ public class PageReference implements Handler {
         html += "    National Resource Consortium. (2024). <i>How Does Recycling Food Waste Benefit My Business?</i> [Image]. Available at: <a href='https://uk-nrc.com/blog/how-recycling-food-waste-benefits-business/' target='_blank'>https://uk-nrc.com/blog/how-recycling-food-waste-benefits-business/</a> (Accessed: 25 May. 2024).</p>";
         html += "</div>";
         html += "<div class='image_container'>";
+        html += "    <img src='foodloss.avif' alt='Background for the mission page' width='150'>";
+        html += "    <p>This image was used as the background for the mission page.<br>";
+        html += "    <br>\n";
+        html += "    Freepik. (n.d.). <i>Arrangement of leftover wasted food, cans, and veggies</i> [Image]. Available at: <a href='https://www.freepik.com/free-photo/arrangement-leftover-wasted-food-cans-veggies_11277267.htm'>https://www.freepik.com/free-photo/arrangement-leftover-wasted-food-cans-veggies_11277267.htm</a> (Accessed: 20 June 2024).</p>";
+        html += "</div>";
+        html += "<div class='image_container'>";
         html += "    <img src='Weblogo.png' alt='Website logo' width='150'>";
         html += "    <p>This image was used as the website logo.<br>";
         html += "    <br>\n";
