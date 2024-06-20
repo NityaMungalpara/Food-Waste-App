@@ -1,8 +1,13 @@
 body {
+    height: 100%;  /* Make sure the html and body take the full height of the viewport*/
+    display: flex;
+    flex-direction: column;
     font-family: sans-serif;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
 }
-
+main {
+    flex: 1;
+}
 /* Container styles for main layout */
 .container {
     display: flex;
@@ -12,13 +17,47 @@ body {
     max-width: 1200px;
     margin: auto;  /*Center align*/
 }
+/*————————————————————————————————————————————Header——————————————————————————————————————————*/
+/* header styles */
+header {
+    background-color: #ffffff;
+    padding: 15px 0;  /* top and bottom */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+}
 
+header .Weblogo img {
+    height: 60px;
+}
+
+/* Navigation menu styles */
+header nav ul {
+    list-style: none; /* Removed default list style*/
+    display: flex;
+}
+/* Navigation menu items */
+header nav ul li {
+    margin-right: 35px;
+    position: relative;
+}
+/* Navigation links */
+header nav ul li a {
+    text-decoration: none; /* Removed default underline*/
+    color: #333;
+    font-size: 17px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+/* Nav links hover effect */
+.nav-links li a:hover {
+background-color: #edecec;
+}
 /* header with arrow icon  */
 header nav ul li .arrow {
     margin-left: 5px;
     font-size: 0.8em;
 }
-
 /* dropdown menu styles  */
 header nav ul li .dropdown-content {
     display: none;
@@ -28,17 +67,30 @@ header nav ul li .dropdown-content {
     z-index: 5; 
     /* make sure dropdown menu is above others*/
 }
-
-/* header styles */
-header {
-    background-color: #fff;
-    padding: 20px 0;  /* top and bottom */
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* dropdown links */
+header nav ul li .dropdown-content a {
+    color: black;
+    padding: 12px 16px;  /*12top,bottom - 16left,right*/
+    text-decoration: none; /* removed underline*/
+    display: block;
+}
+/* dropdown link hover effect*/
+header nav ul li .dropdown-content a:hover {
+    background-color: #ddd;
+}
+/* Show dropdown on hover */
+header nav ul li:hover .dropdown-content {
+    display: block;
 }
 
+/* Hero section title styling */
+.hero h1 {
+    font-size: 25px;
+    display: flex;
+    margin-top: 35px;
+    justify-content: center;
+}
+/*————————————————————————————————————————————Breadcrumb——————————————————————————————————————————*/
 /* Breadcrumb styling */
 .breadcrumb {
     font-size: small;
@@ -46,13 +98,11 @@ header {
     padding: 10px 25px;
     margin-top: 5px;
 }
-
 /* Breadcrumb container alignment */
 .breadcrumb .container {
     display: flex;
     justify-content: center;
 }
-
 /* list styling */
 .breadcrumb ul {
     list-style: none;
@@ -64,13 +114,11 @@ header {
 .breadcrumb ul li {
     margin-right: 10px;
 }
-
 /* link styling */
 .breadcrumb ul li a {
     text-decoration: none;
     color: #333;
 }
-
 /* link hover effect */
 .breadcrumb ul li a:hover {
     text-decoration: underline;
@@ -103,12 +151,6 @@ header {
     position: relative;
     left: 500px;
     top: 50px;
-   }
-  
-   .social-media{
-    position: relative;
-    left: 1200px;
-    top: 100px;
    }
 
    .footer-content{
@@ -197,267 +239,13 @@ header nav ul li:hover .dropdown-content {
     margin-left: auto;
 }
 
-/* Search bar container */
-.search-container {
-    display: flex;
-    align-items: center;
-    margin-right: 20px; 
-}
-/* Search input and language selector */
-.search-container input, .language-selector select {
-    padding: 10px;
-    border: 1px solid #ddd;  
-    border-radius: 3px;  /* Rounded corners */
-    margin-right: 5px; 
-    margin-left: 5px;  /* Space to the left */
-}
-
-/* Buttons in search container, hero section and help center */
-.search-container button, .text-box .learn-more, .help-center {
-    padding: 10px 13px;
-    margin-left: 3px;
-    border: none;
-    background-color: #333; 
-    color: #fff;  
-    border-radius: 5px;  /* Rounded corners */
-    cursor: pointer;  /* Pointer cursor on hover */
-    transition: background-color 0.3s ease;  /* transition on hover */
-}
-/* Buttons hover effect */
-.search-container button:hover, .text-box .learn-more:hover, .help-center:hover {
-    background-color: #23963a; 
-}
-
-/* Hero section styles */
-.hero {
-    background-image: url('FoodWaste.jpg');  /* Add hero section background image */
-    background-size: cover;  /* Cover entire hero section */
-    background-position: center; 
-    text-align: center;  
-    padding: 150px 0;  /* Padding top and bottom 150*/
-    position: relative;
-}
-
-/* Dark overlay in hero section */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);  /* Darken background image */
-}
-
-/* Container in hero section */
-.hero .container {
-    position: relative;
-    z-index: 1;
-    flex-direction: column; /* stack vertically */
-    align-items: center;
-}
-
-/* Hero section heading */
-.hero h1 {
-    margin: 0;
-    font-size: 3.5em; 
-    color: #fff;  
-    text-transform: uppercase; 
-    letter-spacing: 2px;  
-    font-weight: 700;
-    margin: 20px 0;
-}
-
-/* paragraph */
-.hero p {
-    font-style: italic;  
-    font-size: 1.1em;  
-    color: #bebebe;
-    margin: 5px;
-}
-
-/* Hero section button */
-.hero button {
-    margin-top: 40px; 
-    padding: 13px 20px;
-    font-size: 1em;
-    background-color: #1d201e; 
-    color: #fff; 
-    border: none;
-    border-radius: 5px; 
-    cursor: pointer;  
-    transition: background-color 0.3s ease;
-}
-
-/* Hero button hover effect */
-.hero button:hover {
-    background-color: #23963a; 
-}
-
-/* Overview section */
-.overview {
-    padding: 50px;
-}
-
-/* Overview section header */
-.overview-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Overview section heading */
-.overview h2 {
-    font-size: 2.5em; 
-    color: #333; 
-    margin-bottom: 10px;
-}
-
-/* Overview section subheading*/
-.overview h3 {
-    /* font-style: italic;  */
-    font-size: 1em; 
-    color: #a2a2a2; 
-    margin-top: 25px;
-}
-
-/* Content wrapper for overview section */
-.content-wrapper {
-    display: flex;
-    justify-content: center;
-    text-align: left;
-}
-
-/* Text box in overview section */
-.text-box {
-    max-width: 500px;
-    padding: 50px 50px 50px 100px;
-    line-height: 1.8; 
-}
-
-/* ‘learn more‘ button hover effect */
-.text-box .learn-more:hover {
-    background-color: #23963a;
-}
-
+/*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: auto;
-    border-top: 1px solid #d5c9c9
-}
-/* Footer styles */
-.footer {
-    background-color: #fff;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Footer links, social media, and legal sections */
-.footer-links, .footer-social, .footer-legal {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     margin: 10px;
     padding: 10px;
+    border-top: 1px solid #d5c9c9;
 }
-
-/* Footer links */
-footer a {
-    text-decoration: none;
-    color: #333;
-}
-/* Footer social icons size */
-.footer-social img {
-    height: 20px;
-}
-
-
-/*————————————————————————————————————————————Filter section——————————————————————————————————————————*/
-.filter-section {
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
-}
-
-.filter-section form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: flex-start;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.form-group select {
-    margin: 10px 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    /* max-width: 200px; */
-}
-
-.filter-section button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px; 
-    transition: background-color 0.3s ease;
-    padding: 10px 20px;
-}
-
-.filter-section button:hover {
-    background-color: #23963a;
-}
-
-.form-buttons {
-    display:flex;
-    gap: 20px;
-    width: 100%;
-    justify-content: center;
-    margin-top: 15px;
-}
-/*————————————————————————————————————————————Result section——————————————————————————————————————————*/
-/* Result section styles */
-.result-section {
-    justify-content: center;
-    background-color: #fff;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-.result-section table {
-    width: 85%; 
-    margin: auto; 
-    border-collapse: collapse; 
-}
-
-.table-header {
-    background-color: #edeaeaf5;
-}
-
-table.custom-border td, table.custom-border th {
-    border: 0.5px solid #d9d6d6ee;
-  }
-
-/*quick view——————————————————————————————————————————————————————————————————————————————————*/
-.hidden {
-    display: none;
-}
-
-#overview-section:target {
-    display: block;
-}
-

@@ -45,34 +45,30 @@ public class PageST3A implements Handler {
 
         // Add the topnav
 
-
-        html += """
-            <header>
-                <div class='container'>
-                    <div class='Weblogo'>
-                        <img src='Weblogo.png' alt='Logo'>
-                    </div>
-                    <nav>
-                        <ul class='nav-links'>
-                            <li><a href='/'>Home</a></li>                            
-                            <li><a href='mission.html'>Our Mission</a></li>
-                            <li class='dropdown'>
-                                <a href='#data'>Data & Resources <span class='arrow'>&#x25BC</span></a>
-                                <div class='dropdown-content'>
-                                    <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>
-                                    <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>
-                                    <a href='page3A.html'>Similarity Data Analysis by Country</a>
-                                    <a href='page3B.html'>Similarity Data Analysis by Group</a>
-                                </div>
-                            </li>
-                            <li><a href='Reference.html'>Reference</a></li> 
-                        </ul>
-                    </nav>
-                    <div class='nav-right'>
-                    </div>
-                </div>
-            </header>
-        """;
+        //Add header content block
+        html += "<header>";
+        html += "  <div class='container'>";
+        html += "        <div class='Weblogo'>";
+        html += "            <a href='/'><img src='Weblogo.png' alt='Logo'></a>";
+        html += "        </div>";
+        html += "    <nav>";
+        html += "      <ul class='nav-links'>";
+        html += "        <li><a href='/'>Home</a></li>";
+        html += "        <li><a href='mission.html'>Our Mission</a></li>";
+        html += "        <li class='dropdown'>";
+        html += "          <a href='#data'>Data & Resources <span class='arrow'>&#x25BC</span></a>";
+        html += "          <div class='dropdown-content'>";
+        html += "            <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
+        html += "            <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
+        html += "            <a href='page3A.html'>Similarity Data Analysis by Country</a>";
+        html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
+        html += "          </div>";
+        html += "        </li>";
+        html += "        <li><a href='Reference.html'>Reference</a></li>";
+        html += "      </ul>";
+        html += "    </nav>";
+        html += "  </div>";
+        html += "</header>";
         html += "<main>";
         html += "  <nav class='breadcrumb'>";
         html += "    <ul>";
@@ -96,27 +92,14 @@ public class PageST3A implements Handler {
 
         // Close Content div
         html = html + "</div>";
-
-        // Footer
-        html = html + """
-            <footer>
-                <div class='footer-content'>
-                    <div class="footer-logo"><a href='/'><img src = "Weblogo.png" width = 60></a></div>
-                </div>
-            </footer> """;
                         
 
-        html = html + """
-            <footer>
-                    <div class="social-media">
-                    <a href="https://www.twitter.com"><img src = "twitter-icon.png" alt='Twitter' width = 30></a>
-                    <a href="https://www.facebook.com"><img src = "facebook-icon.png" alt='Facebook' width = 30></a>
-                    <a href='https://www.linkedin.com/'><img src='linkedin-icon.png' alt='LinkedIn' width = 30></a>
-                    <a href="https://www.instagram.com"><img src = "instagram-icon.png" alt='Instagram' width = 30></a>
-                </div>
-                </div>
-            </footer>
-        """;
+        // Footer
+        html += "<footer>";
+        html += "    <div class='footer-container'>";
+        html += "            COSC2803 - Studio Project Starter Code (Apr24)";
+        html += "    </div>";
+        html += "</footer>";
     // Finish the HTML webpage
     html = html + "</body>" + "</html>";
         

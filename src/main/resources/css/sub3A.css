@@ -1,8 +1,13 @@
 body {
+    height: 100%;  /* Make sure the html and body take the full height of the viewport*/
+    display: flex;
+    flex-direction: column;
     font-family: sans-serif;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
 }
-
+main {
+    flex: 1;
+}
 /* Container styles for main layout */
 .container {
     display: flex;
@@ -12,13 +17,47 @@ body {
     max-width: 1200px;
     margin: auto;  /*Center align*/
 }
+/*————————————————————————————————————————————Header——————————————————————————————————————————*/
+/* header styles */
+header {
+    background-color: #ffffff;
+    padding: 15px 0;  /* top and bottom */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+}
 
+header .Weblogo img {
+    height: 60px;
+}
+
+/* Navigation menu styles */
+header nav ul {
+    list-style: none; /* Removed default list style*/
+    display: flex;
+}
+/* Navigation menu items */
+header nav ul li {
+    margin-right: 35px;
+    position: relative;
+}
+/* Navigation links */
+header nav ul li a {
+    text-decoration: none; /* Removed default underline*/
+    color: #333;
+    font-size: 17px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+/* Nav links hover effect */
+.nav-links li a:hover {
+background-color: #edecec;
+}
 /* header with arrow icon  */
 header nav ul li .arrow {
     margin-left: 5px;
     font-size: 0.8em;
 }
-
 /* dropdown menu styles  */
 header nav ul li .dropdown-content {
     display: none;
@@ -28,17 +67,30 @@ header nav ul li .dropdown-content {
     z-index: 5; 
     /* make sure dropdown menu is above others*/
 }
-
-/* header styles */
-header {
-    background-color: #fff;
-    padding: 20px 0;  /* top and bottom */
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* dropdown links */
+header nav ul li .dropdown-content a {
+    color: black;
+    padding: 12px 16px;  /*12top,bottom - 16left,right*/
+    text-decoration: none; /* removed underline*/
+    display: block;
+}
+/* dropdown link hover effect*/
+header nav ul li .dropdown-content a:hover {
+    background-color: #ddd;
+}
+/* Show dropdown on hover */
+header nav ul li:hover .dropdown-content {
+    display: block;
 }
 
+/* Hero section title styling */
+.hero h1 {
+    font-size: 25px;
+    display: flex;
+    margin-top: 35px;
+    justify-content: center;
+}
+/*————————————————————————————————————————————Breadcrumb——————————————————————————————————————————*/
 /* Breadcrumb styling */
 .breadcrumb {
     font-size: small;
@@ -46,13 +98,11 @@ header {
     padding: 10px 25px;
     margin-top: 5px;
 }
-
 /* Breadcrumb container alignment */
 .breadcrumb .container {
     display: flex;
     justify-content: center;
 }
-
 /* list styling */
 .breadcrumb ul {
     list-style: none;
@@ -64,13 +114,11 @@ header {
 .breadcrumb ul li {
     margin-right: 10px;
 }
-
 /* link styling */
 .breadcrumb ul li a {
     text-decoration: none;
     color: #333;
 }
-
 /* link hover effect */
 .breadcrumb ul li a:hover {
     text-decoration: underline;
@@ -89,22 +137,11 @@ header {
     padding: 200px 0;
     background-attachment: fixed;
    }
-   .box1{
-    position: absolute;
-    left: 1000px;
-    top: 80px;
-   }
   
    .content{
     text-align: center;
    }
-  
-   .social-media{
-    position: relative;
-    left: 1200px;
-    top: 100px;
-   }
-
+   
     .footer-content{
     top: 140px;
     position: relative;
@@ -170,4 +207,15 @@ header nav ul li:hover .dropdown-content {
     display: flex;
     align-items: center;
     margin-left: auto;
+}
+
+/*————————————————————————————————————————————Footer——————————————————————————————————————————*/
+/* Footer container styles */
+.footer-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 10px;
+    padding: 10px;
+    border-top: 1px solid #d5c9c9;
 }
