@@ -295,5 +295,112 @@ public class JDBCConnection {
     
         return pageST3BBeanList;
     }
+
+     /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get max loss_similarity score
+    public List<Sub3BResult> getMaxSimilarityScore(String name, String groupNumber, String orderType, String sortType) {
+        List<Sub3BResult> sub3BResultList = new ArrayList<>();
+        String sortOrder = "ASC";
+        int limit = 1;
+
+        if (sortType.equalsIgnoreCase("desc")) {
+            sortOrder = "DESC";
+        }
+        if(orderType.equals("min")) {
+            return getMinSimilarityScore(name, groupNumber, sortOrder, sortType);
+        }
+
+        if (groupNumber != null && groupNumber.matches("\\d+")) {
+            limit = Integer.parseInt(groupNumber);
+        }
+
+        String foodName = name.replace("'", "''").trim();
+
+        String query = "WITH selected_commodity_group AS (SELECT g.group_name, MAX(fl.loss_percentage) AS selected_max_loss FROM food_loss fl JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code WHERE fl.commodity = '" + foodName + "' GROUP BY g.group_name), " +
+               "selected_max_loss_commodity AS (SELECT fl.commodity, fl.loss_percentage, g.group_name FROM food_loss fl JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code WHERE g.group_name = (SELECT group_name FROM selected_commodity_group) ORDER BY fl.loss_percentage DESC LIMIT 1), " +
+               "group_max_loss AS (SELECT g.group_name, fl.commodity, MAX(fl.loss_percentage) AS max_loss_percentage FROM food_loss fl JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code GROUP BY g.group_name, fl.commodity HAVING MAX(fl.loss_percentage) = (SELECT MAX(fl2.loss_percentage) FROM food_loss fl2 WHERE SUBSTR(fl2.cpc_code, 1, 3) = SUBSTR(fl.cpc_code, 1, 3))), " +
+               "similarity AS (SELECT gml.group_name, gml.commodity, gml.max_loss_percentage, ROUND(ABS(gml.max_loss_percentage - smlc.loss_percentage), 2) AS similarity_score FROM group_max_loss gml, selected_max_loss_commodity smlc WHERE gml.group_name != (SELECT group_name FROM selected_commodity_group)), " +
+               "combined_results AS (SELECT s.group_name, s.commodity, s.max_loss_percentage, s.similarity_score, 1 AS sort_order FROM similarity s UNION ALL SELECT scm.group_name, scm.commodity, scm.loss_percentage AS max_loss_percentage, 0 AS similarity_score, 0 AS sort_order FROM selected_max_loss_commodity scm) " +
+               "SELECT * FROM combined_results ORDER BY sort_order, similarity_score " + sortOrder + " LIMIT " + (limit + 1);
+
+
+        try (Connection connection = DriverManager.getConnection(DATABASE);
+             Statement stmt = connection.createStatement()) {
+
+            System.out.println(query);
+
+            try (ResultSet results = stmt.executeQuery(query)) {
+                while (results.next()) {
+                    Sub3BResult sub3BResult = new Sub3BResult();
+                    sub3BResult.setName(results.getString("group_name"));
+                    sub3BResult.setFoodName(results.getString("commodity"));
+                    sub3BResult.setMaxPer(results.getString("max_loss_percentage"));
+                    sub3BResult.setScore(results.getString("similarity_score"));
+                    sub3BResultList.add(sub3BResult);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            Sub3BResult errorBean = new Sub3BResult();
+            errorBean.setErrorMessage("An error occurred while querying the database.");
+            sub3BResultList.add(errorBean);
+        }
+        return sub3BResultList;
+    }
+
+
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get min loss_similarity score
+    public List<Sub3BResult> getMinSimilarityScore(String name, String groupNumber, String orderType, String sortType) {
+        List<Sub3BResult> sub3BResultList = new ArrayList<>();
+        int limit = 1;
+        String sortOrder = "ASC";
+
+        if (sortType.equalsIgnoreCase("desc")) {
+            sortOrder = "DESC";
+        }
+
+        if (groupNumber != null && groupNumber.matches("\\d+")) {
+            limit = Integer.parseInt(groupNumber);
+        }
+       
+        String foodName = name.replace("'", "''").trim();
+
+        String query = "WITH selected_commodity_group AS (SELECT g.group_name, MIN(fl.loss_percentage) AS selected_min_loss FROM food_loss fl JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code WHERE fl.commodity = '" + foodName + "' GROUP BY g.group_name), " +
+               "selected_min_loss_commodity AS (SELECT fl.commodity, fl.loss_percentage, g.group_name FROM food_loss fl JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code WHERE g.group_name = (SELECT group_name FROM selected_commodity_group) ORDER BY fl.loss_percentage ASC LIMIT 1), " +
+               "group_min_loss AS (SELECT g.group_name, fl.commodity, MIN(fl.loss_percentage) AS min_loss_percentage FROM food_loss fl JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code GROUP BY g.group_name, fl.commodity HAVING MIN(fl.loss_percentage) = (SELECT MIN(fl2.loss_percentage) FROM food_loss fl2 WHERE SUBSTR(fl2.cpc_code, 1, 3) = SUBSTR(fl.cpc_code, 1, 3))), " +
+               "similarity AS (SELECT gml.group_name, gml.commodity, gml.min_loss_percentage, ROUND(ABS(gml.min_loss_percentage - smlc.loss_percentage), 2) AS similarity_score FROM group_min_loss gml, selected_min_loss_commodity smlc WHERE gml.group_name != (SELECT group_name FROM selected_commodity_group)), " +
+               "combined_results AS (SELECT s.group_name, s.commodity, s.min_loss_percentage, s.similarity_score, 1 AS sort_order FROM similarity s UNION ALL SELECT scm.group_name, scm.commodity, scm.loss_percentage AS min_loss_percentage, 0 AS similarity_score, 0 AS sort_order FROM selected_min_loss_commodity scm), " +
+               "ranked_results AS (SELECT *, ROW_NUMBER() OVER (PARTITION BY group_name ORDER BY sort_order, similarity_score " + sortOrder + ") as rn FROM combined_results) " +
+               "SELECT group_name, commodity, min_loss_percentage, similarity_score FROM ranked_results WHERE rn = 1 ORDER BY sort_order, similarity_score " + sortOrder + " LIMIT " + (limit + 1) + ";";
+
+
+        try (Connection connection = DriverManager.getConnection(DATABASE);
+             Statement stmt = connection.createStatement()) {
+
+            System.out.println(query);
+
+            try (ResultSet results = stmt.executeQuery(query)) {
+                while (results.next()) {
+                    Sub3BResult sub3BResult = new Sub3BResult();
+                    sub3BResult.setName(results.getString("group_name"));
+                    sub3BResult.setFoodName(results.getString("commodity"));
+                    sub3BResult.setMinPer(results.getString("min_loss_percentage"));
+                    sub3BResult.setScore(results.getString("similarity_score"));
+                    sub3BResultList.add(sub3BResult);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            Sub3BResult errorBean = new Sub3BResult();
+            errorBean.setErrorMessage("An error occurred while querying the database.");
+            sub3BResultList.add(errorBean);
+        }
+        return sub3BResultList;
+    }
+    
+    
     
 }
