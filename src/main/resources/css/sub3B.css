@@ -259,14 +259,19 @@ table.custom-border td, table.custom-border th {
 .result-section:target {
     display: block;
 }
+td.similarity-score { width: 180px; }
 /*————————————————————————————————————————————Note——————————————————————————————————————————*/
 /* Similarity score */
 .explanation {
+    display: none;
     margin: 30px;
     padding: 25px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
+}
+.explanation:target {
+    display: block;
 }
 .explanation h3 {
     text-align: center;
@@ -291,7 +296,6 @@ table.custom-border td, table.custom-border th {
 .explanation li {
     margin: 5px 0;
 }
-
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
 /* Footer container styles */
 .footer-container {
