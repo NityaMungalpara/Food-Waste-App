@@ -44,17 +44,7 @@ public class PageST3A implements Handler {
         html = html + "<body>";
 
         // Add the topnav
-        // This uses a Java v15+ Text Block
-        // html = html + """
-        //     <div class='topnav'>
-        //         <a href='/'>Homepage</a>
-        //         <a href='mission.html'>Our Mission</a>
-        //         <a href='page2A.html'>Food Loss Percent by Country</a>
-        //         <a href='page2B.html'>Sub Task 2.B</a>
-        //         <a href='page3A.html'>Similarity Data Analysis by Country</a>
-        //         <a href='page3B.html'>Sub Task 3.B</a>
-        //     </div>
-        // """;
+
 
         html += """
             <header>
@@ -83,17 +73,6 @@ public class PageST3A implements Handler {
                 </div>
             </header>
         """;
-    //     <div class='search-container'>
-    //     <input type='text' placeholder='Search'>
-    //     <button>Search</button>
-    // </div>
-    // <button class='help-center'>Help Center</button>
-    // <div class='language-selector'>
-    //     <select>
-    //         <option value='en'>English</option>
-    //         <option value='cn'>Chinese</option>
-    //     </select>
-    // </div>
         html += "<main>";
         html += "  <nav class='breadcrumb'>";
         html += "    <ul>";
@@ -126,24 +105,6 @@ public class PageST3A implements Handler {
                 </div>
             </footer> """;
                         
-    ArrayList<Student> credits = getAllStudents();
-        
-        html = html + "<footer>"
-                        + "<table class = 'credits'>";
-                
-        html = html + "<tr>" + 
-                    "<th>ID</th>" + 
-                    "<th>Name</th>" +
-                    "</tr>";
-
-        for (Student s : credits) {
-            html = html + "<tr>";
-            html = html + "<td>" + s.studentID + "</td>";
-            html = html + "<td>" + s.studentName + "</td>";
-            html = html + "</tr>";    
-        }
-        html = html + "</table>"
-                            + "</footer>";
 
         html = html + """
             <footer>
@@ -164,72 +125,5 @@ public class PageST3A implements Handler {
         // Makes Javalin render the webpage
         context.html(html);
     }
-
-    public ArrayList<Student> getAllStudents() {
-        // Create the ArrayList of Country objects to return
-        ArrayList<Student> students = new ArrayList<>();
-
-        // Setup the variable for the JDBC connection
-        Connection connection = null;
-
-        try {
-            // Connect to JDBC data base
-            connection = DriverManager.getConnection(JDBCConnection.DATABASE);
-
-            // Prepare a new SQL Query & Set a timeout
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-
-            // The Query
-            String query = "SELECT * FROM Student";
-            
-            // Get Result
-            ResultSet results = statement.executeQuery(query);
-
-            // Process all of the results
-            while (results.next()) {
-
-                // Create a Country Object
-                Student student = new Student();
-                // Lookup the columns we need
-
-                student.studentID = results.getString("StudentID");
-                student.studentName = results.getString("Name");
-                
-
-                // Add the Country object to the array
-                students.add(student);
-            }
-
-            // Close the statement because we are done with it
-            statement.close();
-        } catch (SQLException e) {
-            // If there is an error, lets just pring the error
-            System.err.println(e.getMessage());
-        } finally {
-            // Safety code to cleanup
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e.getMessage());
-            }
-        }
-
-        // Finally we return all of the countries
-        return students;
-    } 
+} 
     
-    //Student Class
-    public class Student{
-        public String studentID;
-        public String studentName;
-
-        public Student(){
-
-        }
-
-    }
-}

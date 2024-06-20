@@ -108,7 +108,7 @@ header {
    .social-media{
     position: relative;
     left: 1200px;
-    bottom: 2px;
+    top: 100px;
    }
 
    .footer-content{
@@ -120,10 +120,25 @@ header {
      overflow: hidden;
      background-color: #3c3a3a;
    }
-  
-   .join-us{
-    text-align: center;
-   }  
+
+#start_year_drop{
+    width: 150px;
+    height: 40px;
+}
+
+#end_year_drop{
+    width: 150px;
+    height: 40px;
+}
+
+#order_drop{
+    width: 150px;
+    height: 40px;
+}
+
+.dropdowns{
+    display: inline;
+}
 
 /* Set header-logo size */
 header .Weblogo img {

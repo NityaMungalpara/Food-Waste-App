@@ -71,19 +71,6 @@ public class PageST2A implements Handler {
                 </div>
             </header>
         """;
-    //     <div class='nav-right'>
-    //     <div class='search-container'>
-    //         <input type='text' placeholder='Search'>
-    //         <button>Search</button>
-    //     </div>
-    //     <button class='help-center'>Help Center</button>
-    //     <div class='language-selector'>
-    //         <select>
-    //             <option value='en'>English</option>
-    //             <option value='cn'>Chinese</option>
-    //         </select>
-    //     </div>
-    // </div>
         // Add the topnav
         // This uses a Java v15+ Text Block
         html += "<main>";
@@ -105,6 +92,7 @@ public class PageST2A implements Handler {
 
         // Add Div for page Content
     html = html + """
+        <section class='dropdowns'>
             <form action='/page2A.html' method='post'>
                 <div class='form-group'>
                     <label for='country_drop'>Select the Country(s):</label>
@@ -271,6 +259,7 @@ public class PageST2A implements Handler {
                         <option>Descending</option>
                     </select>
                 </div>
+            <section>
                 <button type='submit' class='btn btn-primary'>Get Data</button>
             </form>
         """;
@@ -303,25 +292,6 @@ public class PageST2A implements Handler {
                     <div class="footer-logo"><a href='/'><img src = "Weblogo.png" width = 60></a></div>
                 </div>
             </footer> """;
-                        
-    ArrayList<Student> credits = getAllStudents();
-        
-        html = html + "<footer>"
-                        + "<table class = 'credits'>";
-                
-        html = html + "<tr>" + 
-                    "<th>ID</th>" + 
-                    "<th>Name</th>" +
-                    "</tr>";
-
-        for (Student s : credits) {
-            html = html + "<tr>";
-            html = html + "<td>" + s.studentID + "</td>";
-            html = html + "<td>" + s.studentName + "</td>";
-            html = html + "</tr>";    
-        }
-        html = html + "</table>"
-                            + "</footer>";
 
         html = html + """
             <footer>
@@ -359,10 +329,13 @@ public class PageST2A implements Handler {
         html = html + "<table class = 'content-table' border = '1'>";
         html = html + "<tr class = 'heading'><th>Country</th><th>Start Year</th><th>Start Year Loss Percentage</th><th>End Year</th><th>End Year Loss Percentage</th><th>Loss Percent Difference</th><th>Activity</th><th>Food Supply Stage</th><th>Cause Of Loss</th></tr>";
 
-        for (int i = 0; i < lossPercentages.size(); i += 3) {
+        for (int i = 0; i < lossPercentages.size(); i += 6) {
             String country = lossPercentages.get(i);
             String loss_start_year = lossPercentages.get(i + 1);
             String loss_end_year = lossPercentages.get(i + 2);
+            String activity = lossPercentages.get(i+3);
+            String food_supply_stage = lossPercentages.get(i+4);
+            String cause_of_loss = lossPercentages.get(i+5);
             double loss_difference = Double.parseDouble(loss_start_year) - Double.parseDouble(loss_end_year);
 
 
@@ -373,11 +346,8 @@ public class PageST2A implements Handler {
             html = html + "<td>" + endYear + "</td>";
             html = html + "<td>" + loss_end_year + "</td>";
             html = html + "<td>" + loss_difference + "</td>";
-            String activity="";
             html = html + "<td>" + activity + "</td>";
-            String food_supply_stage="";
             html = html + "<td>" + food_supply_stage + "</td>";
-            String cause_of_loss="";
             html = html + "<td>" + cause_of_loss + "</td>";
             html = html + "</tr>";
         } 
@@ -401,9 +371,9 @@ public class PageST2A implements Handler {
     
             // Construct the SQL query with proper spacing and aliases
             String countriesTogether = "'" + String.join("','", countries) + "'";
-            String query = "SELECT t1.country, t1.loss1 AS loss_start_year, t2.loss2 AS loss_end_year " +
+            String query = "SELECT t1.country, t1.loss1 AS loss_start_year, t2.loss2 AS loss_end_year,t1.activity,t1.food_supply_stage,t1.cause_of_loss " +
                            "FROM " +
-                           "(SELECT SUM(loss_percentage) AS loss1, country " +
+                           "(SELECT SUM(loss_percentage) AS loss1, country,activity,food_supply_stage,cause_of_loss " +
                            " FROM food_loss " +
                            " WHERE country IN (" + countriesTogether + ") " +
                            " AND year = '" + startYear + "' " +
@@ -423,17 +393,17 @@ public class PageST2A implements Handler {
                 String country = results.getString("country");
                 String loss_start_year = results.getString("loss_start_year");
                 String loss_end_year = results.getString("loss_end_year");
-                // String activity = results.getString("activity"); // Retrieve activity
-                // String food_supply_stage = results.getString("food_supply_stage"); // Retrieve food_supply_stage
-                // String cause_of_loss = results.getString("cause_of_loss"); // Retrieve cause_of_loss
+                String activity = results.getString("activity"); // Retrieve activity
+                String food_supply_stage = results.getString("food_supply_stage"); // Retrieve food_supply_stage
+                String cause_of_loss = results.getString("cause_of_loss"); // Retrieve cause_of_loss
             
                 // Add country, loss percentages, and additional fields to the list
                 countryData.add(country);
                 countryData.add(loss_start_year);
                 countryData.add(loss_end_year);
-                // countryData.add(activity);
-                // countryData.add(food_supply_stage);
-                // countryData.add(cause_of_loss);
+                countryData.add(activity);
+                countryData.add(food_supply_stage);
+                countryData.add(cause_of_loss);
             }
     
             // Close the statement and connection
@@ -452,73 +422,4 @@ public class PageST2A implements Handler {
         return countryData;
     }
 
-    
-    public ArrayList<Student> getAllStudents() {
-        // Create the ArrayList of Country objects to return
-        ArrayList<Student> students = new ArrayList<>();
-
-        // Setup the variable for the JDBC connection
-        Connection connection = null;
-
-        try {
-            // Connect to JDBC data base
-            connection = DriverManager.getConnection(JDBCConnection.DATABASE);
-
-            // Prepare a new SQL Query & Set a timeout
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-
-            // The Query
-            String query = "SELECT * FROM Student";
-            
-            // Get Result
-            ResultSet results = statement.executeQuery(query);
-
-            // Process all of the results
-            while (results.next()) {
-
-                // Create a Country Object
-                Student student = new Student();
-                // Lookup the columns we need
-
-                student.studentID = results.getString("StudentID");
-                student.studentName = results.getString("Name");
-                
-
-                // Add the Country object to the array
-                students.add(student);
-            }
-
-            // Close the statement because we are done with it
-            statement.close();
-        } catch (SQLException e) {
-            // If there is an error, lets just pring the error
-            System.err.println(e.getMessage());
-        } finally {
-            // Safety code to cleanup
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e.getMessage());
-            }
-        }
-
-        // Finally we return all of the countries
-        return students;
-    } 
-    
-    //Student Class
-    public class Student{
-        public String studentID;
-        public String studentName;
-
-        public Student(){
-
-        }
-    
-    }
 }
-
