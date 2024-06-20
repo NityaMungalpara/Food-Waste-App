@@ -206,7 +206,7 @@ public class PageST2B implements Handler {
             // html += "<p class='error-message'>" + errorMessage + "</p>";
             html += "<div class='error-container' style='display: flex; justify-content: center; align-items: center; height: 100px;'><p class='error-message' style='text-align: center; font-size: 20px; font-weight: bold;'>" + errorMessage + "</p></div>";
         } else {
-            html += "<h2>Results</h2>";
+            html += "<h2>Results<span style='float: right;padding-left: 10px; margin-top: 5px'><a href='javascript:void(0)' onclick='toggleExplanation(\"section-note\")'><img src='query.png' alt='query' width='25' style='vertical-align: middle;'></a></span></h2>";
             if (pageST2BBeanList.size() == 0) {
                 html += "<div style='display: flex; justify-content: center; align-items: center; height: 100px;'><p style='text-align: center; font-size: 20px; font-weight: bold;'>No results found.</p></div>";
             } else {
@@ -326,6 +326,51 @@ public class PageST2B implements Handler {
                 html += "</tr>";
             }
             html += " </table>";
+
+            html += "<div id = 'section-note' class='explanation'>";
+            html += "<h2>Analysis of Food Loss Data</h2>";
+            html += "<p>To understand how food loss has changed over time for different groups, here's what it does:</p>";
+            html += "<ol>";
+            html += "   <li><strong>Group and Activity Details:</strong>";
+            html += "     <ul>";
+            html += "       <li><strong>Group Name:</strong> Shows the name of each group.</li>";
+            html += "       <li><strong>Activity:</strong> Shows the activity related to the food loss.</li>";
+            html += "       <li><strong>Supply Chain Stage:</strong> Indicates the stage in the food supply chain where the loss happens.</li>";
+            html += "       <li><strong>Cause of Loss:</strong> Specifies the reason for the food loss.</li>";
+            html += "     </ul>";
+            html += "   </li>";
+            html += "   <li><strong>Average Loss Calculation:</strong>";
+            html += "      <ul>";
+            html += "       <li><strong>Start Year Average:</strong> Calculates the average food loss percentage for the start year we are looking at.</li>";
+            html += "       <li><strong>End Year Average:</strong> Calculates the average food loss percentage for the end year we are looking at.</li>";
+            html += "      </ul>";
+            html += "   </li>";
+            html += "   <li><strong>Difference in Average Loss:</strong>";
+            html += "      <ul>";
+            html += "       <li><strong>Average Loss Difference:</strong> Calculates the difference between the average food loss percentages of the end year and the start year. If there's no data for a year, it considers the loss as zero or N/A.</li>";
+            html += "      </ul>";
+            html += "   </li>";
+            html += "   <li><strong>Grouping and Sorting:</strong>";
+            html += "      <ul>";
+            html += "       <li><strong>Grouping:</strong> Groups the results by the group name so users can see the relevant data for each group.</li>";
+            html += "       <li><strong>Sorting:</strong> Sorts the results based on the difference in average loss, in the order specified by the user.</li>";
+            html += "      </ul>";
+            html += "   </li>";
+            html += "</ol>";
+            html += "<p>By utilising this search function, users can analyse and compare food loss data over different years for various groups. It shows how much the average food loss percentage has changed, helping to identify trends and patterns in food loss.</p>";
+            html += "</div>";
+
+            // JS to toggle explanation visibility
+            html += "<script>";
+            html += "function toggleExplanation(id) {";
+            html += "  document.querySelectorAll('.explanation').forEach(el => el.style.display = 'none');";
+            html += "  var elem = document.getElementById(id);";
+            html += "  if (elem) {";
+            html += "    elem.style.display = 'block';"; // clicked explanation
+            html += "    elem.scrollIntoView({ behavior: 'smooth' });"; // Scroll to the explanation
+            html += "  }";
+            html += "}";
+            html += "</script>";
 
             html += "  </section>";
         }
