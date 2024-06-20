@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -70,7 +71,7 @@ public class JDBCConnection {
                "SELECT year, commodity, loss_percentage " +
                "FROM ranked_losses " +
                "WHERE row_num = 1) " +
-               "SELECT year, commodity, AVG(loss_percentage) AS avg_max_loss_percentage " +
+               "SELECT year, commodity, ROUND(AVG(loss_percentage), 2) AS avg_max_loss_percentage " +
                "FROM max_losses " +
                "GROUP BY year, commodity " +
                "ORDER BY year;";
@@ -110,12 +111,9 @@ public class JDBCConnection {
 
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //get result for sub2B
-
     public List<PageST2BBean> getAvgByGroupAndYear(List<String> groupList, List<String> activityList, String startYear, String endYear, String orderType) {
         StringBuffer groupWhereBuffer = new StringBuffer();
-        // StringBuffer activityWhereBuffer = new StringBuffer();
         String groupWhereStr = "";
-        // String activityWhereStr = "";
         String yearWhere = "";
 
         if (groupList.size() > 0) {
@@ -126,15 +124,6 @@ public class JDBCConnection {
             groupWhereStr = tempWhere.substring(0, tempWhere.lastIndexOf(","));
             groupWhereStr = " and g.group_name in (" + groupWhereStr + ")";
         }
-
-        // if (activityList.size() > 0) {
-        //     for (String activity : activityList) {
-        //         activityWhereBuffer.append("'").append(activity.trim()).append("',");
-        //     }
-        //     String tempWhere = activityWhereBuffer.toString();
-        //     activityWhereStr = tempWhere.substring(0, tempWhere.lastIndexOf(","));
-        //     activityWhereStr = " and activity in (" + activityWhereStr + ")";
-        // }
 
         if (!("".equals(startYear) || startYear == null) && !("".equals(endYear) || endYear == null)) {
             yearWhere = " and (year between " + startYear + " and " + endYear + ")";
@@ -156,7 +145,7 @@ public class JDBCConnection {
                     "ELSE AVG(CASE WHEN year = " + startYear + " THEN loss_percentage ELSE NULL END) END), 2) AS avg_loss_diff " +
                     "FROM food_loss f " +
                     "INNER JOIN groups g ON SUBSTR(f.cpc_code, 1, 3) = g.group_code " +
-                    "INNER JOIN group_filter gf ON g.group_name = gf.groupName " +
+                    "INNER JOIN FoodLossDetails gf ON g.group_name = gf.groupName " +
                     "WHERE 1 = 1 " + yearWhere + groupWhereStr + " " +
                     "GROUP BY g.group_name " +
                     "ORDER BY avg_loss_diff " + orderType;
@@ -203,21 +192,108 @@ public class JDBCConnection {
     }
     /*—————————————————————————————————————————————————————————————————————————————————————— */
     //get total groups count
-    public ArrayList<Integer> getGroupCount() {
-        ArrayList<Integer> similarNums = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DATABASE)) {
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT COUNT(group_code) AS total_count FROM groups");
-            while (results.next()) {
-                int totalCount = results.getInt("total_count");
-                for (int i = 1; i <= totalCount; i++) {
-                    similarNums.add(i);
-                }
+    // public ArrayList<Integer> getGroupCount() {
+    //     ArrayList<Integer> similarNums = new ArrayList<>();
+    //     try (Connection connection = DriverManager.getConnection(DATABASE)) {
+    //         Statement statement = connection.createStatement();
+    //         ResultSet results = statement.executeQuery("SELECT COUNT(group_code) AS total_count FROM groups");
+    //         while (results.next()) {
+    //             int totalCount = results.getInt("total_count");
+    //             for (int i = 1; i <= totalCount; i++) {
+    //                 similarNums.add(i);
+    //             }
+    //         }
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    //     return similarNums;
+    // }
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //get correspoding group name
+    public String getGroupNameByCommodity(String name) {
+        String groupName = null;
+        String gName = "";
+            // if(name == null) {
+            //     gName = "Rice";
+            // } else {}
+            gName = name.trim();
+  
+        String query = "SELECT DISTINCT g.group_name " +
+                       "FROM food_loss fl " +
+                       "JOIN groups g ON SUBSTR(fl.cpc_code, 1, 3) = g.group_code " +
+                       "WHERE fl.commodity = '" + gName + "';";
+    
+        try (Connection connection = DriverManager.getConnection(DATABASE);
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+                System.out.println(query); 
+    
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                groupName = results.getString("group_name");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return similarNums;
+        return groupName;
+    }
+
+    /*—————————————————————————————————————————————————————————————————————————————————————— */
+    //food waste to loss
+    public List<PageST3BBean> getWasteToLoss(String commodity, String groupNumber, String orderType, String sortType) {
+        List<PageST3BBean> pageST3BBeanList = new ArrayList<>();
+        String name = commodity.trim();
+        int limit = 1;
+
+
+        String sortOrder = "ASC";
+        if (sortType != null && (orderType.equalsIgnoreCase("ASC") || sortType.equalsIgnoreCase("DESC"))) {
+            sortOrder = sortType.toUpperCase();
+        }
+    
+        if (groupNumber != null && groupNumber.matches("\\d+")) {
+            limit = Integer.parseInt(groupNumber);
+        }
+    
+        name = name.replace("'", "''");
+    
+        String query = "WITH GroupWasteAvg AS (SELECT SUBSTR(cpc_code, 1, 3) AS cpc_code_prefix, ROUND(AVG(loss_percentage), 2) AS avg_waste_percentage FROM GroupWasteEvent GROUP BY SUBSTR(cpc_code, 1, 3)), " +
+               "GroupLossAvg AS (SELECT SUBSTR(cpc_code, 1, 3) AS cpc_code_prefix, ROUND(AVG(loss_percentage), 2) AS avg_loss_percentage FROM GroupLossEvent GROUP BY SUBSTR(cpc_code, 1, 3)), " +
+               "CommodityCPC AS (SELECT DISTINCT SUBSTR(cpc_code, 1, 3) AS cpc_code_prefix FROM food_loss WHERE commodity = '" + name + "'), " +
+               "CombinedResults AS (SELECT COALESCE(Waste.cpc_code_prefix, Loss.cpc_code_prefix) AS cpc_code_prefix, Waste.avg_waste_percentage, Loss.avg_loss_percentage, " +
+               "ROUND(Waste.avg_waste_percentage / Loss.avg_loss_percentage, 2) AS waste_to_loss_ratio, " +
+               "CASE WHEN COALESCE(Waste.cpc_code_prefix, Loss.cpc_code_prefix) = (SELECT cpc_code_prefix FROM CommodityCPC LIMIT 1) THEN 1 ELSE 0 END AS is_selected " +
+               "FROM GroupWasteAvg Waste FULL OUTER JOIN GroupLossAvg Loss ON Waste.cpc_code_prefix = Loss.cpc_code_prefix WHERE Waste.avg_waste_percentage IS NOT NULL AND Loss.avg_loss_percentage IS NOT NULL), " +
+               "BaseValue AS (SELECT waste_to_loss_ratio FROM CombinedResults ORDER BY is_selected DESC, waste_to_loss_ratio ASC LIMIT 1) " +
+               "SELECT G.group_name, CR.avg_waste_percentage, CR.avg_loss_percentage, CR.waste_to_loss_ratio, " +
+               "CASE WHEN CR.waste_to_loss_ratio = (SELECT waste_to_loss_ratio FROM BaseValue) THEN 0 ELSE 1 END AS sort_order " +
+               "FROM CombinedResults CR LEFT JOIN groups G ON G.group_code = CR.cpc_code_prefix " +
+               "ORDER BY sort_order, ABS(CR.waste_to_loss_ratio - (SELECT waste_to_loss_ratio FROM BaseValue)) " + sortOrder + " LIMIT " + (limit + 1) + ";";
+    
+        try (Connection connection = DriverManager.getConnection(DATABASE);
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            
+            System.out.println(query);
+            
+            try (ResultSet results = stmt.executeQuery()) {
+                while (results.next()) {
+                    PageST3BBean pageST3BBean = new PageST3BBean();
+                    pageST3BBean.setName(results.getString("group_name"));
+                    pageST3BBean.setAvgLossPer(results.getString("avg_loss_percentage"));
+                    pageST3BBean.setAvgWastePer(results.getString("avg_waste_percentage"));
+                    pageST3BBean.setRatio(results.getString("waste_to_loss_ratio"));
+    
+                    pageST3BBeanList.add(pageST3BBean);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+    
+            PageST3BBean errorBean = new PageST3BBean();
+            errorBean.setErrorMessage("An error occurred while querying the database.");
+            pageST3BBeanList.add(errorBean);
+        }
+    
+        return pageST3BBeanList;
     }
     
 }
