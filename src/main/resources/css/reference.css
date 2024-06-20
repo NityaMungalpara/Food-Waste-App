@@ -24,6 +24,10 @@ header {
     display: flex;
 }
 
+header .Weblogo img {
+    height: 60px;
+}
+
 /* Navigation menu styles */
 header nav ul {
     list-style: none; /* Removed default list style*/
@@ -90,7 +94,7 @@ header nav ul li:hover .dropdown-content {
 .image_container {
     display: flex;
     align-items: center;
-    margin-bottom: 230px;
+    /* margin-bottom: 230px; */
     margin-top: 40px;
 }
     

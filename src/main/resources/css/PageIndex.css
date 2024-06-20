@@ -13,28 +13,17 @@ body {
     margin: auto;  /*Center align*/
 }
 
-/* header with arrow icon  */
-header nav ul li .arrow {
-    margin-left: 5px;
-    font-size: 0.8em;
-}
-
-/* dropdown menu styles  */
-header nav ul li .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 150px;
-    z-index: 5; 
-    /* make sure dropdown menu is above others*/
-}
-
+/*————————————————————————————————————————————Header——————————————————————————————————————————*/
 /* header styles */
 header {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 15px 0;  /* top and bottom */
     border-bottom: 1px solid #ddd;
     display: flex;
+}
+
+header .Weblogo img {
+    height: 60px;
 }
 
 /* Navigation menu styles */
@@ -42,13 +31,11 @@ header nav ul {
     list-style: none; /* Removed default list style*/
     display: flex;
 }
-
 /* Navigation menu items */
 header nav ul li {
     margin-right: 35px;
     position: relative;
 }
-
 /* Navigation links */
 header nav ul li a {
     text-decoration: none; /* Removed default underline*/
@@ -58,17 +45,24 @@ header nav ul li a {
     display: flex;
     align-items: center;
 }
-
-/* .nav-right {
-    margin-left: auto;
-} */
-
 /* Nav links hover effect */
 .nav-links li a:hover {
-    /* text-decoration: underline; */
-    background-color: #edecec;
+background-color: #edecec;
 }
-
+/* header with arrow icon  */
+header nav ul li .arrow {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+/* dropdown menu styles  */
+header nav ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    z-index: 5; 
+    /* make sure dropdown menu is above others*/
+}
 /* dropdown links */
 header nav ul li .dropdown-content a {
     color: black;
@@ -76,12 +70,10 @@ header nav ul li .dropdown-content a {
     text-decoration: none; /* removed underline*/
     display: block;
 }
-
 /* dropdown link hover effect*/
 header nav ul li .dropdown-content a:hover {
     background-color: #ddd;
 }
-
 /* Show dropdown on hover */
 header nav ul li:hover .dropdown-content {
     display: block;
@@ -99,7 +91,7 @@ header nav ul li:hover .dropdown-content {
     transition: background-color 0.3s ease;  /* transition on hover */
 }
 /* Buttons hover effect */
-.search-container button:hover, .text-box .learn-more:hover, .help-center:hover {
+.text-box .learn-more:hover {
     background-color: #23963a; 
 }
 

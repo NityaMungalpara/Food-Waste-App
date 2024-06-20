@@ -26,6 +26,10 @@ header {
     display: flex;
 }
 
+header .Weblogo img {
+    height: 60px;
+}
+
 /* Navigation menu styles */
 header nav ul {
     list-style: none; /* Removed default list style*/

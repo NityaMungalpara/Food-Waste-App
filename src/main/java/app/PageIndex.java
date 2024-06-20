@@ -62,6 +62,9 @@ public class PageIndex implements Handler {
         // Add header content block
         html += "<header>";
         html += "  <div class='container'>";
+        html += "        <div class='Weblogo'>";
+        html += "            <a href='/'><img src='Weblogo.png' alt='Logo'></a>";
+        html += "        </div>";
         html += "    <nav>";
         html += "      <ul class='nav-links'>";
         html += "        <li><a href='/'>Home</a></li>";
