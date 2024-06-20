@@ -32,79 +32,9 @@ header nav ul li .dropdown-content {
 /* header styles */
 header {
     background-color: #fff;
-    padding: 20px 0;  /* top and bottom */
+    padding: 15px 0;  /* top and bottom */
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-/*Added some CSS from common.css*/
- .btn:hover{
-    background-color: lightgreen;
-   }
-   .purpose{
-    background-image: url("foodloss.avif");
-    background-size: cover;
-    text-align: center;
-    background-position: center;   
-    padding: 20px 0;
-    display: block;
-    height: 600px;
-    width: 1500px;
-   }
-
-   .table{
-    padding: 40px;
-    margin: 20px;
-    table-layout: fixed;
-    -o-table-baseline: initial;
-   }
-   .box1{
-    position: absolute;
-    left: 1000px;
-    top: 80px;
-   }
-  
-   .efforts{
-    text-align: center;
-   }
-  
-   .credits{
-    font-size: x-large;
-    text-align: center;
-    position: relative;
-    left: 550px;
-    top: 10px;
-   }
-
-   .users{
-    text-align: center;
-    font-size:xx-large;
-   }
-  
-   .social-media{
-    position: relative;
-    left: 1200px;
-    top: 60px;
-   }
-
-   .footer-content{
-    top: 90px;
-    position: relative;
-   }  
-
-   .topnav{
-     overflow: hidden;
-     background-color: #3c3a3a;
-   }
-  
-   .join-us{
-    text-align: center;
-   }  
-
-/* Set header-logo size */
-header .Weblogo img {
-    height: 60px;
 }
 
 /* Navigation menu styles */
@@ -115,7 +45,7 @@ header nav ul {
 
 /* Navigation menu items */
 header nav ul li {
-    margin-right: 20px;
+    margin-right: 35px;
     position: relative;
 }
 
@@ -123,10 +53,15 @@ header nav ul li {
 header nav ul li a {
     text-decoration: none; /* Removed default underline*/
     color: #333;
+    font-size: 17px;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
+
+/* .nav-right {
+    margin-left: auto;
+} */
 
 /* Nav links hover effect */
 .nav-links li a:hover {
@@ -151,3 +86,29 @@ header nav ul li .dropdown-content a:hover {
 header nav ul li:hover .dropdown-content {
     display: block;
 }
+
+ .btn:hover{
+    background-color: lightgreen;
+   }
+
+.purpose{
+    background-image: url("foodloss.avif");
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    background-position: center;   
+    padding: 20px 0;
+    background-attachment: fixed;
+}
+  
+  
+   .credits{
+    position: relative;
+    left: 500px;
+    top: 50px;
+   }*/
+
+   .footer-content{
+    top: 140px;
+    position: relative;
+   } 

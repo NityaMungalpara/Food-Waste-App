@@ -76,17 +76,6 @@ public class PageMission implements Handler {
                 </div>
             </header>
         """;
-    //     <div class='search-container'>
-    //     <input type='text' placeholder='Search'>
-    //     <button>Search</button>
-    // </div>
-    // <button class='help-center'>Help Center</button>
-    // <div class='language-selector'>
-    //     <select>
-    //         <option value='en'>English</option>
-    //         <option value='cn'>Chinese</option>
-    //     </select>
-    // </div>
         // Add header content block
 
         // Add Div for page Content

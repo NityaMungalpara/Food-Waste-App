@@ -97,8 +97,8 @@ public class PageST2A implements Handler {
                 <div class='form-group'>
                     <label for='country_drop'>Select the Country(s):</label>
                     <div>
-                        <input type='checkbox' name='country_drop' value='Africa'>Africa
-                        <input type='checkbox' name='country_drop' value='Algeria'>Algeria
+                        <input type='checkbox' name='country_drop' value='Africa'>Africa<br>
+                        <input type='checkbox' name='country_drop' value='Algeria'>Algeria<br>
                         <input type='checkbox' name='country_drop' value='Angola'>Angola
                         <input type='checkbox' name='country_drop' value='Argentina'>Argentina
                         <input type='checkbox' name='country_drop' value='Argmenia'>Armenia
@@ -384,7 +384,7 @@ public class PageST2A implements Handler {
                            " WHERE country IN (" + countriesTogether + ") " +
                            " AND year = '" + endYear + "' " +
                            " GROUP BY country,year) t2 ON t1.country = t2.country";
-                            //" AND " + "SELECT activity, food_supply_stage, cause_of_loss FROM food_loss";
+                           //+ " ORDER BY country";
             //            
             // Execute the query
             ResultSet results = statement.executeQuery(query);
