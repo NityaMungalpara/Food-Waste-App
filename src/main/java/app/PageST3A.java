@@ -44,7 +44,7 @@ public class PageST3A implements Handler {
         html += "            <a href='page2A.html'>Food Loss and Waste Analysis by Country</a>";
         html += "            <a href='page2B.html'>Food Loss and Waste Analysis by Group</a>";
         html += "            <a href='page3A.html'>Similarity Data Analysis by Country</a>";
-        html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>""";
+        html += "            <a href='page3B.html'>Similarity Data Analysis by Group</a>";
         html += "          </div>";
         html += "        </li>";
         html += "        <li><a href='Reference.html'>Reference</a></li>";
