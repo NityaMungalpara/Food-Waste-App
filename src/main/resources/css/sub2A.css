@@ -127,43 +127,35 @@ header nav ul li:hover .dropdown-content {
 }
 
 /*Added some CSS from common.css*/
- .btn:hover{
-    background-color: lightgreen;
-   }
-   .purpose{
-    background-image: url("foodloss.png");
-    background-size: cover;
-    position: relative;
-    text-align: center;
-    background-position: center;   
-    padding: 200px 0;
-    background-attachment: fixed;
-   }
-   .box1{
-    position: absolute;
-    left: 1000px;
-    top: 80px;
-   }
-  
-   .content{
-    text-align: center;
-   }
-  
-   .credits{
-    position: relative;
-    left: 500px;
-    top: 50px;
-   }
 
-   .footer-content{
-    top: 140px;
-    position: relative;
-   } 
-   
-   .topnav{
-     overflow: hidden;
-     background-color: #3c3a3a;
-   }
+  
+.content {
+    background-color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+  
+.btn-primary {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #00b30f;
+}
 
 #start_year_drop{
     width: 150px;
@@ -188,52 +180,6 @@ header nav ul li:hover .dropdown-content {
 header .Weblogo img {
     height: 60px;
 }
-
-/* Navigation menu styles */
-header nav ul {
-    list-style: none; /* Removed default list style*/
-    display: flex;
-}
-
-/* Navigation menu items */
-header nav ul li {
-    margin-right: 20px;
-    position: relative;
-}
-
-/* Navigation links */
-header nav ul li a {
-    text-decoration: none; /* Removed default underline*/
-    color: #333;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-}
-
-/* Nav links hover effect */
-.nav-links li a:hover {
-    /* text-decoration: underline; */
-    background-color: #edecec;
-}
-
-/* dropdown links */
-header nav ul li .dropdown-content a {
-    color: black;
-    padding: 12px 16px;  /*12top,bottom - 16left,right*/
-    text-decoration: none; /* removed underline*/
-    display: block;
-}
-
-/* dropdown link hover effect*/
-header nav ul li .dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Show dropdown on hover */
-header nav ul li:hover .dropdown-content {
-    display: block;
-}
-
 /* Navigation right section */
 .nav-right{
     display: flex;

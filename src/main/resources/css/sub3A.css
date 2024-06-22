@@ -177,8 +177,8 @@ header nav ul li:hover .dropdown-content {
 }
 
 .btn-primary {
-    background-color: whitesmoke;
-    color: black;
+    background-color: black;
+    color: white;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
