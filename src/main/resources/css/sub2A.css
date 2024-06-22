@@ -17,6 +17,8 @@ main {
     max-width: 1200px;
     margin: auto;  /*Center align*/
 }
+
+
 /*————————————————————————————————————————————Header——————————————————————————————————————————*/
 /* header styles */
 header {
@@ -237,6 +239,76 @@ header nav ul li:hover .dropdown-content {
     display: flex;
     align-items: center;
     margin-left: auto;
+}
+
+/*Body Styles*/
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input[type="checkbox"],
+.form-group select {
+    margin-top: 5px;
+}
+
+.form-group .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-group .btn:hover {
+    background-color: #45a049;
+}
+
+/* Table styles */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.content-table th, .content-table td {
+    padding: 8px;
+    text-align: left;
+}
+
+.content-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.content-table tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/

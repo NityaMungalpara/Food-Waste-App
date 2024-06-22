@@ -154,7 +154,7 @@ header nav ul li:hover .dropdown-content {
 }
 
  .btn:hover{
-    background-color: lightgreen;
+    background-color: #45a049;
    }
 
 .purpose{
@@ -173,7 +173,7 @@ header nav ul li:hover .dropdown-content {
   
 .credits{
     position: relative;
-    left: 600px;
+    left: 670px;
     bottom: 10px;
    }
 

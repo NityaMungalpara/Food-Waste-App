@@ -123,59 +123,10 @@ header nav ul li:hover .dropdown-content {
 .breadcrumb ul li a:hover {
     text-decoration: underline;
 }
-
-/*Added some CSS from common.css*/
-.btn:hover{
-    background-color: lightgreen;
-   }
-   .purpose{
-    background-image: url("foodloss.png");
-    background-size: cover;
-    position: relative;
-    text-align: center;
-    background-position: center;   
-    padding: 200px 0;
-    background-attachment: fixed;
-   }
-  
-   .content{
-    text-align: center;
-   }
-   
-    .footer-content{
-    top: 140px;
-    position: relative;
-   } 
-   
-   .topnav{
-     overflow: hidden;
-     background-color: #3c3a3a;
-   }
   
 /* Set header-logo size */
 header .Weblogo img {
     height: 60px;
-}
-
-/* Navigation menu styles */
-header nav ul {
-    list-style: none; /* Removed default list style*/
-    display: flex;
-}
-
-/* Navigation menu items */
-header nav ul li {
-    margin-right: 20px;
-    position: relative;
-}
-
-/* Navigation links */
-header nav ul li a {
-    text-decoration: none; /* Removed default underline*/
-    color: #333;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
 }
 
 /* Nav links hover effect */
@@ -207,6 +158,49 @@ header nav ul li:hover .dropdown-content {
     display: flex;
     align-items: center;
     margin-left: auto;
+}
+
+.content {
+    background-color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: whitesmoke;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #00b30f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
 }
 
 /*————————————————————————————————————————————Footer——————————————————————————————————————————*/
