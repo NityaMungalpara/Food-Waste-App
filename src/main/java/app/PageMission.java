@@ -79,21 +79,33 @@ public class PageMission implements Handler {
         html = html + """
             <main>
             <section class = 'purpose'>
-                <h1>Our Purpose</h1>
-                    The website mainly focuses to acknowledge people regarding<br> the global issue of food loss and wastage,
-                    which occurs<br> throughout the world. The website would provide the 
-                    information of the food<br> loss percents occurring in different countries based on a given start year<br> and end year
-                    .Besides that, based on a given country,<br> it would find other countries that have common food types being wasted<br> 
-                    and similar overall food loss percent. The website <br>would also be helpful to people, by informing them about<br>
-                    the devastating impact of food disposal on environment as well as<br> available resources. It would encourage
-                    people by providing the required information<br> using tables, so that they can easily access the data. The website
-                    would<br> provide information in an engaging manner so that people do not feel bored.
-                <h1>Features of the Website</h1>
                 
-                 <li>Explore the Food Loss Analysis by Country webpage.<br></li><br>
-                 <li>You can get the amount of loss percent for a country corresponding to a year.<br></li><br> 
-                 <li>You can also filter out data based on activity, food supply stage and cause of food loss.<br></li><br>
-                 <li>You can also get other countries having similar food loss percent<br> and in which the wasted products are common through the <br>Similarity Analysis by Country Page.</li>
+
+                <h1>WHY THE WEBSITE WAS MADE?</h1>
+                <p>
+                The website mainly focuses to acknowledge people regarding<br> the global issue of food loss and wastage,
+                which occurs<br> throughout the world. The website would also be helpful to people, by providing them<br>
+                the actual quantitative data of food waste occuring in the world.
+                </p> 
+                
+                <h1>OUR PURPOSE</h1>
+                    <p>
+                    The purpose of the website is to help the users find relevant and required information.<br>The users would be able to find the loss percentages
+                    for the countries and commodities,<br> based on the selected start and end years. Also the loss percentage would be<br>displayed in a seperate column.The 
+                    website would provide the information in tables, so<br> that the users can access the data conveniently.Also the users would be provided with<br>
+                    some filters like activity, food supply stage and cause of loss, so that the accuracy<br> of the information is maintained.They would also be
+                    offered option to get number of similar<br>countries/ food groups based on selected country/food group and a year.  
+                    </p>
+
+                <h1>FEATURES OF THE WEBSITE</h1>
+                
+                 <li><b>Food Loss and Waste Analysis by Country :</b> Explore the page to get information about loss percentages for a country or even multiple countries in selected years!<br></li><br>
+                 <li><b>Food Loss and Waste Analysis by Group :</b> Go through the page if you want to get the loss percentages of particular commodities in particular years!<br></li><br> 
+                 <li><b>Filter Feature :</b> For these pages, you also have an option to filter out data based on activity, food supply stage and cause of food loss.<br></li><br>
+                 <li><b>Similarity Data Analysis by Country :</b> You can select a country, a year and number of similar countries that you want.<br>A table would provide the countries from most similarity index to the least.</li><br>
+                 <li><b>Similarity Data Analysis by Group :</b> This page would help you to find ouy similar commodities based on the selected commodity.</li><br>
+                 <li><b>Ordering Feature :</b> The pages would also provide the data in asscending and descending order!</li>
+                 <li><b>Reference Page :</b> This page would provide the links to the sites from which the images have been used!</li>
                 
         </section>
             </main>
@@ -138,7 +150,7 @@ public class PageMission implements Handler {
         
         html = html + "<footer>"
                         + "<table border = 3 class = 'credits'>";
-        html = html + "<h2 class = 'efforts'>Efforts By:</h2>";
+        html = html + "<h2 class = 'efforts'>EFFORTS BY:</h2>";
                 
         html = html + "<tr>" + 
                     "<th>ID</th>" + 

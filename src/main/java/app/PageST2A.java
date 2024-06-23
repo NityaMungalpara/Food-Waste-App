@@ -240,7 +240,6 @@ public class PageST2A implements Handler {
                         <option>1998</option>";
                         <option>1999</option>";
                         <option>2000</option>";
-                        <option>2000</option>";
                         <option>2001</option>";
                         <option>2002</option>";
                         <option>2003</option>";
@@ -306,7 +305,6 @@ public class PageST2A implements Handler {
                         <option>1997</option>";
                         <option>1998</option>";
                         <option>1999</option>";
-                        <option>2000</option>";
                         <option>2000</option>";
                         <option>2001</option>";
                         <option>2002</option>";
@@ -418,32 +416,34 @@ public class PageST2A implements Handler {
 
     public String filterByFields(String[] countries, String startYear, String endYear, List<String> groupByList, List<String> displayFields) {
         String html = "";
-
+    
         List<Map<String, String>> sumLossPercentagesByFields = getSumLossPercentagesByFields(countries, startYear, endYear, groupByList);
-
+    
         html += "<h2>Filtered Data by " + String.join(", ", groupByList) + "</h2>";
         html += "<table class='content-table' border='1'>";
         html += "<tr>";
-        
+    
         // Add table headers based on displayFields
         for (String field : displayFields) {
             html += "<th>" + field + "</th>";
         }
         html += "<th>Average (Loss Percentage)</th></tr>";
-
+    
         for (Map<String, String> row : sumLossPercentagesByFields) {
             html += "<tr>";
-            
+    
             // Add table data based on displayFields
             for (String field : displayFields) {
-                html += "<td>" + row.get(field) + "</td>";
+                String value = row.getOrDefault(field, "Null");
+                html += "<td>" + (value != null && !value.isEmpty() ? value : "Null") + "</td>";
             }
-            html += "<td>" + row.get("AverageLossPercentage") + "</td>";
+            String averageLossPercentage = row.getOrDefault("AverageLossPercentage", "Null");
+            html += "<td>" + (averageLossPercentage != null && !averageLossPercentage.isEmpty() ? averageLossPercentage : "Null") + "</td>";
             html += "</tr>";
         }
-
+    
         html += "</table>";
-
+    
         return html;
     }
 
@@ -502,11 +502,11 @@ public class PageST2A implements Handler {
 
     public List<Map<String, String>> getSumLossPercentagesByFields(String[] countries, String startYear, String endYear, List<String> groupByList) {
         List<Map<String, String>> countryData = new ArrayList<>();
-
+    
         try {
             Connection connection = DriverManager.getConnection(JDBCConnection.DATABASE);
             Statement statement = connection.createStatement();
-
+    
             String countriesTogether = "'" + String.join("','", countries) + "'";
             String groupByFields = String.join(", ", groupByList);
             String query = "SELECT " + groupByFields + ", AVG(loss_percentage) AS AverageLossPercentage " +
@@ -515,25 +515,27 @@ public class PageST2A implements Handler {
                            "AND year >= '" + startYear + "' " +
                            "AND year <= '" + endYear + "' " +
                            "GROUP BY " + groupByFields;
-
+    
             ResultSet results = statement.executeQuery(query);
-
+    
             while (results.next()) {
                 Map<String, String> row = new HashMap<>();
                 for (String field : groupByList) {
-                    row.put(field, results.getString(field));
+                    String value = results.getString(field);
+                    row.put(field, value != null ? value : "Null");
                 }
-                row.put("AverageLossPercentage", results.getString("AverageLossPercentage"));
+                String averageLossPercentage = results.getString("AverageLossPercentage");
+                row.put("AverageLossPercentage", averageLossPercentage != null ? averageLossPercentage : "Null");
                 countryData.add(row);
             }
-
+    
             results.close();
             statement.close();
             connection.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-
+    
         return countryData;
     }
 }

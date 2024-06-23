@@ -171,6 +171,9 @@ header nav ul li:hover .dropdown-content {
     text-align: center;
 }
   
+.users{
+    text-align: center;
+}
 .credits{
     position: relative;
     left: 670px;
@@ -186,5 +189,8 @@ header nav ul li:hover .dropdown-content {
     align-items: center; 
     margin: 10px;
     padding: 10px;
-    border-top: 1px solid #d5c9c9;
+    border-top: 1px solid #d5c9c9; 
 }
+    /* position: relative;
+    top: 60px;
+    left: 1200px; */

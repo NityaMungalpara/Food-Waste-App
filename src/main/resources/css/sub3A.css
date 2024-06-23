@@ -188,18 +188,23 @@ header nav ul li:hover .dropdown-content {
     background-color: #00b30f;
 }
 
-table {
+.content-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.content-table th, .content-table td {
     padding: 8px;
+    text-align: left;
 }
 
-th {
+.content-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.content-table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
