@@ -117,7 +117,7 @@ public class PageMission implements Handler {
 
         ArrayList<Persona> personas = getAllPersonas();
         html = html + "<h2 class = 'users'>OUR USERS</h2>";
-        html = html + "<table border = '1' class = 'table'>";
+        html = html + "<table border = '1' class = 'content-table'>";
                 
         html = html + "<tr>" + 
                     "<th>ID</th>" + 
@@ -149,7 +149,7 @@ public class PageMission implements Handler {
         ArrayList<Student> credits = getAllStudents();
         
         html = html + "<footer>"
-                        + "<table border = 3 class = 'credits'>";
+                        + "<table border = 1 class = 'credits'>";
         html = html + "<h2 class = 'efforts'>EFFORTS BY:</h2>";
                 
         html = html + "<tr>" + 

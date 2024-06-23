@@ -9,9 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PageST2A implements Handler {
 
@@ -415,37 +417,57 @@ public class PageST2A implements Handler {
     }
 
     public String filterByFields(String[] countries, String startYear, String endYear, List<String> groupByList, List<String> displayFields) {
-        String html = "";
-    
-        List<Map<String, String>> sumLossPercentagesByFields = getSumLossPercentagesByFields(countries, startYear, endYear, groupByList);
-    
-        html += "<h2>Filtered Data by " + String.join(", ", groupByList) + "</h2>";
-        html += "<table class='content-table' border='1'>";
-        html += "<tr>";
-    
-        // Add table headers based on displayFields
-        for (String field : displayFields) {
-            html += "<th>" + field + "</th>";
-        }
-        html += "<th>Average (Loss Percentage)</th></tr>";
-    
-        for (Map<String, String> row : sumLossPercentagesByFields) {
-            html += "<tr>";
-    
-            // Add table data based on displayFields
-            for (String field : displayFields) {
-                String value = row.getOrDefault(field, "Null");
-                html += "<td>" + (value != null && !value.isEmpty() ? value : "Null") + "</td>";
-            }
-            String averageLossPercentage = row.getOrDefault("AverageLossPercentage", "Null");
-            html += "<td>" + (averageLossPercentage != null && !averageLossPercentage.isEmpty() ? averageLossPercentage : "Null") + "</td>";
-            html += "</tr>";
-        }
-    
-        html += "</table>";
-    
-        return html;
+    String html = "";
+
+    List<Map<String, String>> sumLossPercentagesByFields = getSumLossPercentagesByFields(countries, startYear, endYear, groupByList);
+
+    // Sort the data by AverageLossPercentage in ascending order
+    List<Map<String, String>> sortedByAscending = sumLossPercentagesByFields.stream()
+            .sorted(Comparator.comparing(row -> Double.valueOf(row.get("AverageLossPercentage"))))
+            .collect(Collectors.toList());
+
+    // Sort the data by AverageLossPercentage in descending order
+    List<Map<String, String>> sortedByDescending = sumLossPercentagesByFields.stream()
+            .sorted((row1, row2) -> Double.compare(Double.valueOf(row2.get("AverageLossPercentage")), Double.valueOf(row1.get("AverageLossPercentage"))))
+            .collect(Collectors.toList());
+
+    html += "<h2>Filtered Data by " + String.join(", ", groupByList) + "</h2>";
+    html += "<table class='content-table' border='1'>";
+    html += "<tr>";
+
+    // Add table headers based on displayFields
+    for (String field : displayFields) {
+        html += "<th>" + field + "</th>";
     }
+    html += "<th>Average (Loss Percentage)</th>";
+    html += "<th>Ascending Order</th>";
+    html += "<th>Descending Order</th></tr>";
+
+    for (int i = 0; i < sumLossPercentagesByFields.size(); i++) {
+        Map<String, String> row = sumLossPercentagesByFields.get(i);
+        html += "<tr>";
+
+        // Add table data based on displayFields
+        for (String field : displayFields) {
+            String value = row.getOrDefault(field, "Null");
+            html += "<td>" + (value != null && !value.isEmpty() ? value : "Null") + "</td>";
+        }
+        String averageLossPercentage = row.getOrDefault("AverageLossPercentage", "Null");
+        html += "<td>" + (averageLossPercentage != null && !averageLossPercentage.isEmpty() ? averageLossPercentage : "Null") + "</td>";
+
+        // Add ascending and descending order data
+        Map<String, String> ascendingRow = sortedByAscending.get(i);
+        Map<String, String> descendingRow = sortedByDescending.get(i);
+        html += "<td>" + (ascendingRow.get("AverageLossPercentage") != null ? ascendingRow.get("AverageLossPercentage") : "Null") + "</td>";
+        html += "<td>" + (descendingRow.get("AverageLossPercentage") != null ? descendingRow.get("AverageLossPercentage") : "Null") + "</td>";
+
+        html += "</tr>";
+    }
+
+    html += "</table>";
+
+    return html;
+}
 
     public List<String> getLossPercentages(String[] countries, String startYear, String endYear) {
         List<String> countryData = new ArrayList<>();

@@ -114,7 +114,7 @@ public class PageST3A implements Handler {
                 "<label for='num_results'>Number of Similar Results:</label>" +
                 "<input type='number' id='num_results' name='num_results' min='1' max='10' value='5'>" +
                 "</div>" +
-                "<button type='submit' class='btn btn-primary'>Find Similar Groups</button>" +
+                "<button type='submit' class='btn btn-primary'>Find Similar Countries/Regions</button>" +
                 "</form>";
 
         String year = context.formParam("year");
